@@ -1,0 +1,21 @@
+package: demo
+triggers:
+  - demo.trigger.open_page
+  - demo.trigger.dialogflow.hi
+  - demo.trigger.dialogflow.size
+  - demo.trigger.dialogflow.smalltalk
+  - demo.trigger.hello_world2
+  - demo.trigger.log
+integrations:
+  - demo.integration.calendly
+  - demo.integration.clearbit
+  - demo.integration.custom
+  - demo.integration.dialogflow
+  - demo.integration.freshchat
+  - demo.integration.orb
+  - demo.integration.segment
+  - demo.integration.sendgrid
+  - demo.integration.sfla
+  - demo.integration.smooch
+  - demo.integration.twilio
+  - demo.integration.webhook

@@ -1,0 +1,22 @@
+triggers:
+  - keyword: chat
+
+steps:
+  - ask: Change chat state
+    buttons:
+      - text: Open
+        action: next
+      - text: Close
+        action:
+          jump: close
+
+  - (open)
+  - open_chat
+  - flow: demo.flow.chat
+    transfer: true
+
+  - (close)
+  - close_chat
+  - flow: demo.flow.chat
+    transfer: true
+

@@ -1,0 +1,5 @@
+triggers:
+  - keyword: visits
+
+steps:
+  - say: First (@ user.visits.first ), last (@ user.visits.last )

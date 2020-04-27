@@ -1,0 +1,6 @@
+type: page_open
+when: (@ not thread.open_page )
+action:
+  flow: demo.flow.open_page
+  data:
+    page: snow capped mountains

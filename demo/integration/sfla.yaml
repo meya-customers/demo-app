@@ -1,0 +1,8 @@
+type: meya.salesforce.live_agent.integration
+api_root: (@ vault.live_agent.api_root )
+username: (@ vault.live_agent.username )
+password: (@ vault.live_agent.password )
+api_endpoint: (@ vault.live_agent.api_endpoint )
+organization_id: (@ vault.live_agent.organization_id )
+deployment_id: (@ vault.live_agent.deployment_id )
+button_id: (@ vault.live_agent.button_id )

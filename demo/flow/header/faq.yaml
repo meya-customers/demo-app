@@ -1,0 +1,20 @@
+triggers:
+  - button_id: .faq
+
+steps:
+  - open_chat
+  - ask: How can I help?
+    button_style: radio
+    tiles:
+      - buttons:
+          - text: What is an assistant?
+            action: next
+          - text: What is a bot?
+            action: next
+          - text: What is a conversational interface?
+            action: next
+          - text: What are the cosmic ocean laws of physics?
+            action: next
+          - text: How old are you?
+  - say: 42 😉
+

@@ -1,0 +1,27 @@
+triggers:
+  - keyword: match
+
+steps:
+  - ask: Match a/b/c/d?
+  - match:
+      (?P<a_group>a+):
+        say: A (@ flow.groups.a_group )
+      b.b:
+        jump: b
+      (cc)+:
+        jump: c
+    default:
+      jump: d
+  - end
+
+  - (b)
+  - say: B (@ flow.result )
+  - end
+
+  - (c)
+  - say: C (@ flow.groups )
+  - end
+
+  - (d)
+  - say: D
+  - end

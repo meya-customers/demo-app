@@ -1,0 +1,11 @@
+triggers:
+  - keyword: name
+
+steps:
+  - say: Hey there...
+  - continue_screen
+  - ask: What's your name?
+    composer:
+      placeholder: For example, Ada
+  - user_set: name
+  - say: Nice to meet you, (@ user.name ) 🔥

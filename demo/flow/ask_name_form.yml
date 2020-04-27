@@ -1,0 +1,11 @@
+triggers:
+  - keyword: name_form
+steps:
+  - say: Hey there...
+  - ask_form: What's your name?
+    icon: user
+    label: Name
+    composer:
+      visibility: hide
+  - user_set: name
+  - say: Nice to meet you, (@ user.name ) 🔥

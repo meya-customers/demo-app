@@ -1,0 +1,7 @@
+triggers:
+  - regex: ^.*message.*$
+    ignorecase: true
+
+steps:
+  - echo
+  - say: '2nd echo: (@ flow.result ) 🤔'

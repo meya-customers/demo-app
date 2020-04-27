@@ -1,0 +1,45 @@
+triggers:
+  - regex: quick.replies
+
+steps:
+  - ask: 'Pick an animal:'
+    quick_replies:
+      - African Elephant
+      - Asian Elephant
+      - Woolly Mammoth
+      - Lion
+      - Seberian Tiger
+      - Leopard
+      - Cheetah
+      - Snow Leopard
+      - Bengal Tiger
+      - Kudu
+      - Impala
+      - Eland
+      - White Rhino
+      - Black Rhino
+      - Buffalo
+      - Orynx
+    composer:
+      focus: blur
+      placeholder: Ideally your favourite one
+  - say: "This was your reply: '(@ flow.result )'"
+
+  - url: https://images.unsplash.com/photo-1560246496-1c10714a3ea0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80
+    alt: Toy tiger
+  - ask:
+    quick_replies:
+      - African Elephant
+      - Asian Elephant
+      - Buffalo
+      - Orynx
+    composer:
+      visibility: hide
+  - say: "This was your second reply: '(@ flow.result )'"
+
+  - say: Here are some other flows to try...
+    quick_replies:
+      - button
+      - message 93911
+      - cond
+      - quick replies

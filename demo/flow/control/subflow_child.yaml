@@ -1,0 +1,9 @@
+triggers:
+  - keyword: subflow_child
+
+steps:
+  - say: Child here
+  - say: Child flow (@ flow )
+  - ask: Child name?
+  - flow_set: name
+  - say: Child flow (@ flow )

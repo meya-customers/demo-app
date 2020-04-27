@@ -1,0 +1,13 @@
+triggers:
+  - keyword: _availability
+
+steps:
+  - type: meya.time.component.availability
+    timezone: America/Toronto
+    mon: 9-17
+    tue: 9-12, 13-17
+    wed: 9-17
+    thu: 9-12, 13-17
+    fri: 9-17
+  - say: Available? (@ flow.ok )
+

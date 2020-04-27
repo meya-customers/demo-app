@@ -1,0 +1,57 @@
+triggers:
+  - regex: >
+      ( .+\W | ^ )
+      button
+      ( \W.* | $ )
+    ignorecase: true
+  - keyword: Text 4
+    action:
+      jump: text_4
+
+steps:
+  - hero: Here are some buttons
+    description: 'Please pick one:'
+  - buttons:
+      - text: Result 1
+        result:
+          key: 1
+      - text: Result 2
+        result:
+          - two
+          - two
+      - text: Jump 3
+        action:
+          jump: jump_3
+      - text: Text 4
+      - text: Link 5
+        url: https://example.org/?n=5
+    composer:
+      visibility: hide
+
+  - ask: You chose (@ flow.result ) 🔥
+    buttons:
+      - text: Button 5
+        result: 5
+      - text: Button 6
+        result: 6
+      - text: JavaScript 7
+        javascript: alert(7)
+        result: 7
+    quick_replies:
+      - Text 8
+      - Text 9
+    composer:
+      placeholder: Have something else to say?
+  - say: You chose (@ flow.result ) 🔥🔥
+  - end
+
+  - (jump_3)
+  - say: You've reached Jump 3
+  - end
+
+  - (text_4)
+  - say: You've reached Text 4
+  - tiles:
+      - buttons:
+          - button
+  - end

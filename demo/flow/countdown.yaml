@@ -1,0 +1,47 @@
+triggers:
+  - keyword: countdown
+
+steps:
+  - say:
+    quick_replies:
+      - '4'
+      - '3'
+      - '2'
+      - '1'
+    composer:
+      placeholder: '5'
+  - delay: 1
+
+  - say:
+    quick_replies:
+      - '3'
+      - '2'
+      - '1'
+    composer:
+      placeholder: '4'
+  - delay: 1
+
+  - say:
+    quick_replies:
+      - '2'
+      - '1'
+    composer:
+      placeholder: '3'
+  - delay: 1
+
+  - say:
+    quick_replies:
+      - '1'
+    composer:
+      placeholder: '2'
+  - delay: 1
+
+  - say:
+    composer:
+      placeholder: '1'
+  - delay: 1
+
+  - say:
+    composer:
+      placeholder: Liftoff!
+

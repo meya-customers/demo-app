@@ -1,0 +1,30 @@
+triggers:
+  - keyword: cond
+
+steps:
+  - ask: Cond a/b/c/d?
+  - cond:
+      - (@ flow.result <= "a" ):
+          jump: a
+      - (@ flow.result <= "b" and flow.result != "aa" ):
+          jump: b
+      - (@ flow.result <= "c" or flow.result == "ccc" ):
+          jump: c
+    default:
+      jump: d
+
+  - (a)
+  - say: A
+  - end
+
+  - (b)
+  - say: B
+  - end
+
+  - (c)
+  - say: C
+  - end
+
+  - (d)
+  - say: D
+  - end

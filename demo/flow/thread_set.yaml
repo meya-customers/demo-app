@@ -1,0 +1,80 @@
+triggers:
+  - keyword: thread_set
+
+steps:
+  - (start)
+  - ask: start (@ thread.__data__ )
+    tiles:
+      - title: Set
+        buttons:
+          - text: BFML
+            action:
+              jump: bfml_set
+          - text: Python
+            action:
+              jump: py_set
+              data:
+                clear: false
+                error: false
+          - text: Python (error)
+            action:
+              jump: py_set
+              data:
+                clear: false
+                error: true
+      - title: Clear
+        buttons:
+          - text: BFML
+            action:
+              jump: bfml_clear
+          - text: Python
+            action:
+              jump: py_set
+              data:
+                clear: true
+                error: false
+          - text: Python (error)
+            action:
+              jump: py_set
+              data:
+                clear: true
+                error: true
+
+  - (bfml_set)
+  - thread_set:
+      thread_data_1: []
+      thread_data_2: {}
+      thread_data_3: {key: !!null ''}
+      thread_data_4: {key1: x, key2: !!null ''}
+      thread_data_5:
+        - {}
+        - key1: x
+          key2:
+          key3: []
+          key4:
+            - 1
+            - 
+            - key5:
+              key6: y
+  - jump: end
+
+  - (bfml_clear)
+  - thread_set:
+      thread_data_1:
+      thread_data_2:
+      thread_data_3:
+      thread_data_4:
+      thread_data_5:
+  - jump: end
+
+  - (py_set)
+  - type: demo.component.thread_set
+    clear: (@ flow["clear"] )
+    error: (@ flow.error )
+  - jump: end
+
+  - (end)
+  - say: end (@ thread.__data__ )
+    quick_replies:
+      - thread_set
+  - end

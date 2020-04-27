@@ -1,0 +1,14 @@
+triggers:
+  - keyword: even
+
+steps:
+  - ask: Number?
+  - if_even: (@ flow.result | int )
+    then:
+      jump: yes
+    else:
+      say: Sorry, try again
+  - end
+
+  - (yes)
+  - say: Yes it's even

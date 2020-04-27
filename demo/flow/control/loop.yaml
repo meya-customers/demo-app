@@ -1,0 +1,28 @@
+triggers:
+  - keyword: loop
+
+steps:
+  - ask: Start at...
+  - flow_set: sum
+
+  - (print)
+  - say: Sum is (@ flow.sum )
+  - ask: Plus...
+  - flow_set: plus
+  - jump: >
+      (% if flow.plus == "stop" %)
+        stop
+      (% else %)
+        continue
+      (% endif %)
+
+  - (continue)
+  - flow: demo.flow.control.loop
+    jump: print
+    data:
+      sum: (@ flow.sum + flow.plus )
+    transfer: true
+  - say: Flow control error
+
+  - (stop)
+  - say: Stopped

@@ -1,0 +1,12 @@
+type: meya.segment.integration
+write_key: (@ vault.segment.write_key )
+tracked_entries:
+  - meya.csp.event
+  - meya.text.event
+  - meya.flow.entry.label
+  - meya.flow.entry.start
+  - meya.user.entry.data
+untracked_user_data:
+  - SIN
+  - CC
+  - password

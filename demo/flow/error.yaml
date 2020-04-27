@@ -1,0 +1,64 @@
+triggers:
+  - keyword: error
+  - regex: ^error_.*$
+    action:
+      jump: (@ flow.result )
+
+steps:
+  - (error_variable_0)
+  - say: Flow variable (@ flow.event )
+  - (error_variable_1)
+  - say: Flow variable (@ flow.event_error )
+  - (error_variable_2)
+  - say: (@ flow.event_error )
+
+  - (error_filter_0)
+  - say: Flow filter (upper) (@ flow.event | upper )
+  - (error_filter_1)
+  - say: Flow filter (upper) (@ flow.event_error | upper )
+  - (error_filter_2)
+  - say: (@ flow.event_error | upper )
+  - (error_filter_3)
+  - say: Flow filter (int) (@ flow.event | int )
+  - (error_filter_4)
+  - say: Flow filter (int) (@ flow.event_error | int )
+  - (error_filter_5)
+  - say: (@ flow.event_error | int )
+
+  - (error_compare_0)
+  - say: Flow compare (@ flow.event > 0 )
+  - (error_compare_1)
+  - say: Flow compare (@ flow.event_error > 0 )
+  - (error_compare_2)
+  - say: (@ flow.event_error > 0 )
+
+  - (error_string_concat_0)
+  - say: Flow string concat (@ flow.event + "xyz" )
+  - (error_string_concat_1)
+  - say: Flow string concat (@ flow.event_error + "xyz" )
+  - (error_string_concat_2)
+  - say: (@ flow.event_error + "xzy" )
+
+  - (error_if_block_0)
+  - say: >
+      Flow if block
+      (% if flow.event == "error" %)
+        TRUE
+      (% else %)
+        FALSE
+      (% endif %)
+  - (error_if_block_1)
+  - say: >
+      Flow if block
+      (% if flow.event_error == "error" %)
+        TRUE
+      (% else %)
+        FALSE
+      (% endif %)
+  - (error_if_block_2)
+  - say: >
+      (% if flow.event_error == "error" %)
+        TRUE
+      (% else %)
+        FALSE
+      (% endif %)

@@ -1,0 +1,5 @@
+triggers:
+  - ping
+
+steps:
+  - pong

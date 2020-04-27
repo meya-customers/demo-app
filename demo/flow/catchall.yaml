@@ -1,0 +1,12 @@
+triggers:
+  - catchall
+
+steps:
+  - say: Sorry, I don't understand.
+    composer:
+      visibility: show
+      focus: text
+    quick_replies:
+      - email
+      - random
+      - catchall

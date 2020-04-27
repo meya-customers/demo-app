@@ -1,0 +1,11 @@
+*.js
+.direnv
+.idea
+.meya
+.pytest_cache
+__pycache__
+config.yaml
+demo_app.egg-info
+node_modules
+vault.yaml
+vault.release.yaml

@@ -1,0 +1,35 @@
+triggers:
+  - keyword: calendar
+
+steps:
+  - (book)
+  - calendly: erik-meya/meya-demo
+    title: Book a demo date
+    description: Click "Schedule time" below to setup a face-to-face meeting.
+    button_style: text
+    prefill:
+      name: Tope Awotono
+      email: erik+tope@meya.ai
+    rows:
+      -   - cell: Customer specialist
+            value: Kaiser Sose
+      -   - cell: Email
+            value: kaiser@meya.ai
+  - if: (@ flow.result )
+    then: next
+    else:
+      jump: fail
+
+  - (success)
+  - say: >
+      Meeting booked with (@ flow.result.payload.event.assigned_to[0] )
+      @ (@ flow.result.payload.event.start_time_pretty )
+  - end
+
+  - (fail)
+  - say: Nothing booked. Try again?
+    quick_replies:
+      - text: Try again
+        action:
+          jump: book
+  - end

@@ -1,0 +1,2 @@
+type: meya.clearbit.integration
+api_key: (@ vault.clearbit.api_key )

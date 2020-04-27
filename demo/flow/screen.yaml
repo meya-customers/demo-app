@@ -1,0 +1,49 @@
+triggers:
+  - keyword: screen
+    action:
+      jump: start
+  - keyword: screen default
+    action:
+      jump: default
+  - keyword: screen continue
+    action:
+      jump: continue
+  - keyword: screen end
+    action:
+      jump: end
+steps:
+  - (start)
+  - say: Screen test start
+
+  - (ask)
+  - ask: Pick a mode
+    buttons:
+      - text: Default
+        action:
+          jump: default
+      - text: Continue
+        action:
+          jump: continue
+      - text: End
+        action:
+          jump: end
+    quick_replies:
+      - screen default
+      - screen continue
+      - screen end
+
+  - (default)
+  - say: Screen test default
+  - jump: ask
+
+  - (continue)
+  - continue_screen
+  - say: Screen test continue
+  - jump: ask
+
+  - (end)
+  - say: Screen test end
+  - delay: 1
+  - end_screen
+  - jump: ask
+

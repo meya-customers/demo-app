@@ -1,0 +1,2 @@
+type: meya.webhook.integration
+postback_url: (@ vault.webhook.postback_url )

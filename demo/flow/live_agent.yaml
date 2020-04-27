@@ -1,0 +1,165 @@
+id: demo.flow.live_agent.request_agent
+
+triggers:
+  - regex: live.agent
+    ignorecase: true
+
+steps:
+  - open_chat
+  - type: meya.csp.component.session.agent.request
+    say: Transferring you to the next available agent.
+    integration: demo.integration.sfla
+    note: Here is a note for the agent.
+    data:
+      Name__c: Frank
+      Surname__c: Underwood
+      Income__c: 1,000,000.00 USD
+---
+id: demo.flow.live_agent.chat_request_failed
+
+triggers:
+  - event_type: meya.salesforce.live_agent.event.session.agent.request.error
+
+steps:
+  - say: Chat request failed.
+---
+id: demo.flow.live_agent.chat_request_success
+
+triggers:
+  - event_type: meya.salesforce.live_agent.event.session.agent.request.ok
+
+steps:
+  - say: Chat request success, you're in queue position (@ flow.event.data.queue_position
+      | int )
+  - if: (@ flow.event.data.queue_position > 0 )
+    then:
+      flow: demo.flow.live_agent.end_session
+      transfer: true
+    else: end
+---
+id: demo.flow.live_agent.chat_ended
+
+triggers:
+  - event_type: meya.salesforce.live_agent.event.session.ended
+
+steps:
+  - say: Chat ended.
+---
+id: demo.flow.live_agent.chat_established
+
+triggers:
+  - event_type: meya.salesforce.live_agent.event.session.established
+
+steps:
+  - say: You're now talking to (@ flow.event.data.agent_name )
+---
+id: demo.flow.live_agent.agent_transfer
+
+triggers:
+  - event_type: meya.salesforce.live_agent.event.session.assign
+
+steps:
+  - say: You've been transferred to (@ flow.event.data.agent_name )
+---
+id: demo.flow.live_agent.agent_disconnect
+
+triggers:
+  - event_type: meya.salesforce.live_agent.event.session.agent.disconnect
+
+steps:
+  - say: The agent has disonnected
+  - flow: demo.flow.live_agent.end_session
+    transfer: true
+---
+id: demo.flow.live_agent.queue_update
+
+triggers:
+  - event_type: meya.salesforce.live_agent.event.session.queue.update
+    # This prevents event spoofing
+    # TODO: We need to create a meya.trigger.system_type trigger with the check built in
+    when: (@ member.role.system )
+
+steps:
+  - say: You're now in queue position (@ flow.event.data.position | int )
+  - if: (@ flow.event.data.position > 0 )
+    then:
+      flow: demo.flow.live_agent.end_session
+      transfer: true
+    else: end
+---
+id: demo.flow.live_agent.end_session
+
+steps:
+  - ask: Do you want to continue with the agent session?
+    buttons:
+      - text: Yes
+        result:
+          option: yes
+      - text: No
+        result:
+          option: no
+  - if: (@ flow.result.option == "no" )
+    then: next
+    else: end
+  - type: meya.csp.component.session.end
+    integration: demo.integration.sfla
+---
+id: demo.flow.live_agent.command.pill
+
+triggers:
+  - agent_command: ^.*pill.*
+
+steps:
+  # Publish as the agent
+  - flow_set:
+      publish_as: (@ flow.event.data.member_id )
+  - say: Executing the `/slash` command.
+  - ask: Which pill?
+    buttons:
+      - text: Blue
+        action:
+          jump: blue_pill
+      - text: Red
+        action:
+          jump: red_pill
+
+  - (blue_pill)
+  - say: Welcome to the real world!
+  - thread_set:
+      mode: blue
+  - end
+
+  - (red_pill)
+  - say: Welcome back to the Matrix.
+  - thread_set:
+      mode: red
+  - end
+---
+id: demo.flow.live_agent.command.training
+
+triggers:
+  - agent_command: training
+    when: (@ thread.mode == "blue" )
+
+steps:
+  # Publish as the agent
+  - flow_set:
+      publish_as: (@ flow.event.data.member_id )
+  - say: Neo training
+  - url: https://media.giphy.com/media/V2ojLo7PvhVug/giphy.gif
+    alt: Neo gestures "come on"
+---
+id: demo.flow.live_agent.command.matrix
+
+triggers:
+  - agent_command: matrix
+    when: (@ thread.mode == "red" )
+
+steps:
+  # Publish as the agent
+  - flow_set:
+      publish_as: (@ flow.event.data.member_id )
+  - say: This is what the matrix looks like
+  - url: https://media.giphy.com/media/fV0oSDsZ4UgdW/giphy.gif
+    alt: The Matrix visible as flowing green code
+

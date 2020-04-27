@@ -1,0 +1,9 @@
+triggers:
+  - keyword: _split_name
+
+steps:
+  - say: Split name string...
+  - ask_form: What's your name?
+  - type: meya.util.text.component.split_name
+    name: (@ flow.result )
+  - say: first=(@ flow.result.first_name ) last=(@ flow.result.last_name )

@@ -1,0 +1,6 @@
+triggers:
+  - keyword: _hex
+
+steps:
+  - type: meya.util.text.component.random_hex
+  - say: hex=(@ flow.result )

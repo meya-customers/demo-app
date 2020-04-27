@@ -1,0 +1,30 @@
+triggers:
+  - keyword: case
+
+steps:
+  - ask: Case a/b/c/d?
+  - case:
+      a:
+        jump: a
+      b:
+        jump: b
+      c:
+        jump: c
+    default:
+      jump: d
+
+  - (a)
+  - say: A
+  - end
+
+  - (b)
+  - say: B
+  - end
+
+  - (c)
+  - say: C
+  - end
+
+  - (d)
+  - say: D
+  - end

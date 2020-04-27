@@ -1,0 +1,30 @@
+triggers:
+  - keyword: _segment_identify
+  - keyword: _segment_identify2
+    action:
+      jump: identify
+      data:
+        email: erik@meya.ai
+        age: 41
+        SIN: 123456789  # untracked
+
+steps:
+  - (start)
+  - say: start segment identify test...
+  - (email)
+  - ask_form: email?
+    expect: email_address
+  - user_set: email
+  - (age)
+  - ask_form: age?
+  - user_set: age
+  - (SIN)
+  - ask_form: SIN?
+  - user_set: SIN
+  - (identify)
+  - identify:
+      email: (@ user.email )
+      age: (@ user.age )
+      SIN: (@ user.SIN )
+  - (done)
+  - say: done.

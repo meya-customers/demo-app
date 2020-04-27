@@ -1,0 +1,2 @@
+type: meya.calendly.integration
+api_key: (@ vault.calendly.api_key )

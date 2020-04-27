@@ -1,0 +1,18 @@
+triggers:
+  - keyword: branch
+
+steps:
+  - ask: What's bigger than 100?
+  - jump: >
+      (% if (flow.result | int) > 100 %)
+        big
+      (% else %)
+        small
+      (% endif %)
+
+  - (small)
+  - say: No
+  - end
+
+  - (big)
+  - say: Yes

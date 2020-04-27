@@ -1,0 +1,15 @@
+triggers:
+  - regex: delay
+
+steps:
+  - say: Starting 0.5s delay
+  - delay: 0.5
+
+  - end_screen
+  - say: 0.5s delay complete
+  - say: Starting 5s delay
+  - delay: 5
+
+  - end_screen
+  - say: 5s delay complete
+

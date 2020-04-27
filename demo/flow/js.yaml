@@ -1,0 +1,23 @@
+triggers:
+  - keyword: js
+  - button_id: .js
+
+steps:
+  - ask: Want to run some code?
+    tiles:
+      - title: pow(2, 10)
+        javascript: alert(Math.pow(2, 10))
+      - buttons:
+          - text: Static button
+            javascript: orbButtonClick('.js')
+          - text: Dynamic button
+            javascript: alert('DYNAMIC BUTTON')
+            result: DYNAMIC
+      - buttons:
+          - text: Say
+            javascript: orbSay(prompt('Say?'))
+          - text: Start spin
+            javascript: document.querySelector('.orb-h1').classList.add('infinite-spinning')
+          - text: Stop spin
+            javascript: document.querySelector('.orb-h1').classList.remove('infinite-spinning')
+  - say: Code ran (@ flow.result )

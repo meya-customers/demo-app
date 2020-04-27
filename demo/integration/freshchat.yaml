@@ -1,0 +1,14 @@
+type: meya.freshworks.freshchat.integration
+app_id: (@ vault.freshchat.app_id )
+api_root: (@ vault.freshchat.api_root )
+api_token: (@ vault.freshchat.api_token )
+bot_agent_email: roeland+assistant@meya.ai
+channel_name: Inbox
+agent_command_prefix: '@'
+create_conversation: on_csp_track
+assignment_rules:
+  # assignee: thread_mode
+  no_assignee: bot
+  human_agent: agent
+  bot_agent: bot
+  group:

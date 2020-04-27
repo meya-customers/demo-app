@@ -1,0 +1,4 @@
+type: meya.sendgrid.integration
+key_id: (@ vault.sendgrid.api_key_id )
+secret: (@ vault.sendgrid.api_secret )
+email_address: (@ vault.sendgrid.email_address )

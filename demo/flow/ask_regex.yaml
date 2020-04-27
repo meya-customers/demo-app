@@ -1,0 +1,16 @@
+triggers:
+  - regex: regex
+
+steps:
+  - ask: What's your postal code?
+    regex: >
+      ^
+      ([A-Za-z]\d[A-Za-z])
+      [ -]?
+      (?P<second_part>\d[A-Za-z]\d)
+      $
+    error_message: Invalid postal code, please try again.
+    retries: .inf
+  - say: 'Flow data: (@ flow )'
+  - flow_set: postal_code
+  - say: flow.postal_code = (@ flow.postal_code )

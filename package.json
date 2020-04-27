@@ -1,0 +1,35 @@
+{
+    "name": "test",
+    "private": true,
+    "scripts": {
+        "build": "webpack",
+        "analyze": "ANALYZE=Y webpack",
+        "dev": "webpack-dev-server --mode development --open",
+        "deploy": "yarn build && yarn deploy-app",
+        "deploy-app": "gsutil -h 'Cache-Control:public, max-age=86400, s-maxage=10' cp index.html bundle.js gs://meya-v2-demo"
+    },
+    "devDependencies": {
+        "@meya-ai/meya-orb": "link:../../orb",
+        "@types/node": "^12.0.10",
+        "@types/react": "^16.8.23",
+        "@types/react-dom": "^16.8.4",
+        "@types/webpack": "^4.4.34",
+        "@types/webpack-bundle-analyzer": "^2.13.2",
+        "@types/yaml": "^1.0.2",
+        "framer-motion": "^1.6.7",
+        "polished": "^3.4.1",
+        "react": "^16.8.6",
+        "react-dom": "^16.8.6",
+        "styled-components": "^4.3.2",
+        "styled-icons": "^8.1.0",
+        "ts-loader": "^6.0.4",
+        "ts-node": "^8.3.0",
+        "typescript": "^3.5.2",
+        "typescript-plugin-styled-components": "^1.4.3",
+        "webpack": "^4.35.2",
+        "webpack-bundle-analyzer": "^3.3.2",
+        "webpack-cli": "^3.3.5",
+        "webpack-dev-server": "^3.7.2",
+        "yaml": "^1.5.0"
+    }
+}

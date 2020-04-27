@@ -1,0 +1,26 @@
+triggers:
+  - keyword: random
+
+steps:
+  - say: Random...
+  - random:
+      - jump: a
+      - jump: b
+      - jump: c
+      - jump: d
+
+  - (a)
+  - say: A
+  - end
+
+  - (b)
+  - say: B
+  - end
+
+  - (c)
+  - say: C
+  - end
+
+  - (d)
+  - say: D
+  - end

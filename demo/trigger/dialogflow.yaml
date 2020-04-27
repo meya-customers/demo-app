@@ -1,0 +1,42 @@
+id: demo.trigger.dialogflow.hi
+
+expect: dialogflow
+integration: demo.integration.dialogflow
+language: en
+intent_regex: ^greet
+action:
+  flow: demo.flow.dialogflow.text
+  data:
+    intent_type: greet
+---
+id: demo.trigger.dialogflow.size
+
+expect: dialogflow
+integration: demo.integration.dialogflow
+language: en
+intent: size
+action:
+  flow: demo.flow.dialogflow.text
+  data:
+    intent_type: size
+---
+id: demo.trigger.dialogflow.smalltalk
+
+expect: dialogflow
+integration: demo.integration.dialogflow
+language: en
+intent_regex: ^smalltalk\.
+action:
+  flow: demo.flow.dialogflow.text
+  data:
+    intent_type: smalltalk
+---
+id: demo.flow.dialogflow.text
+
+steps:
+  - continue_screen
+  - say: (@ flow.dialogflow_response.queryResult.fulfillmentText )
+  - if: (@ flow.event.data.text is upper )
+    then:
+      say: 'Flow data: (@ flow )'
+    else: next

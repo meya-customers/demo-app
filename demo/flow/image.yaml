@@ -1,0 +1,21 @@
+triggers:
+  - type: image
+    when: (@ member.role.user and "Hubble" not in event.data.url )
+  - keyword: image
+
+steps:
+  - url: https://images.unsplash.com/photo-1476610182048-b716b8518aae?ixlib=rb-1.2.1&q=85&fm=jpg&crop=entropy&cs=srgb&w=1000
+    alt: Photo of a landscape and waterfall
+  - url: https://images.unsplash.com/photo-1517352551702-336dda93455e?ixlib=rb-1.2.1&q=85&fm=jpg&crop=entropy&cs=srgb&w=1000
+    alt: Photo of a llama
+  - url: https://upload.wikimedia.org/wikipedia/en/thumb/4/4a/Commons-logo.svg/178px-Commons-logo.svg.png
+    alt: Wikimedia Commons logo
+  - url: https://media.giphy.com/media/WWyT3VgEgIK8U/giphy.gif
+    alt: Cat squinting
+
+  - ask: Show me some cats please? 🐈
+    expect: image
+    quick_replies:
+      - I have no cats
+      - I have too many cats
+  - say: Thanks (@ flow )

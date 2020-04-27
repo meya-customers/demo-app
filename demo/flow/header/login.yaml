@@ -1,0 +1,7 @@
+triggers:
+  - button_id: .login
+
+steps:
+  - open_chat
+  - say: <Insert login flow here>
+

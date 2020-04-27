@@ -1,0 +1,46 @@
+triggers:
+  - keyword: if
+
+steps:
+  - ask: If a/b/c/d?
+  - flow_set: string
+  - if: (@ "a" in flow.string )
+    then: end
+    else: next
+
+  - (no_a)
+  - say: No A (@ flow )
+  - if: (@ "b" in flow.string )
+    then:
+      jump: yes_b
+    else:
+      next:
+        upper: (@ flow.string | upper )
+  - say: No B (@ flow )
+
+  - (yes_b)
+  - if: (@ "c" in flow.string )
+    then:
+      flow: demo.flow.control.if
+      jump: yes_c
+      data:
+        string: (@ flow.string )
+    else:
+      flow: demo.flow.control.if
+      jump: no_c
+      data:
+        string: (@ flow.string )
+      transfer: true
+  - say: Yes C done (@ flow )
+  - end
+
+  - (yes_c)
+  - say: Yes C (@ flow )
+
+  - (no_c)
+  - if: (@ "d" in flow.string )
+    then:
+      end:
+        double: (@ flow.string )(@ flow.string )
+    else: next
+  - say: No D (@ flow )

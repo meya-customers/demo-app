@@ -1,0 +1,62 @@
+triggers:
+  - keyword: email
+
+steps:
+  - url: https://media.giphy.com/media/1aejdvBiVkJsk/giphy-downsized.gif
+    alt: AOL logo
+
+  - (start)
+  - type: meya.email.component.address.ask.form
+    quick_replies:
+      - text: Why do you need my email?
+        action:
+          jump: why
+      - Where is your privacy statement?
+    composer:
+      visibility: collapse
+      placeholder: Have a question?
+    error_message: Not a valid email address, please try again.
+    retries: 3
+  - cond:
+      - (@ not flow.ok ):
+          jump: invalid_email
+      - (@ flow.result.startswith("test") ):
+          jump: test_email
+    default:
+      jump: valid_email
+
+  - (invalid_email)
+  - say: Could not determine your email address after (@ flow.retry_count) retries.
+  - end
+
+  - (valid_email)
+  - say: Hi (@ flow.result )️ 👋
+  - user_set: email
+  - end
+
+  - (test_email)
+  - say: 'Flow data: (@ flow )'
+  - user_set:
+      email_dict: (@ flow.result )
+      email_confidence: (@ flow.confidence )
+  - user_set: email
+  - say: |
+      user.email = (@ user.email )
+      user.email_dict = (@ user.email_dict ),
+      user.email_confidence = (@ user.email_confidence )
+  - flow_set: email
+  - flow_set:
+      email_dict: (@ flow.result )
+      email_retries: (@ flow.retry_count )
+  - say: |
+      flow.email = (@ flow.email )
+      flow.email_dict = (@ flow.email_dict )
+      flow.email_retries = (@ flow.email_retries )
+  - end
+
+  - (why)
+  - say: Because.
+  - buttons:
+      - text: OK
+        action:
+          jump: start

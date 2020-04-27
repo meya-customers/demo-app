@@ -1,0 +1,3 @@
+type: meya.mailgun.integration
+api_key: (@ vault.mailgun.api_key )
+domain: (@ vault.mailgun.domain )

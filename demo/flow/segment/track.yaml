@@ -1,0 +1,22 @@
+triggers:
+  - keyword: _segment_track
+  - keyword: _segment_track2
+    action:
+      jump: track
+      data:
+        event_name: foo
+
+steps:
+  - say: start segment track test...
+  - ask_form: event name?
+    expect: email_address
+  - flow_set: event_name
+  - (track)
+  - track: custom.segment.event.(@ flow.event_name )
+    data:
+      foo: bar
+      pi: 3.1415926535
+    context:
+      ip: 127.0.0.1
+      country: canada
+  - say: done.

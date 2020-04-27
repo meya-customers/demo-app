@@ -1,0 +1,17 @@
+triggers:
+  - file
+  - keyword: file
+
+steps:
+  - url: https://upload.wikimedia.org/wikipedia/commons/b/b3/Wiki_markup_cheatsheet_EN.pdf
+    filename: cheatsheet.pdf
+  - url: https://www.w3.org/TR/PNG/iso_8859-1.txt
+    filename: iso.txt
+  - url: https://httpbin.org/headers
+    filename: headers.json
+
+  - ask: What file do you have?
+    expect: file
+    composer:
+      placeholder: Find a file
+  - say: Thanks (@ flow )

@@ -1,0 +1,7 @@
+package: demo
+triggers:
+  - demo.trigger.open_page
+  - demo.trigger.hello_world2
+  - demo.trigger.log
+integrations:
+  - demo.integration.orb

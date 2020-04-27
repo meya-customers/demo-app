@@ -1,0 +1,2 @@
+type: meya.slack.integration
+webhook_url: (@ vault.slack.webhook_url )
