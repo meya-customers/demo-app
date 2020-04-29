@@ -1,0 +1,19 @@
+triggers:
+  - keyword: Astronomy
+
+steps:
+  - url: https://media.giphy.com/media/3o7buijTqhjxjbEqjK/giphy.gif
+    alt: BBC space GIF travelling through stars
+    quick_replies:
+      - text: Astronomy
+        action:
+          flow: flow.orb.header.astronomy
+      - text: Cosmology
+        action:
+          flow: flow.orb.header.cosmology
+      - text: Astrophysics
+        action:
+          flow: flow.orb.header.astrophysics
+      - text: Astrobiology
+        action:
+          flow: flow.orb.header.astrobiology

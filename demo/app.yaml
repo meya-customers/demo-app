@@ -1,8 +1,0 @@
-id: demo
-type: meya.app.element
-bots:
-  - demo.grid_bot
-  - demo.null_bot
-integrations: (@ config.integrations )
-logs:
-  - demo.log.default

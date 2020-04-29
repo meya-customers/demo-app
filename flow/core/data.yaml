@@ -1,0 +1,56 @@
+triggers:
+  - keyword: data
+  - keyword: data explicit
+    action:
+      jump: explicit
+  - keyword: data invalid simple
+    action:
+      jump: invalid simple
+  - keyword: data invalid complex
+    action:
+      jump: invalid complex
+
+steps:
+  - (start)
+  - say: start (@ flow )
+  - type: component.core.data_1
+
+  - (middle)
+  - say: middle (@ flow )
+  - type: component.core.data_2
+    data_1: (@ flow.result )
+
+  - (end)
+  - say: end (@ flow )
+  - end
+
+  - (explicit)
+  - type: component.core.data_2
+    data_1:
+      x: 1
+      y:
+        z:
+          true: false
+          4: 8
+  - say: explicit (@ flow )
+
+  - (invalid simple)
+  - flow_set:
+      result: None
+  - buttons:
+      - text: Continue
+        action: next
+  - type: component.core.data_2
+    data_1: (@ flow.result )
+  - say: invalid simple (@ flow )
+
+  - (invalid complex)
+  - flow_set:
+      result:
+        a: b
+  - buttons:
+      - text: Continue
+        action: next
+  - type: component.core.data_2
+    data_1: (@ flow.result )
+  - say: invalid complex (@ flow )

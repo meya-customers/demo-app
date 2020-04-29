@@ -1,0 +1,30 @@
+triggers:
+  - expect: dialogflow
+    integration: integration.dialogflow
+    language: en
+    intent_regex: ^greet
+    action:
+      data:
+        intent_type: greet
+  - expect: dialogflow
+    integration: integration.dialogflow
+    language: en
+    intent: size
+    action:
+      data:
+        intent_type: size
+  - expect: dialogflow
+    integration: integration.dialogflow
+    language: en
+    intent_regex: ^smalltalk\.
+    action:
+      data:
+        intent_type: smalltalk
+
+steps:
+  - continue_screen
+  - say: (@ flow.dialogflow_response.queryResult.fulfillmentText )
+  - if: (@ flow.event.data.text is upper )
+    then:
+      say: 'Flow data: (@ flow )'
+    else: next

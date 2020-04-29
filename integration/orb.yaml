@@ -1,0 +1,5 @@
+type: meya.orb.integration
+container: document.querySelector("#orb-mount")
+theme:
+  brand_color: '#4989ea'
+  bot_avatar_monogram: D

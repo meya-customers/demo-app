@@ -1,0 +1,15 @@
+triggers:
+  - keyword: subflow
+
+steps:
+  - ask: Parent name?
+  - flow_set: name
+  - say: Parent flow (@ flow )
+
+  - say: Calling child
+  - flow: flow.flow.subflow_child
+    data:
+      parent_name: (@ flow.name )
+
+  - say: Called child
+  - say: Parent flow (@ flow )

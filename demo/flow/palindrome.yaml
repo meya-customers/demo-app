@@ -1,6 +1,0 @@
-triggers:
-  - type: demo.trigger.palindrome
-    minimum: 4
-
-steps:
-  - say: Nice, length (@ flow.result | length )!

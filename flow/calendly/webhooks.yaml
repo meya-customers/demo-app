@@ -1,0 +1,18 @@
+triggers:
+  - keyword: calendly_webhook
+
+steps:
+  - (set webhook)
+  - say: Setting Calendly webhook ...
+  - type: meya.calendly.component.webhook.create
+    integration: integration.calendly
+    wait_for_response: true
+  - if: (@ flow.ok )
+    then: next
+    else:
+      jump: webhook fail
+  - (done)
+  - say: Done. hook_id = (@ flow.result.id )
+  - end
+  - (webhook fail)
+  - say: Something went wrong. (@ flow.result )

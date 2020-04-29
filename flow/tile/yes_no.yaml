@@ -1,0 +1,7 @@
+triggers:
+  - keyword: yes_no_tile
+
+steps:
+  - type: component.tile.yes_no
+    text: Do you want to continue?
+  - say: Flow result (@ flow.result )

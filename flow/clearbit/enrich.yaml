@@ -1,0 +1,22 @@
+triggers:
+  - keyword: _clearbit
+  - keyword: _clearbit2
+    action:
+      jump: enrich
+      data:
+        email: erik@meya.ai
+
+steps:
+  - say: Let's enrich an email using Clearbit.
+  - ask_form: What email to enrich?
+    expect: email_address
+  - flow_set: email
+  - (enrich)
+  - type: meya.clearbit.component.enrich
+    email: (@ flow.email )
+    integration: integration.clearbit
+  - say: Done. (@ flow.ok ) - (@ flow.status ) Show results?
+    quick_replies:
+      - text: Ok
+        action: next
+  - say: result=(@ flow.result ) data=(@ flow.data )

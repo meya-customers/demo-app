@@ -1,0 +1,39 @@
+# This workflow will install Python and Meya dependencies, runs tests and code formatting check
+name: Meya build
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.8
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install --upgrade \
+            --extra-index-url https://meya:${{ secrets.auth_token }}@grid.meya.ai/registry/pypi \
+            "pygit2>=1.1.1" \
+            "meya-sdk>=2.0.0" \
+            "meya-cli>=2.0.0"
+      - name: Authenticate using Meya auth token
+        run: |
+          meya auth add --grid-url https://grid.meya.ai --auth-token ${{ secrets.auth_token }}
+      - name: Connect to production app
+        run: |
+          meya connect --grid-url https://grid.meya.ai --app-id ${{ secrets.app_id }}
+      - name: Check code syntax and formatting
+        run: meya check
+      - name: Run tests
+        run: meya test
+      - name: Deploy
+        if: github.ref == 'refs/heads/master'
+        run: meya push --force --build-image

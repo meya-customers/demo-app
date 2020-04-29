@@ -1,0 +1,32 @@
+triggers:
+  - type: page_open
+    when: (@ not thread.open_page )
+    action:
+      data:
+        page: snow capped mountains
+
+steps:
+  - thread_set:
+      open_page: true
+# uncomment if you want to track in freshchat
+#  - type: meya.component.csp_track
+#    integration: integration.freshchat
+#    data:
+#      assign_to_agent: roeland+assistant@meya.ai
+#      assign_to_group: Bot
+  - component.session.track
+  - hero: Start your journey...
+    description: Welcome to the (@ flow.page )! 🔮
+    quick_replies:
+      - button
+      - email
+      - text: ǝɯɐu
+        action:
+          flow: flow.text.ask_name
+      - text: hello
+        action:
+          say: hello back
+      - chat
+      - text: next
+        action: next
+  - say: After hero

@@ -1,0 +1,6 @@
+triggers:
+  - keyword: upper
+
+steps:
+  - ask: What to make upper?
+  - say_upper: (@ flow.result )

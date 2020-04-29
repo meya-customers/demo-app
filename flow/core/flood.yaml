@@ -1,0 +1,11 @@
+triggers:
+  - regex: >
+      flood
+      (?:
+          \s
+          (?P<count> \d+ )
+      )?
+
+steps:
+  - type: component.core.flood
+    count: (@ flow.groups.count | int )

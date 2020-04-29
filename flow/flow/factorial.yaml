@@ -1,0 +1,33 @@
+triggers:
+  - keyword: factorial
+
+steps:
+  - ask: Of?
+  - flow: flow.flow.factorial
+    jump: start
+    data:
+      input: (@ flow.result | int )
+  - say: The answer is (@ flow.output )
+  - end
+  - say: Control flow error
+
+  - (start)
+  - jump: >
+      (% if flow.input > 1 %)
+        recurse
+      (% else %)
+        done
+      (% endif %)
+
+  - (recurse)
+  - flow: flow.flow.factorial
+    jump: start
+    data:
+      input: (@ flow.input - 1 )
+  - end:
+      output: (@ flow.input * flow.output )
+
+  - (done)
+  - end:
+      output: 1
+

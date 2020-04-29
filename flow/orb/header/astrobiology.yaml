@@ -1,0 +1,27 @@
+triggers:
+  - keyword: 👩‍🚀
+
+steps:
+  - continue_screen
+  - ask: 👽👽👽
+    buttons:
+      - text: 🐙
+        action: next
+      - text: 🛸
+        action: next
+      - text: 🖖
+        action: next
+  - say: 😄🚀⭐️
+    quick_replies:
+      - text: Astronomy
+        action:
+          flow: flow.orb.header.astronomy
+      - text: Cosmology
+        action:
+          flow: flow.orb.header.cosmology
+      - text: Astrophysics
+        action:
+          flow: flow.orb.header.astrophysics
+      - text: Astrobiology
+        action:
+          flow: flow.orb.header.astrobiology

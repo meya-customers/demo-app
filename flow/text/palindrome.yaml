@@ -1,0 +1,6 @@
+triggers:
+  - type: trigger.text.palindrome
+    minimum: 4
+
+steps:
+  - say: Nice, length (@ flow.result | length )!

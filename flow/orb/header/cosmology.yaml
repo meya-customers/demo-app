@@ -1,0 +1,27 @@
+triggers:
+  - button_id: .cosmology
+
+steps:
+  - say: Cosmology (from the Greek κόσμος, kosmos "world" and -λογία, -logia "study
+      of") is a branch of astronomy concerned with the studies of the origin and evolution
+      of the universe, from the Big Bang to today and on into the future.
+  - delay: 2
+  - say: It is the scientific study of the origin, evolution, and eventual fate of
+      the universe.
+  - delay: 2
+  - say: Physical cosmology is the scientific study of the universe's origin, its
+      large-scale structures and dynamics, and its ultimate fate, as well as the laws
+      of science that govern these areas.
+    quick_replies:
+      - text: Astronomy
+        action:
+          flow: flow.orb.header.astronomy
+      - text: Cosmology
+        action:
+          flow: flow.orb.header.cosmology
+      - text: Astrophysics
+        action:
+          flow: flow.orb.header.astrophysics
+      - text: Astrobiology
+        action:
+          flow: flow.orb.header.astrobiology
