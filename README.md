@@ -4,6 +4,8 @@
 
 Sample BFML and Python code for Meya Grid and Orb.
 
+Try it live: https://demo.meya.ai/
+
 ## Setup
 
 ```shell script
