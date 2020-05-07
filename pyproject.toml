@@ -9,6 +9,7 @@ exclude = '''
   | \.pytest_cache
   | node_modules
   | .*egg-info
+  | venv
 )/
 '''
 line-length = 79

@@ -7,5 +7,6 @@ __pycache__
 config.yaml
 demo_app.egg-info
 node_modules
-vault.yaml
-vault.release.yaml
+vault.secret*.yaml
+venv
+scratch/
