@@ -1,0 +1,313 @@
+triggers:
+  - keyword: tile_icons
+  - regex: ^tile_icons_.*$
+    action:
+      jump: (@ flow.result )
+
+steps:
+  - (tile_icons_row)
+  - layout: row
+    tiles:
+      - icon: (@ config.icon.bird )
+        result: bird
+      - icon: (@ config.icon.cat )
+        result: cat
+      - icon: (@ config.icon.dog )
+        result: dog
+  - say: Flow result (@ flow.result )
+
+  - (tile_icons_row_title)
+  - layout: row
+    tiles:
+      - icon: (@ config.icon.bird )
+        title: Bird
+        result: bird
+      - icon: (@ config.icon.cat )
+        title: Cat
+        result: cat
+      - icon: (@ config.icon.dog )
+        title: Dog
+        result: dog
+  - say: Flow result (@ flow.result )
+
+  - (tile_icons_row_radio)
+  - layout: row
+    button_style: radio
+    tiles:
+      - icon: (@ config.icon.bird )
+        result: bird
+      - icon: (@ config.icon.cat )
+        result: cat
+      - icon: (@ config.icon.dog )
+        result: dog
+  - say: Flow result (@ flow.result )
+
+  - (tile_icons_row_radio_title)
+  - layout: row
+    button_style: radio
+    tiles:
+      - icon: (@ config.icon.bird )
+        title: Bird
+        result: bird
+      - icon: (@ config.icon.cat )
+        title: Cat
+        result: cat
+      - icon: (@ config.icon.dog )
+        title: Dog
+        result: dog
+  - say: Flow result (@ flow.result )
+
+  - (tile_icons_row_description)
+  - layout: row
+    tiles:
+      - icon: (@ config.icon.bird )
+        title: Bird
+        description: Circumnavigated how far away ship of the imagination star stuff
+          harvesting star light great turbulent clouds a billion trillion
+        result: bird
+      - icon: (@ config.icon.cat )
+        title: Cat
+        description: Circumnavigated how far away ship of the imagination star stuff
+          harvesting star light great turbulent clouds a billion trillion
+        result: cat
+      - icon: (@ config.icon.dog )
+        title: Dog
+        description: Circumnavigated how far away ship of the imagination star stuff
+          harvesting star light great turbulent clouds a billion trillion
+        result: dog
+  - say: Flow result (@ flow.result )
+
+  - (tile_icons_row_buttons)
+  - layout: row
+    tiles:
+      - icon: (@ config.icon.bird )
+        title: Bird
+        buttons:
+          - text: Day
+            result: bird_day
+          - text: Night
+            result: bird_night
+      - icon: (@ config.icon.cat )
+        description: Cat
+        buttons:
+          - text: Day
+            icon: (@ config.icon.sun )
+            result: cat_day
+          - text: Night
+            icon: (@ config.icon.moon )
+            result: cat_night
+      - icon: (@ config.icon.dog )
+        buttons:
+          - text: Day
+            icon: (@ config.icon.sun )
+            url: https://example.org
+          - text: Night
+            icon: (@ config.icon.moon )
+            url: https://example.org
+  - say: Flow result (@ flow.result )
+
+  - (tile_icons_row_radio_buttons)
+  - layout: row
+    button_style: radio
+    tiles:
+      - icon: (@ config.icon.bird )
+        title: Bird
+        buttons:
+          - text: Day
+            result: bird_day
+          - text: Night
+            result: bird_night
+      - icon: (@ config.icon.cat )
+        description: Cat
+        buttons:
+          - text: Day
+            icon: (@ config.icon.sun )
+            result: cat_day
+          - text: Night
+            icon: (@ config.icon.moon )
+            result: cat_night
+      - icon: (@ config.icon.dog )
+        buttons:
+          - text: Day
+            icon: (@ config.icon.sun )
+            url: https://example.org
+          - text: Night
+            icon: (@ config.icon.moon )
+            url: https://example.org
+  - say: Flow result (@ flow.result )
+
+  - (tile_icons_row_text_buttons)
+  - layout: row
+    button_style: text
+    tiles:
+      - icon: (@ config.icon.bird )
+        title: Bird
+        buttons:
+          - text: Day
+            result: bird_day
+          - text: Night
+            result: bird_night
+      - icon: (@ config.icon.cat )
+        description: Cat
+        buttons:
+          - text: Day
+            icon: (@ config.icon.sun )
+            result: cat_day
+          - text: Night
+            icon: (@ config.icon.moon )
+            result: cat_night
+      - icon: (@ config.icon.dog )
+        buttons:
+          - text: Day
+            icon: (@ config.icon.sun )
+            url: https://example.org
+          - text: Night
+            icon: (@ config.icon.moon )
+            url: https://example.org
+  - say: Flow result (@ flow.result )
+
+  - (tile_icons_column)
+  - layout: column
+    tiles:
+      - icon: (@ config.icon.bird )
+        result: bird
+      - icon: (@ config.icon.cat )
+        result: cat
+      - icon: (@ config.icon.dog )
+        result: dog
+  - say: Flow result (@ flow.result )
+
+  - (tile_icons_column_radio)
+  - layout: column
+    button_style: radio
+    tiles:
+      - icon: (@ config.icon.bird )
+        result: bird
+      - icon: (@ config.icon.cat )
+        result: cat
+      - icon: (@ config.icon.dog )
+        result: dog
+  - say: Flow result (@ flow.result )
+
+  - (tile_icons_column_title)
+  - layout: column
+    tiles:
+      - icon: (@ config.icon.bird )
+        title: Bird
+        result: bird
+      - icon: (@ config.icon.cat )
+        title: Cat
+        result: cat
+      - icon: (@ config.icon.dog )
+        title: Dog
+        result: dog
+  - say: Flow result (@ flow.result )
+
+  - (tile_icons_column_description)
+  - layout: column
+    tiles:
+      - icon: (@ config.icon.bird )
+        title: Bird
+        description: Circumnavigated how far away ship of the imagination star stuff
+          harvesting star light great turbulent clouds a billion trillion
+        result: bird
+      - icon: (@ config.icon.cat )
+        title: Cat
+        description: Circumnavigated how far away ship of the imagination star stuff
+          harvesting star light great turbulent clouds a billion trillion
+        result: cat
+      - icon: (@ config.icon.dog )
+        title: Dog
+        description: Circumnavigated how far away ship of the imagination star stuff
+          harvesting star light great turbulent clouds a billion trillion
+        result: dog
+  - say: Flow result (@ flow.result )
+
+  - (tile_icons_column_buttons)
+  - layout: column
+    tiles:
+      - icon: (@ config.icon.bird )
+        title: Bird
+        buttons:
+          - text: Day
+            result: bird_day
+          - text: Night
+            result: bird_night
+      - icon: (@ config.icon.cat )
+        description: Cat
+        buttons:
+          - text: Day
+            icon: (@ config.icon.sun )
+            result: cat_day
+          - text: Night
+            icon: (@ config.icon.moon )
+            result: cat_night
+      - icon: (@ config.icon.dog )
+        buttons:
+          - text: Day
+            icon: (@ config.icon.sun )
+            url: https://example.org
+          - text: Night
+            icon: (@ config.icon.moon )
+            url: https://example.org
+  - say: Flow result (@ flow.result )
+
+  - (tile_icons_column_radio_buttons)
+  - layout: column
+    button_style: radio
+    tiles:
+      - icon: (@ config.icon.bird )
+        title: Bird
+        buttons:
+          - text: Day
+            result: bird_day
+          - text: Night
+            result: bird_night
+      - icon: (@ config.icon.cat )
+        description: Cat
+        buttons:
+          - text: Day
+            icon: (@ config.icon.sun )
+            result: cat_day
+          - text: Night
+            icon: (@ config.icon.moon )
+            result: cat_night
+      - icon: (@ config.icon.dog )
+        buttons:
+          - text: Day
+            icon: (@ config.icon.sun )
+            url: https://example.org
+          - text: Night
+            icon: (@ config.icon.moon )
+            url: https://example.org
+  - say: Flow result (@ flow.result )
+
+  - (tile_icons_column_text_buttons)
+  - layout: column
+    button_style: text
+    tiles:
+      - icon: (@ config.icon.bird )
+        title: Bird
+        buttons:
+          - text: Day
+            result: bird_day
+          - text: Night
+            result: bird_night
+      - icon: (@ config.icon.cat )
+        description: Cat
+        buttons:
+          - text: Day
+            icon: (@ config.icon.sun )
+            result: cat_day
+          - text: Night
+            icon: (@ config.icon.moon )
+            result: cat_night
+      - icon: (@ config.icon.dog )
+        buttons:
+          - text: Day
+            icon: (@ config.icon.sun )
+            url: https://example.org
+          - text: Night
+            icon: (@ config.icon.moon )
+            url: https://example.org
+  - say: Flow result (@ flow.result )

@@ -4,9 +4,8 @@
 .meya
 .pytest_cache
 __pycache__
-config.yaml
 demo_app.egg-info
 node_modules
 vault.secret*.yaml
 venv
-scratch/
+scratch

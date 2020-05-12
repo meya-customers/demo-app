@@ -1,0 +1,38 @@
+triggers:
+  - regex: ^dialogflow_.*$
+    action:
+      jump: (@ flow.result )
+
+steps:
+  - (dialogflow_form)
+  - ask_form: Enter NLU text
+    expect: dialogflow
+    icon: (@ config.icon.question )
+    language: en
+    integration: integration.dialogflow
+    retries: 1
+    min_confidence: 0.75
+  - jump: print
+
+  - (dialogflow_composer)
+  - ask: Enter NLU text
+    expect: dialogflow
+    language: en
+    integration: integration.dialogflow
+    retries: 1
+    min_confidence: 0.75
+  - jump: print
+
+  - (dialogflow_detect)
+  - detect_dialogflow: size large
+    integration: integration.dialogflow
+    language: en
+    min_confidence: 0.75
+  - jump: print
+
+  - (print)
+  - say: OK (@ flow.ok )
+  - say: Confidence (@ flow.get("confidence") )
+  - say: Intent (@ flow.get("result") )
+  - say: Details (@ flow.get("dialogflow_response") )
+  - end

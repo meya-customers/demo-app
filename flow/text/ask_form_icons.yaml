@@ -1,0 +1,25 @@
+triggers:
+  - keyword: ask_form_icons
+  - regex: ^ask_form_icons_.*$
+    action:
+      jump: (@ flow.result )
+
+steps:
+  - (ask_form_icons_name)
+  - ask_form: What's your name?
+    autocomplete: name
+    label: Name
+  - say: Flow result (@ flow.result )
+
+  - (ask_form_icons_country)
+  - ask_form: Where do you want to go?
+    autocomplete: country-name
+    label: Country
+  - say: Flow result (@ flow.result )
+
+  - (ask_form_icons_hat)
+  - ask_form: What hat do you wear?
+    icon: (@ config.icon.hat )
+    label: Hat
+  - say: Flow result (@ flow.result )
+

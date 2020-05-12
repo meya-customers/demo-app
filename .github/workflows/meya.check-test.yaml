@@ -2,10 +2,10 @@
 name: Meya build
 
 on:
+  repository_dispatch:
   push:
-    branches: [master]
-  pull_request:
-    branches: [master]
+    branches:
+      - '*'
 
 jobs:
   build-and-deploy:
@@ -16,6 +16,14 @@ jobs:
         uses: actions/setup-python@v1
         with:
           python-version: 3.8
+      - name: Install Google Cloud dependencies
+        if: github.ref == 'refs/heads/master'
+        run: |
+          wget https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-243.0.0-linux-x86_64.tar.gz -O /opt/google-cloud-sdk-243.0.0-linux-x86_64.tar.gz
+          tar -C /opt -zxf /opt/google-cloud-sdk-243.0.0-linux-x86_64.tar.gz
+          rm /opt/google-cloud-sdk-243.0.0-linux-x86_64.tar.gz
+          echo '${{ secrets.google_auth_json }}' > /var/tmp/keyconfig.json
+          /opt/google-cloud-sdk/bin/gcloud auth activate-service-account --key-file /var/tmp/keyconfig.json --project "${{ secrets.google_project_id }}"
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
@@ -34,6 +42,10 @@ jobs:
         run: meya check
       - name: Run tests
         run: meya test
-      - name: Deploy
+      - name: Deploy app
         if: github.ref == 'refs/heads/master'
         run: meya push --force --build-image
+      - name: Deploy website
+        if: github.ref == 'refs/heads/master'
+        run: /opt/google-cloud-sdk/bin/gsutil -h 'Cache-Control:public, max-age=86400,
+          s-maxage=10' cp public/index.html gs://meya-v2-demo

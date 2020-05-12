@@ -1,0 +1,31 @@
+triggers:
+  - keyword: button_icons
+
+steps:
+  - buttons:
+      - icon: (@ config.icon.bird )
+        result: bird
+      - icon: (@ config.icon.cat )
+        text: Cat
+        result: cat
+      - icon: (@ config.icon.dog )
+        text: Dog
+        url: https://example.org
+      - text: Fish
+        result: fish
+      - text: Turtle
+        url: https://example.org
+    quick_replies:
+      - icon: (@ config.icon.bird )
+        result: bird
+      - icon: (@ config.icon.cat )
+        text: Cat
+        result: cat
+      - icon: (@ config.icon.dog )
+        text: Dog
+        url: https://example.org
+      - text: Fish
+        result: fish
+      - text: Turtle
+        url: https://example.org
+  - say: Flow result (@ flow.result )

@@ -1,6 +1,6 @@
 triggers:
-  - keyword: tile
-  - keyword: example tile
+  - keyword: build_tile
+  - keyword: example_tile
     action:
       jump: build
       data:
@@ -204,7 +204,7 @@ steps:
 
   # flow.tiles
   - (build)
-  - component.tile.build_tiles
+  - component.tile.build
   - flow_set: tiles
 
   # end

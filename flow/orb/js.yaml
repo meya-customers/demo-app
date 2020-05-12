@@ -13,11 +13,19 @@ steps:
           - text: Dynamic button
             javascript: alert('DYNAMIC BUTTON')
             result: DYNAMIC
-      - buttons:
-          - text: Say
-            javascript: orbSay(prompt('Say?'))
-          - text: Start spin
-            javascript: document.querySelector('.orb-h1').classList.add('infinite-spinning')
-          - text: Stop spin
-            javascript: document.querySelector('.orb-h1').classList.remove('infinite-spinning')
-  - say: Code ran (@ flow.result )
+    quick_replies:
+      - text: Next
+        action: next
+  - say: Code ran (@ flow.get("result") )
+
+  - buttons:
+      - text: Start spin
+        javascript: document.querySelector('.orb-h1').classList.add('infinite-spinning')
+      - text: Stop spin
+        javascript: document.querySelector('.orb-h1').classList.remove('infinite-spinning')
+    quick_replies:
+      - text: Next
+        action: next
+      - text: Say
+        javascript: orbSay(prompt('Say what?'))
+  - say: Code ran (@ flow.get("result") )

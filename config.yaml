@@ -1,0 +1,12 @@
+icon:
+  bird: streamline-regular/33-pets-animals/12-wild birds/wild-bird.svg
+  cat: streamline-regular/33-pets-animals/04-cats/cat-sitting.svg
+  dog: streamline-regular/33-pets-animals/03-dogs/dog.svg
+  hat:
+    path: streamline-regular/29-clothes-footwear-accessories/03-caps/cap-3.svg
+    color: "#2bcc7c"
+  moon: streamline-regular/34-weather/03-weather/weather-night-clear.svg
+  pdf_file: streamline-regular/07-work-office-companies/07-office-files/office-file-pdf-1.svg
+  sun: streamline-regular/34-weather/03-weather/weather-sun.svg
+  txt_file: streamline-regular/07-work-office-companies/07-office-files/office-file-txt-1.svg
+  question: streamline-regular/01-interface essential/14-alerts/question-circle.svg
