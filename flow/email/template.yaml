@@ -1,0 +1,32 @@
+triggers:
+  - keyword: email_template
+
+steps:
+  - ask: Let's test sending a templated email
+    quick_replies:
+      - OK
+  - ask_form: What's your email?
+    expect: email_address
+  - user_set: email
+  - ask_form: What's your name?
+    label: name
+    autocomplete: name
+  - user_set: name
+  - ask_form: What's your favorite color?
+    icon: streamline-light/12-design/05-colors:painting/color-tubes.svg
+    label: Color
+  - flow_set: favorite_color
+  - type: component.file.load
+    file_path: email/welcome.html
+    template: true
+  - type: meya.mailgun.component.send
+    integration: integration.mailgun
+    wait_for_response: true
+    to:
+      - email: (@ user.email )
+    from:
+      name: Meya
+      email: no-reply@meya.ai
+    subject: Welcome!
+    html: (@ flow.result )
+  - say: Email sent! ✉️

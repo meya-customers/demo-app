@@ -19,7 +19,7 @@ python3 -m venv venv  # optional
 . venv/bin/activate  # optional
 pip3 install --upgrade \
     --extra-index-url https://meya:$MEYA_AUTH_TOKEN@grid.meya.ai/registry/pypi \
-    "pygit2==1.1.1" \
+    "pygit2==1.2.1" \
     "meya-sdk>=2.0.0" \
     "meya-cli>=2.0.0"
 # auth (if needed)
