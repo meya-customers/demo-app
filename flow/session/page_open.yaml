@@ -1,11 +1,18 @@
 triggers:
   - type: page_open
+    magic_link_error: false
     when: (@ not thread.open_page )
     action:
       data:
         page: snow capped mountains
 
+  - type: page_open
+    magic_link_error: true
+    action:
+      jump: magic_link_error
+
 steps:
+  - (welcome)
   - thread_set:
       open_page: true
 # uncomment if you want to track in freshchat
@@ -30,3 +37,16 @@ steps:
       - text: next
         action: next
   - say: After hero
+  - end
+
+  - (magic_link_error)
+  - flow_set:
+      page_open_event: (@ flow.event )
+  - ask: The magic link you clicked has expired
+    buttons:
+      - text: OK
+        action:
+          jump: welcome
+          data:
+            event: (@ flow.page_open_event)
+            page: deep jungle

@@ -1,0 +1,17 @@
+triggers:
+  - keyword: magic_link
+
+steps:
+  - buttons:
+      - text: Create a new magic link
+        action:
+          flow: flow.orb.magic_link.create
+          transfer: true
+      - text: View your magic links
+        action:
+          flow: flow.orb.magic_link.view
+          transfer: true
+      - text: Clear your magic links
+        action:
+          flow: flow.orb.magic_link.clear
+          transfer: true

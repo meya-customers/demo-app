@@ -25,6 +25,10 @@ steps:
       - text: Text 4
       - text: Link 5
         url: https://example.org/?n=5
+      - text: Static 6
+        button_id: _static_button
+        button_context:
+          product: marmalade
     composer:
       visibility: hide
 

@@ -16,8 +16,7 @@ steps:
     icon: streamline-light/12-design/05-colors:painting/color-tubes.svg
     label: Color
   - flow_set: favorite_color
-  - type: component.file.load
-    file_path: email/welcome.html
+  - file_path: template/email/welcome.html
     template: true
   - type: meya.mailgun.component.send
     integration: integration.mailgun

@@ -1,0 +1,96 @@
+triggers:
+  - keyword: magic_link_create
+  - regex: ^magic_link_create_.*$
+    action:
+      jump: (@ flow.result )
+
+steps:
+  - ask: What do you want the magic link to do?
+    buttons:
+      - text: Just open the page
+        result: magic_link_create_page_open
+      - text: Trigger a static button with context
+        result: magic_link_create_context_button
+      - text: Trigger a single use dynamic button
+        result: magic_link_create_dynamic_button
+  - say: Creating a magic link...
+  - jump: (@ flow.result )
+
+  - (magic_link_create_page_open)
+  - magic_link: (@ user.page_open_url or "https://example.org" )
+    button_id: false
+    single_use: false
+  - jump: show
+
+  - (magic_link_create_context_button)
+  - magic_link: (@ user.page_open_url or "https://example.org" )
+    button_id: _static_button
+    button_context:
+      product: jam
+    single_use: false
+  - jump: show
+
+  - (magic_link_create_dynamic_button)
+  - magic_link: (@ user.page_open_url or "https://example.org" )
+    button_id: true
+    single_use: true
+  - jump: show
+
+  - (show)
+  - flow_set: magic_link
+  - say: Here's your secret magic link (@ flow.magic_link )
+  - if: (@ flow.button_id)
+    then:
+      say: Secret button is (@ flow.button_id )
+    else: next
+  - buttons:
+      - text: Email me the link
+        action: next
+      - text: Skip
+        action:
+          jump: wait
+
+  - (email)
+  - ask_form: What's your email?
+    expect: email_address
+  - flow_set: email_address
+  - file_path: template/email/magic_link.html
+    template: true
+  - say: Sending...
+  - type: meya.mailgun.component.send
+    integration: integration.mailgun
+    wait_for_response: true
+    to:
+      - email: (@ flow.email_address )
+    from:
+      name: Meya
+      email: no-reply@meya.ai
+    subject: Magic link
+    html: (@ flow.result )
+  - say: Email sent! 📧
+
+  - (wait)
+  - if: (@ flow.button_id )
+    then: next
+    else:
+      jump: done
+  - ask: Please click the magic link
+    buttons:
+      - text: Cancel
+        action:
+          jump: done
+      - button_id: (@ flow.button_id )
+        action: next
+  - say: Great, you're in!
+
+  - (done)
+  - say: You're all done
+    quick_replies:
+      - text: Create a new magic link
+        action:
+          flow: flow.orb.magic_link.create
+          transfer: true
+      - text: What else can I do with magic links?
+        action:
+          flow: flow.orb.magic_link.magic_link
+          transfer: true

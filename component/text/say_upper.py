@@ -16,9 +16,9 @@ class SayUpperComponent(Component):
     composer: ComposerSpec = element_field(default_factory=ComposerSpec)
 
     async def start(self) -> List[Entry]:
-        quick_replies = self.activate_button_triggers(self.quick_replies)
+        quick_replies = self.get_buttons_and_triggers(self.quick_replies)
         say_event = SayEvent(
-            composer=self.composer,
+            composer=self.get_composer(self.composer),
             member_id=self.member_id,
             quick_replies=quick_replies.buttons,
             text=self.say_upper.upper(),

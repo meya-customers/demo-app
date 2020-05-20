@@ -1,0 +1,12 @@
+triggers:
+  - keyword: magic_link_clear
+
+steps:
+  - user_set:
+      magic_links:
+  - say: Magic links cleared
+    quick_replies:
+      - text: What else can I do with magic links?
+        action:
+          flow: flow.orb.magic_link.magic_link
+          transfer: true

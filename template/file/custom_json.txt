@@ -1,0 +1,4 @@
+{
+    (@ key | tojson ): "otherValue",
+    "otherKey": [ (@ value | tojson ) ]
+}

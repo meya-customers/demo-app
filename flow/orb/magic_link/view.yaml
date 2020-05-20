@@ -1,0 +1,12 @@
+triggers:
+  - keyword: magic_link_view
+
+steps:
+  - say: Magic links (@ user.magic_links )
+    quick_replies:
+      - text: What else can I do with magic links?
+        action:
+          flow: flow.orb.magic_link.magic_link
+          data:
+            event: (@ flow.get("event") )
+          transfer: true

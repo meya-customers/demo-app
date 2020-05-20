@@ -1,0 +1,25 @@
+triggers:
+  - keyword: file_load
+
+steps:
+  - say: Plain text 👇
+  - file_path: template/file/plain.txt
+  - say: (@ flow.result )
+
+  - say: Custom JSON 👇
+  - file_path: template/file/custom_json.txt
+    template: true
+    context:
+      key: "custom:\nkey"
+      value:
+        complex:
+          - alpha
+          - beta
+  - say: (@ flow.result )
+
+  - say: Flow scope 👇
+  - flow_set:
+      emoji: ⛈
+  - file_path: template/file/flow.txt
+    template: true
+  - say: (@ flow.result )

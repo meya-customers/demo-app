@@ -2,9 +2,6 @@ triggers:
   - keyword: email
 
 steps:
-  - url: https://media.giphy.com/media/1aejdvBiVkJsk/giphy-downsized.gif
-    alt: AOL logo
-
   - (start)
   - type: meya.email.component.address.ask.form
     quick_replies:
@@ -27,12 +24,15 @@ steps:
 
   - (invalid_email)
   - say: Could not determine your email address after (@ flow.retry_count) retries.
-  - end
+  - end:
+      ok: false
 
   - (valid_email)
   - say: Hi (@ flow.result )️ 👋
   - user_set: email
-  - end
+  - end:
+      ok: true
+      email: (@ flow.result )
 
   - (test_email)
   - say: 'Flow data: (@ flow )'
@@ -55,8 +55,13 @@ steps:
   - end
 
   - (why)
-  - say: Because.
+  - say: We need your email address to send you important messages
   - buttons:
       - text: OK
         action:
           jump: start
+      - text: Cancel
+        action:
+          end:
+            ok: false
+
