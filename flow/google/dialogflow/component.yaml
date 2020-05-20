@@ -15,12 +15,23 @@ steps:
   - jump: print
 
   - (dialogflow_composer)
-  - ask: Enter NLU text
+  - ask: Enter NLU text e.g. large size
+    expect: dialogflow
+    language: en
+    integration: integration.dialogflow
+    intent: size
+  - jump: print
+
+  - (dialogflow_composer_no_catchall)
+  - ask: Enter NLU text e.g. large size
     expect: dialogflow
     language: en
     integration: integration.dialogflow
     retries: 1
     min_confidence: 0.75
+    intent: size
+    context: false
+    catchall: false
   - jump: print
 
   - (dialogflow_detect)
