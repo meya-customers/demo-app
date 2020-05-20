@@ -1,0 +1,2 @@
+type: meya.mandrill.integration
+api_key: (@ vault.mandrill.api_key )

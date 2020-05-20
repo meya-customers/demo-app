@@ -33,3 +33,5 @@ segment.write_key: xxx
 calendly.api_key: xxx
 clearbit.api_key: xxx
 webhook.postback_url: xxx
+postmark.server_token: xxx
+mandrill.api_key: xxx

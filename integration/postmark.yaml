@@ -1,0 +1,2 @@
+type: meya.postmark.integration
+server_token: (@ vault.postmark.server_token )

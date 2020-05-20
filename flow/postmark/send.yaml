@@ -1,0 +1,99 @@
+triggers:
+  - keyword: postmark_send
+  - keyword: postmark_send_2
+    action:
+      jump: send
+      data:
+        name: Erik Kalviainen
+        email: erik@meya.ai
+        subject: '[postmark] Testing demo app'
+        text: This is text.
+        html: >
+          This is <strong>HTML</strong>.<br/>
+          <a href="https://meya.ai">Meya.ai</a>
+  - keyword: postmark_send_advanced
+    action:
+      jump: advanced
+      data:
+        name: Inigo Montoya
+        email: erik+inigo@meya.ai
+
+steps:
+  - say: Let's test sending an email using Postmark.
+  - ask_form: What email to send to?
+    expect: email_address
+  - flow_set: email
+  - ask_form: Name?
+  - flow_set: name
+  - ask_form: Subject?
+  - flow_set: subject
+  - ask_form: Text?
+  - flow_set: text
+  - flow_set:
+      html:
+  - (send)
+  - type: meya.postmark.component.send
+    integration: integration.postmark
+    wait_for_response: true
+    to:
+      - name: (@ flow.name )
+        email: (@ flow.email )
+    from:
+      name: Meya Support
+      email: support@meya.ai
+    subject: (@ flow.subject )
+    text: (@ flow.text )
+    html: (@ flow.html )
+  - jump: ok
+
+  - (advanced)
+  - type: meya.util.text.component.random_hex
+  - flow_set:
+      random: (@ flow.result[0:3] )
+  - type: meya.postmark.component.send
+    integration: integration.postmark
+    wait_for_response: true
+    to:
+      - name: (@ flow.name )
+        email: (@ flow.email )
+    cc:
+      - email: erik+cc@meya.ai
+    bcc:
+      - name: Kaiser Sose
+        email: erik+kaiser@meya.ai
+    from:
+      name: Meya Support
+      email: support@meya.ai
+    subject: Advanced Postmark test [(@ flow.random )]
+    tag: Invitation
+    html: <b>Hello</b> <img src="cid:image.jpg"/>
+    text: Hello
+    reply_to: reply@meya.ai
+    headers:
+      foo: bar
+      CUSTOM-HEADER: value
+    track_opens: true
+    track_links: HtmlOnly
+    metadata:
+      color: blue
+      client-id: '54321'
+    attachments:
+      - name: test.txt
+        content: VGhpcyBpcyB0ZXh0
+        content_type: text/plain
+      - name: image.jpg
+        content_id: cid:image.jpg
+        content: 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
+        content_type: image/jpeg
+    message_stream: outbound
+  - jump: ok
+
+  - (ok)
+  - if: (@ flow.get("ok") )
+    then: next
+    else:
+      jump: fail
+  - say: Done. Check (@ flow.email ) for an email. (@ flow.result )
+  - end
+  - (fail)
+  - say: Postmark API failed. (@ flow.result )

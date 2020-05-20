@@ -1,0 +1,49 @@
+triggers:
+  - keyword: mandrill_send
+  - keyword: mandrill_send_2
+    action:
+      jump: send
+      data:
+        name: Erik Kalviainen
+        email: erik@meya.ai
+        subject: '[mandrill] Testing demo app'
+        text: This is text.
+        html: >
+          This is <strong>HTML</strong>.<br/>
+          <a href="https://meya.ai">Meya.ai</a>
+
+steps:
+  - say: Let's test sending an email using Mandrill.
+  - ask_form: What email to send to?
+    expect: email_address
+  - flow_set: email
+  - ask_form: Name?
+  - flow_set: name
+  - ask_form: Subject?
+  - flow_set: subject
+  - ask_form: Text?
+  - flow_set: text
+  - flow_set:
+      html:
+  - (send)
+  - type: meya.mandrill.component.send
+    integration: integration.mandrill
+    wait_for_response: true
+    to:
+      - name: (@ flow.name )
+        email: (@ flow.email )
+    from:
+      name: Meya Support
+      email: support@meya.ai
+    subject: (@ flow.subject )
+    text: (@ flow.text )
+    html: (@ flow.html )
+  - (ok)
+  - if: (@ flow.get("ok") )
+    then: next
+    else:
+      jump: fail
+  - say: Done. Check (@ flow.email ) for an email. (@ flow.result )
+  - end
+  - (fail)
+  - say: Mandrill API failed. (@ flow.result )
