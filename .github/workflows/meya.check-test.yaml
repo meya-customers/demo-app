@@ -12,6 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.custom_github_token }}
       - name: Set up Python 3.8
         uses: actions/setup-python@v1
         with:
@@ -49,3 +51,12 @@ jobs:
         if: github.ref == 'refs/heads/master'
         run: /opt/google-cloud-sdk/bin/gsutil -h 'Cache-Control:public, max-age=86400,
           s-maxage=10' cp public/index.html gs://meya-v2-demo
+      - name: Push snapshot
+        if: github.ref == 'refs/heads/master' && !startsWith(github.repository, 'meya-customers/')
+        run: |
+          git config user.email build@meya.ai
+          git config user.name "Meya Build"
+          git remote add snapshot https://github.com/$(echo $GITHUB_REPOSITORY | sed -e 's,^meya-ai,meya-customers,')
+          git fetch --depth 1 snapshot master
+          SNAPSHOT_COMMIT=$(git commit-tree -p snapshot/master $GITHUB_SHA^{tree} -m Snapshot)
+          git push snapshot $SNAPSHOT_COMMIT:refs/heads/master
