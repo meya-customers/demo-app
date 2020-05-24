@@ -6,6 +6,6 @@ steps:
   - continue_screen
   - ask: What's your name?
     composer:
-      placeholder: For example, Ada
+      placeholder: For example, Dorinda
   - user_set: name
   - say: Nice to meet you, (@ user.name ) 🔥
