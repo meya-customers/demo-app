@@ -1,6 +1,6 @@
 # demo-app
 
-![Meya build](https://github.com/meya-ai/demo-app/workflows/Meya%20build/badge.svg)
+![Meya build](https://github.com/meya-customers/demo-app/workflows/Meya%20build/badge.svg)
 
 Sample BFML and Python code for Meya Grid and Orb.
 
