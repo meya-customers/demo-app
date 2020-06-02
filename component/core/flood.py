@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from meya.component.element import Component
 from meya.element.field import element_field
 from meya.entry import Entry
-from meya.orb.composer_spec import ComposerSpec
+from meya.orb.composer_spec import ComposerEventSpec
 from meya.text.event.say import SayEvent
 from typing import List
 
@@ -15,7 +15,7 @@ class FloodComponent(Component):
         return self.respond(
             *[
                 SayEvent(
-                    composer=ComposerSpec(),
+                    composer=ComposerEventSpec(),
                     member_id=self.member_id,
                     quick_replies=[],
                     text=f"Flood - {i}",
