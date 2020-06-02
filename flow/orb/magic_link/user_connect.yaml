@@ -1,0 +1,87 @@
+triggers:
+  - keyword: user_connect
+  - keyword: user_disconnect
+    when: true
+    action:
+      jump: disconnect
+
+steps:
+  - (mode)
+  - ask: Welcome to User Connect
+    buttons:
+      - text: Host another user
+        data:
+          mode: host
+      - text: Join another user
+        data:
+          mode: join
+
+  - (name)
+  - if: (@ not user.name )
+    then: next
+    else:
+      jump: avatar_image
+
+  - ask: What's your name?
+    quick_replies:
+      - text: Skip
+        action:
+          jump: avatar_image
+  - user_set: name
+
+  - (avatar_image)
+  - if: (@ not (user.avatar or {}).get("image") )
+    then: next
+    else:
+      jump: branch
+  - ask: What avatar image do you want to use?
+    expect: image
+    quick_replies:
+      - text: Skip
+        action:
+          jump: branch
+  - user_set:
+      avatar:
+        image: (@ flow.result )
+
+  - (branch)
+  - value: (@ flow.mode )
+    case:
+      host:
+        jump: host
+      join:
+        jump: join
+    default: end
+
+  - (host)
+  - thread_set:
+      mode: user_connect
+  - ask: Ready for others to join
+    tiles:
+      - title: Thread
+        description: (@ thread.__thread_id__ )
+  - say: When you're done, run "user_disconnect"
+  - end
+
+  - (join)
+  - ask: What thread do you want to join?
+  - type: meya.orb.component.session.create
+    integration: integration.orb
+    thread_id: (@ flow.result )
+  - magic_link: (@ user.page_open_url )
+    member: (@ flow.result )
+    button_id: false
+    single_use: true
+  - ask: Ready?
+    buttons:
+      - text: Join
+        javascript: location.href = (@ flow.result | tojson )
+  - end
+
+  # TODO Use builtin thread leave + new thread (no JS)
+  - (disconnect)
+  - ask: Leaving...
+    buttons:
+      - text: Disconnect
+        javascript: location.reload()
+  - disconnect_member_id: (@ flow.event.data.member_id )
