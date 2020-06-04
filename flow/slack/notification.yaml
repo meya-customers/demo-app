@@ -1,0 +1,10 @@
+triggers:
+  - keyword: _notify
+    bot: bot.notification
+  - keyword: _notify
+
+steps:
+  - type: meya.slack.component.send
+    integration: integration.slack
+    wait_for_response: true
+    text: NOTIFICATION

@@ -1,0 +1,5 @@
+type: meya.bot.element
+default: false
+name: Notification Bot
+avatar:
+  image: https://images.prismic.io/meya-website/ed79b834-e132-4d54-963d-edfba69b13ea_streamline-icon-alarm-bell-ring%40140x140.png

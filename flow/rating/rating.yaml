@@ -1,0 +1,65 @@
+triggers:
+  - keyword: rating
+  - regex: ^rating_.*$
+    action:
+      jump: (@ flow.result )
+
+steps:
+  - (rating_faces)
+  - rating: faces
+    title: How did you enjoy your experience?
+  - jump: result
+
+  - (rating_stars)
+  - rating: stars
+    title: How did you enjoy your experience?
+  - jump: result
+
+  - (rating_thumbs)
+  - rating: thumbs
+    title: How did you enjoy your experience?
+  - jump: result
+
+  - (rating_custom)
+  - rating: custom
+    options:
+      - icon: streamline-regular/12-design/06-shapes/shape-triangle.svg
+        score: 2
+      - icon: streamline-regular/12-design/06-shapes/shape-cube.svg
+        score: 4
+      - icon: streamline-regular/12-design/06-shapes/shape-cylinder.svg
+        score: 8
+    title: Which shape is best?
+  - jump: result
+
+  - (rating_backfill)
+  - rating: custom
+    fill: true
+    backfill: true
+    options:
+      - icon: streamline-regular/48-maps-navigation/04-sign shapes/sign-badge-circle.svg
+        score: 1
+      - icon: streamline-regular/48-maps-navigation/04-sign shapes/sign-badge-circle.svg
+        score: 2
+      - icon: streamline-regular/48-maps-navigation/04-sign shapes/sign-badge-circle.svg
+        score: 3
+      - icon: streamline-regular/48-maps-navigation/04-sign shapes/sign-badge-circle.svg
+        score: 4
+    title: How did you enjoy your experience?
+  - jump: result
+
+  - (rating_fill)
+  - rating: custom
+    fill: true
+    options:
+      - icon: streamline-regular/52-arrows-diagrams/01-arrows/arrow-thick-circle-left.svg
+        score: 1
+      - icon: streamline-regular/52-arrows-diagrams/01-arrows/arrow-thick-circle-down-2.svg
+        score: 2
+      - icon: streamline-regular/52-arrows-diagrams/01-arrows/arrow-thick-circle-right.svg
+        score: 3
+    title: Which direction do you prefer?
+  - jump: result
+
+  - (result)
+  - say: Thank you for your rating. You rated this (@ flow.result )

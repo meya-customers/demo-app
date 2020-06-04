@@ -15,9 +15,7 @@ class UserDisconnectComponent(Component):
             self.disconnect_member_id
         )
         user = await self.user_view.load_for_integration(
-            member.integration_id,
-            member.integration_thread_id,
-            member.integration_user_id,
+            member.integration_id, member.integration_user_id
         )
         user.orb_sessions = None
         return self.respond(
