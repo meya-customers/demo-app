@@ -68,7 +68,7 @@ steps:
   - jump: end
 
   - (py_set)
-  - type: component.user.user_set
+  - type: component.user.set
     clear: (@ flow["clear"] )
     error: (@ flow.error )
   - jump: end

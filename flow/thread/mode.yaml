@@ -1,0 +1,11 @@
+triggers:
+  - regex: ^mode_(.*)$
+    when: true
+
+steps:
+  - flow_set:
+      mode: (@ flow.groups[0] )
+  - say: Setting mode to (@ flow.mode )...
+  - thread_set:
+      mode: (@ flow.mode )
+  - say: Done. To reset type "mode_bot"

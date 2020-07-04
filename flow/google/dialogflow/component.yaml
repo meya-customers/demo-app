@@ -7,9 +7,9 @@ steps:
   - (dialogflow_form)
   - ask_form: Enter NLU text
     expect: dialogflow
+    integration: integration.dialogflow
     icon: (@ config.icon.question )
     language: en
-    integration: integration.dialogflow
     retries: 1
     min_confidence: 0.75
   - jump: print
@@ -17,16 +17,16 @@ steps:
   - (dialogflow_composer)
   - ask: Enter NLU text e.g. large size
     expect: dialogflow
-    language: en
     integration: integration.dialogflow
+    language: en
     intent: size
   - jump: print
 
   - (dialogflow_composer_no_catchall)
   - ask: Enter NLU text e.g. large size
     expect: dialogflow
-    language: en
     integration: integration.dialogflow
+    language: en
     retries: 1
     min_confidence: 0.75
     intent: size

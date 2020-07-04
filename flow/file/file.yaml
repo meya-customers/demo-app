@@ -1,6 +1,10 @@
 triggers:
   - file
   - keyword: file
+  - keyword: file_no_ask
+    action:
+      data:
+        no_ask: true
 
 steps:
   - url: https://upload.wikimedia.org/wikipedia/commons/b/b3/Wiki_markup_cheatsheet_EN.pdf
@@ -13,6 +17,10 @@ steps:
 
   - url: https://httpbin.org/headers
     filename: headers.json
+
+  - if: (@ flow.get("no_ask") )
+    then: end
+    else: next
 
   - ask: What file do you have?
     expect: file

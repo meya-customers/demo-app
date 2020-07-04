@@ -1,8 +1,7 @@
 smooch.api_key_id: xxx
 smooch.api_secret: x
-sendgrid.api_key_id: xxx
+sendgrid.api_key: xxx
 sendgrid.email_address: xxx
-sendgrid.api_secret: xxx
 dialogflow.service_account_key:
   type: service_account
   project_id: xxx
@@ -31,7 +30,9 @@ twilio.auth_token: xxx
 slack.webhook_url: xxx
 segment.write_key: xxx
 calendly.api_key: xxx
+calendly.event_link: xxx
 clearbit.api_key: xxx
 webhook.postback_url: xxx
+webhook.api_key: xxx
 postmark.server_token: xxx
 mandrill.api_key: xxx

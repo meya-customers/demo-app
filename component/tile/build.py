@@ -1,12 +1,12 @@
 import random
 
 from dataclasses import dataclass
-from meya.button.spec import ButtonSpec
+from meya.button.spec import ButtonElementSpec
 from meya.component.element import Component
 from meya.component.element import ComponentResponse
 from meya.entry import Entry
 from meya.tile.spec import TileCell
-from meya.tile.spec import TileSpec
+from meya.tile.spec import TileElementSpec
 from typing import List
 
 
@@ -45,7 +45,7 @@ class BuildTilesComponent(Component):
             for _ in range(link_button_count):
                 button = button_offset + len(buttons)
                 buttons.append(
-                    ButtonSpec(
+                    ButtonElementSpec(
                         text=f"Link button {button}",
                         url=f"https://cataas.com/cat/says/Link%20button%20{button}",
                     )
@@ -53,11 +53,11 @@ class BuildTilesComponent(Component):
             for _ in range(button_count):
                 button = button_offset + len(buttons)
                 buttons.append(
-                    ButtonSpec(text=f"Button {button}", result=button)
+                    ButtonElementSpec(text=f"Button {button}", result=button)
                 )
             tile = len(tiles)
             tiles.append(
-                TileSpec(
+                TileElementSpec(
                     title=f"Title {tile}" if title else None,
                     description=sagan_ipsum if description else None,
                     result=None if buttons else tile,

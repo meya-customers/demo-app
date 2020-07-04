@@ -1,0 +1,10 @@
+triggers:
+  - keyword: user_clear
+
+steps:
+  - ask: Which user ID do you want to clear data for?
+
+  - type: component.user.clear
+    user_id: (@ flow.result )
+
+  - say: Done

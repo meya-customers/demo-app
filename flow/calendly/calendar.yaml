@@ -1,9 +1,9 @@
 triggers:
-  - keyword: calendar
+  - regex: ^calend.*
 
 steps:
   - (book)
-  - calendly: erik-meya/meya-demo
+  - calendly: (@ vault.calendly.event_link )
     title: Book a demo date
     description: Click "Schedule time" below to setup a face-to-face meeting.
     button_style: text

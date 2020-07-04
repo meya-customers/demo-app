@@ -9,7 +9,7 @@ steps:
         javascript: alert(Math.pow(2, 10))
       - buttons:
           - text: Static button
-            javascript: orbButtonClick('.js')
+            javascript: orb.click('.js')
           - text: Dynamic button
             javascript: alert('DYNAMIC BUTTON')
             result: DYNAMIC
@@ -27,5 +27,5 @@ steps:
       - text: Next
         action: next
       - text: Say
-        javascript: orbSay(prompt('Say what?'))
+        javascript: orb.say(prompt('Say what?'))
   - say: Code ran (@ flow.get("result") )

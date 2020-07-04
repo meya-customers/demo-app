@@ -1,6 +1,6 @@
 triggers:
   - type: image
-    when: (@ member.role.user and "Hubble" in event.data.url )
+    when: (@ event_user.type.user and "Hubble" in event.data.url )
 
 steps:
   - say: The X-ray glow is from material heated to about ten million degrees Celsius

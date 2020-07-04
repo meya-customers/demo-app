@@ -1,0 +1,176 @@
+triggers:
+  - keyword: markdown
+  - regex: ^markdown_.*$
+    action:
+      jump: (@ flow.result )
+
+steps:
+  - (default)
+  - say: |
+      **This is bold text**
+      *This is italic text*
+      > Blockquotes can also be nested...
+      [link text](http://dev.nodeca.com)
+      [link with title](http://nodeca.github.io/pica/demo/ "title text!")
+      Autoconverted link https://github.com/nodeca/pica
+      ``` js
+      var foo = function (bar) {
+        return bar++;
+      };
+
+      console.log(foo(5));
+      ```
+      See [more](https://markdown-it.github.io/)
+  - jump: done
+
+  - (markdown_format)
+  - say: |
+      **This is bold text**
+      *This is italic text*
+      > Blockquotes can also be nested...
+      [link text](http://dev.nodeca.com)
+      [link with title](http://nodeca.github.io/pica/demo/ "title text!")
+      Autoconverted link https://github.com/nodeca/pica
+      ``` js
+      var foo = function (bar) {
+        return bar++;
+      };
+
+      console.log(foo(5));
+      ```
+      See [more](https://markdown-it.github.io/)
+      # h1 Heading 8-)
+      ## h2 Heading
+      ### h3 Heading
+      #### h4 Heading
+      ##### h5 Heading
+      ###### h6 Heading
+      ## Lists
+
+      Unordered
+
+      + Create a list by starting a line with `+`, `-`, or `*`
+      + Sub-lists are made by indenting 2 spaces:
+        - Marker character change forces new list start:
+          * Ac tristique libero volutpat at
+          + Facilisis in pretium nisl aliquet
+          - Nulla volutpat aliquam velit
+      + Very easy!
+
+      Ordered
+
+      1. Lorem ipsum dolor sit amet
+      2. Consectetur adipiscing elit
+      3. Integer molestie lorem at massa
+      ## Typographic replacements
+
+      Enable typographer option to see result.
+
+      (c) (C) (r) (R) (tm) (TM) (p) (P) +-
+
+      test.. test... test..... test?..... test!....
+
+      !!!!!! ???? ,,  -- ---
+
+      "Smartypants, double quotes" and 'single quotes'
+    markdown: true
+  - jump: done
+
+  - (markdown_on)
+  - say: test **text**
+    markdown: true
+  - jump: done
+
+  - (markdown_off)
+  - say: test **text**
+    markdown: false
+  - jump: done
+
+  - (markdown_linkify)
+  - say: >
+      [link text](http://dev.nodeca.com)
+      Autoconverted link https://github.com/nodeca/pica
+    markdown:
+      - linkify
+  - jump: done
+
+  - (markdown_breaks)
+  - say: |
+      Testing
+      line 1
+      line 2
+      line 3
+    markdown:
+      - breaks
+  - jump: done
+
+  - (markdown_headings)
+  - say: |
+      # h1 Heading 8-)
+      ## h2 Heading
+      ### h3 Heading
+      #### h4 Heading
+      ##### h5 Heading
+      ###### h6 Heading
+  - jump: done
+
+  - (markdown_lists)
+  - say: |
+      ## Lists
+
+      Unordered
+
+      + Create a list by starting a line with `+`, `-`, or `*`
+      + Sub-lists are made by indenting 2 spaces:
+        - Marker character change forces new list start:
+          * Ac tristique libero volutpat at
+          + Facilisis in pretium nisl aliquet
+          - Nulla volutpat aliquam velit
+      + Very easy!
+
+      Ordered
+
+      1. Lorem ipsum dolor sit amet
+      2. Consectetur adipiscing elit
+      3. Integer molestie lorem at massa
+  - jump: done
+
+  - (markdown_tables)
+  - say: |
+      ## Tables
+
+      | Option | Description |
+      | ------ | ----------- |
+      | data   | path to data files to supply the data that will be passed into templates. |
+      | engine | engine to be used for processing templates. Handlebars is the default. |
+      | ext    | extension to be used for dest files. |
+
+      Right aligned columns
+
+      | Option | Description |
+      | ------:| -----------:|
+      | data   | path to data files to supply the data that will be passed into templates. |
+      | engine | engine to be used for processing templates. Handlebars is the default. |
+      | ext    | extension to be used for dest files. |
+  - jump: done
+
+  - (markdown_typographer)
+  - say: |
+      ## Typographic replacements
+
+      Enable typographer option to see result.
+
+      (c) (C) (r) (R) (tm) (TM) (p) (P) +-
+
+      test.. test... test..... test?..... test!....
+
+      !!!!!! ???? ,,  -- ---
+
+      "Smartypants, double quotes" and 'single quotes'
+    markdown:
+      - typographer
+  - jump: done
+
+  - (done)
+  - say: '**Thanks for testing** *markdown*'
+    markdown: true

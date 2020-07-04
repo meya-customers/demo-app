@@ -15,7 +15,7 @@ class TrackComponent(Component):
         else:
             self.user.visits["last"] = self.now()
         page_open_event = PageOpenEvent.from_typed_dict(
-            self.entry.data["event"], self.type_registry
+            self.entry.data["event"]
         )
         self.user.page_open_url = page_open_event.url
         return self.respond()

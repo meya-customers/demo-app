@@ -1,8 +1,7 @@
 triggers:
   - button_id: _static_button
-    button_context: true
 
 steps:
   - say: You've clicked a static button
   - delay: 1
-  - say: What do you want to know about (@ flow.result.product )?
+  - say: What do you want to know about (@ flow.context.product )?

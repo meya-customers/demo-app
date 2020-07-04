@@ -1,4 +1,5 @@
 type: meya.bot.element
 name: Demo Bot
 avatar:
-  image: https://images.prismic.io/meya-website/2d864135-625f-44a9-8c18-40bcff44a33a_streamline-icon-science-fiction-robot%40140x140.png
+  image: https://images.prismic.io/meya-website/c63a142a-a049-4da2-8c83-842325e31449_scifi-robot.png
+markdown: true

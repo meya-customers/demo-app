@@ -13,10 +13,10 @@ def test_sanity():
 @pytest.mark.asyncio
 async def test_component():
     component = Data1Component()
-    component_start_entry = create_component_start_entry(component, "xxx")
+    component_start_entry = create_component_start_entry(component)
     flow_next_entry = create_flow_next_entry(
-        bot_entry=component_start_entry,
-        data=dict(result={"x": 4, "y": {"z": {4.42: True, "www": None}}}),
+        component_start_entry,
+        dict(result={"x": 4, "y": {"z": {4.42: True, "www": None}}}),
     )
     await verify_process_element(
         component, component_start_entry, [flow_next_entry]

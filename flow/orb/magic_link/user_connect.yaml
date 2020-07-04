@@ -68,8 +68,10 @@ steps:
   - type: meya.orb.component.session.create
     integration: integration.orb
     thread_id: (@ flow.result )
-  - magic_link: (@ user.page_open_url )
-    member: (@ flow.result )
+  - integration: integration.orb
+    magic_link: (@ user.page_open_url )
+    integration_user_id: (@ flow.integration_user_id )
+    integration_thread_id: (@ flow.integration_thread_id )
     button_id: false
     single_use: true
   - ask: Ready?

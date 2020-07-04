@@ -1,0 +1,5 @@
+triggers:
+  - keyword: hi
+
+steps:
+  - say: Hello, World!

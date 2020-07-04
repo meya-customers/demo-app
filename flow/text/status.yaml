@@ -1,0 +1,25 @@
+triggers:
+  - keyword: status
+  - keyword: status_ephemeral
+    action:
+      jump: status_ephemeral
+
+steps:
+  - status: This is a status message
+  - end
+
+  - (status_ephemeral)
+  - say: Counting down queue position
+  - status: Queue position 3
+    ephemeral: true
+  - delay: 2
+  - status: Queue position 2
+    ephemeral: true
+  - delay: 2
+  - status: Queue position 1
+    ephemeral: true
+  - delay: 2
+  - status: Queue position 0 🚀
+    ephemeral: true
+  - delay: 3
+  - say: You are at the end!

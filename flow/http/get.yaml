@@ -1,0 +1,7 @@
+triggers:
+  - keyword: http_get
+
+steps:
+  - say: Getting via HTTP...
+  - type: component.http.get
+  - say: Response (@ flow.result )

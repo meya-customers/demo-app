@@ -1,2 +1,4 @@
 type: meya.webhook.integration
 postback_url: (@ vault.webhook.postback_url )
+api_key: (@ vault.webhook.api_key )
+suppress_echo: false

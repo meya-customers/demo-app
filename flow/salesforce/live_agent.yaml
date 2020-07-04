@@ -1,5 +1,4 @@
 id: flow.live_agent.request_agent
-
 triggers:
   - regex: live.agent
     ignorecase: true
@@ -8,7 +7,7 @@ steps:
   - open_chat
   - type: meya.csp.component.session.agent.request
     say: Transferring you to the next available agent.
-    integration: integration.sfla
+    integration: integration.live_agent
     note: Here is a note for the agent.
     data:
       Name__c: Frank
@@ -16,7 +15,6 @@ steps:
       Income__c: 1,000,000.00 USD
 ---
 id: flow.live_agent.chat_request_failed
-
 triggers:
   - event_type: meya.salesforce.live_agent.event.session.agent.request.error
 
@@ -24,7 +22,6 @@ steps:
   - say: Chat request failed.
 ---
 id: flow.live_agent.chat_request_success
-
 triggers:
   - event_type: meya.salesforce.live_agent.event.session.agent.request.ok
 
@@ -38,7 +35,6 @@ steps:
     else: end
 ---
 id: flow.live_agent.chat_ended
-
 triggers:
   - event_type: meya.salesforce.live_agent.event.session.ended
 
@@ -46,23 +42,44 @@ steps:
   - say: Chat ended.
 ---
 id: flow.live_agent.chat_established
-
 triggers:
   - event_type: meya.salesforce.live_agent.event.session.established
 
 steps:
   - say: You're now talking to (@ flow.event.data.agent_name )
 ---
-id: flow.live_agent.agent_transfer
+id: flow.live_agent.transfer_to_button
+triggers:
+  - event_type: meya.salesforce.live_agent.event.session.transfer_to_button
 
+steps:
+  - say: |
+      (@ flow.event.data.agent_name ) is transferring you, please wait for the
+      next available agent.
+
+---
+id: flow.live_agent.agent_transfer
 triggers:
   - event_type: meya.salesforce.live_agent.event.session.assign
 
 steps:
   - say: You've been transferred to (@ flow.event.data.agent_name )
 ---
-id: flow.live_agent.agent_disconnect
+id: flow.live_agent.agent_join
+triggers:
+  - event_type: meya.salesforce.live_agent.event.session.agent.conference.join
 
+steps:
+  - say: (@ flow.event.data.agent_name ) has joined the conversation.
+---
+id: flow.live_agent.agent_leave
+triggers:
+  - event_type: meya.salesforce.live_agent.event.session.agent.conference.leave
+
+steps:
+  - say: (@ flow.event.data.agent_name ) has left the conversation.
+---
+id: flow.live_agent.agent_disconnect
 triggers:
   - event_type: meya.salesforce.live_agent.event.session.agent.disconnect
 
@@ -72,12 +89,11 @@ steps:
     transfer: true
 ---
 id: flow.live_agent.queue_update
-
 triggers:
   - event_type: meya.salesforce.live_agent.event.session.queue.update
     # This prevents event spoofing
     # TODO: We need to create a meya.trigger.system_type trigger with the check built in
-    when: (@ member.role.system )
+    when: (@ event_user.type.system )
 
 steps:
   - say: You're now in queue position (@ flow.event.data.position | int )
@@ -88,7 +104,6 @@ steps:
     else: end
 ---
 id: flow.live_agent.end_session
-
 steps:
   - ask: Do you want to continue with the agent session?
     buttons:
@@ -102,17 +117,16 @@ steps:
     then: next
     else: end
   - type: meya.csp.component.session.end
-    integration: integration.sfla
+    integration: integration.live_agent
 ---
 id: flow.live_agent.command.pill
-
 triggers:
   - agent_command: ^.*pill.*
 
 steps:
   # Publish as the agent
   - flow_set:
-      publish_as: (@ flow.event.data.member_id )
+      event_user_id: (@ flow.event.data.user_id )
   - say: Executing the `/slash` command.
   - ask: Which pill?
     buttons:
@@ -136,7 +150,6 @@ steps:
   - end
 ---
 id: flow.live_agent.command.training
-
 triggers:
   - agent_command: training
     when: (@ thread.mode == "blue" )
@@ -144,13 +157,12 @@ triggers:
 steps:
   # Publish as the agent
   - flow_set:
-      publish_as: (@ flow.event.data.member_id )
+      event_user_id: (@ flow.event.data.user_id )
   - say: Neo training
   - url: https://media.giphy.com/media/V2ojLo7PvhVug/giphy.gif
     alt: Neo gestures "come on"
 ---
 id: flow.live_agent.command.matrix
-
 triggers:
   - agent_command: matrix
     when: (@ thread.mode == "red" )
@@ -158,7 +170,7 @@ triggers:
 steps:
   # Publish as the agent
   - flow_set:
-      publish_as: (@ flow.event.data.member_id )
+      event_user_id: (@ flow.event.data.user_id )
   - say: This is what the matrix looks like
   - url: https://media.giphy.com/media/fV0oSDsZ4UgdW/giphy.gif
     alt: The Matrix visible as flowing green code

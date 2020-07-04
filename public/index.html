@@ -9,6 +9,10 @@
     />
     <link rel="stylesheet" href="https://cdn.meya.ai/font/inter.css"/>
     <style>
+        .orb-body .calendly-overlay {
+            z-index: 2147483001;
+        }
+
         .orb-body {
             display: flex;
             flex-direction: column;
@@ -144,33 +148,33 @@
 <h1 class="orb-h1">
     ORB DEMO
     <nav class="orb-nav orb-nav-hide">
-        <a class="orb-nav-link" href="javascript:orbSay('Astronomy')">
+        <a class="orb-nav-link" href="javascript:orb.say('Astronomy')">
             Astronomy
         </a>
         <a class="orb-nav-link" href="#"
-            onclick="orbButtonClick('.cosmology'); return false">
+            onclick="orb.click('.cosmology'); return false">
             Cosmology
         </a>
         <a class="orb-nav-link" href="#"
-            onclick="orbPublish(orbEvent.makeImageEvent('https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/N_63A-_Chandra_and_Hubble_-_Heic0507f.tif/lossy-page1-400px-N_63A-_Chandra_and_Hubble_-_Heic0507f.tif.jpg')); return false">
+            onclick="orb.publishEvent(orb.createImageEvent('https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/N_63A-_Chandra_and_Hubble_-_Heic0507f.tif/lossy-page1-400px-N_63A-_Chandra_and_Hubble_-_Heic0507f.tif.jpg')); return false">
             Astrophysics
         </a>
         <a class="orb-nav-link" href="#"
-            onclick="orbSay('👩‍🚀'); return false">
+            onclick="orb.say('👩‍🚀'); return false">
             Astrobiology
         </a>
     </nav>
     <nav class="orb-nav">
         <a class="orb-nav-link" href="#"
-            onclick="orbButtonClick('.faq'); return false">
+            onclick="orb.click('.faq'); return false">
             FAQ
         </a>
         <a class="orb-nav-link" href="#"
-            onclick="orbOpenChat(); return false">
+            onclick="orb.openChat(); return false">
             Chat
         </a>
         <a class="orb-nav-link" href="#"
-            onclick="orbButtonClick('.login'); return false">
+            onclick="orb.click('.login'); return false">
             Login
         </a>
     </nav>
@@ -305,11 +309,13 @@
     }
 
     var seconds = 0
+
     function timeOnPage() {
         seconds += 20
-        orbTrack("time_on_page", { seconds })
+        orb.track("time_on_page", { seconds })
         setTimeout(timeOnPage, 20000)
     }
+
     // uncomment to track time on page
     // timeOnPage()
 </script>
@@ -320,21 +326,21 @@
             appId: "app-73c6d31d4f544a72941e21fb518b5737",
             integrationId: "integration.orb",
         },
-        theme: {"brandColor":"#4989ea","botAvatarMonogram":"D"},
+        theme: { "brandColor": "#4989ea" },
         container: document.querySelector("#orb-mount"),
-        windowFunctions: true,
+        windowApi: true,
     };
-    (function(){
-        var script = document.createElement("script");
-        script.type = "text/javascript";
-        script.async = true;
-        script.src = "https://cdn.meya.ai/v2/orb.js";
-        document.body.appendChild(script);
-        var fontStyleSheet = document.createElement("link");
-        fontStyleSheet.rel = "stylesheet";
-        fontStyleSheet.href = "https://cdn.meya.ai/font/inter.css";
-        document.body.appendChild(fontStyleSheet);
-    })();
+    (function () {
+        var script = document.createElement("script")
+        script.type = "text/javascript"
+        script.async = true
+        script.src = "https://cdn.meya.ai/v2/orb.js"
+        document.body.appendChild(script)
+        var fontStyleSheet = document.createElement("link")
+        fontStyleSheet.rel = "stylesheet"
+        fontStyleSheet.href = "https://cdn.meya.ai/font/inter.css"
+        document.body.appendChild(fontStyleSheet)
+    })()
 </script>
 </body>
 </html>

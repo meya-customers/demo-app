@@ -1,9 +1,18 @@
 triggers:
   - keyword: _notify
     bot: bot.notification
+  - keyword: _notify_echo
+    bot: bot.notification
+    action:
+      data:
+        echo: true
   - keyword: _notify
 
 steps:
+  - if: (@ flow.get("echo") )
+    then:
+      say: NOTIFYING...
+    else: next
   - type: meya.slack.component.send
     integration: integration.slack
     wait_for_response: true
