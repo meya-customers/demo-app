@@ -1,0 +1,21 @@
+triggers:
+  - keyword: zendesk_support_user_update
+
+steps:
+  # this assumes the user is linked, run "zendesk_support_ticket_create" first
+  - type: meya.zendesk.support.component.user.show
+    integration: integration.zendesk.support
+  - flow_set: user
+  - say: Current tags (@ flow.user.tags )
+  - ask: What tag do you want to add?
+    buttons:
+      - text: Gold
+        result: gold
+      - text: Silver
+        result: silver
+      - text: Bronze
+        result: bronze
+  - type: meya.zendesk.support.component.user.update
+    integration: integration.zendesk.support
+    tags: (@ flow.user.tags + [flow.result] )
+  - say: Done

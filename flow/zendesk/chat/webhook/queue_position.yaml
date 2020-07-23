@@ -1,0 +1,9 @@
+triggers:
+  - zendesk_chat_event_type: chat.queue_position
+
+steps:
+  - if: (@ flow.result.queue_position > 0 )
+    then: next
+    else: end
+  - status: You are now in queue position (@ flow.result.queue_position )
+    ephemeral: true

@@ -1,0 +1,9 @@
+triggers:
+  - keyword: zendesk_support_ticket_unlink
+    when: true
+
+steps:
+  - say: Unlinking...
+  - type: component.zendesk.support.ticket.unlink
+    integration: integration.zendesk.support
+  - say: Done

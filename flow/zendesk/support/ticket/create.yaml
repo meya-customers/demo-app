@@ -1,0 +1,109 @@
+triggers:
+  - keyword: zendesk_support_ticket_create
+    when: true
+  - keyword: zendesk_support_ticket_create_shortcut
+    when: true
+    action:
+      jump: create
+      data:
+        link_user: true
+        link_ticket: true
+        subject:
+        comment:
+        name:
+        email:
+        phone:
+  - keyword: zendesk_support_ticket_create_simple
+    when: true
+    action:
+      jump: create_ticket_simple
+
+steps:
+  - ask: Link user?
+    buttons:
+      - text: Yes
+        result: true
+      - text: No
+        result: false
+  - flow_set: link_user
+  - if: (@ flow.link_user )
+    then:
+      jump: link_ticket
+    else:
+      next:
+  - flow_set:
+      link_ticket: false
+  - jump: name
+
+  - (link_ticket)
+  - ask: Link ticket?
+    buttons:
+      - text: Yes
+        result: true
+      - text: No
+        result: false
+  - flow_set: link_ticket
+
+  - (name)
+  - ask_form: Name?
+    label: Name
+    icon: (@ config.icon.person )
+    quick_replies:
+      - text: Skip (generate)
+        result:
+  - flow_set: name
+
+  - ask_form: Email?
+    expect: email_address
+    quick_replies:
+      - text: Skip (blank)
+        result:
+  - flow_set: email
+
+  - ask_form: Phone?
+    label: Phone
+    icon: (@ config.icon.phone )
+    quick_replies:
+      - text: Skip (blank)
+        result:
+  - flow_set: phone
+
+  - ask_form: Subject?
+    label: Ticket subject
+    quick_replies:
+      - text: Skip (generate)
+        result:
+  - flow_set: subject
+
+  - ask_form: Comment?
+    label: Ticket comment
+    quick_replies:
+      - text: Skip (use transcript)
+        result:
+  - flow_set: comment
+
+  - (create)
+  - say: Creating or updating user...
+  - type: meya.zendesk.support.component.user.create_or_update
+    integration: integration.zendesk.support
+    link: (@ flow.link_user )
+    name: (@ flow.name )
+    email: (@ flow.email )
+    phone: (@ flow.phone )
+  - say: User (@ flow.result.id ) created or updated
+  - say: Creating ticket...
+  - type: meya.zendesk.support.component.ticket.create
+    integration: integration.zendesk.support
+    link: (@ flow.link_ticket )
+    requester_id: (@ flow.result.id )
+    subject: (@ flow.subject )
+    comment: (@ flow.comment )
+  - say: Ticket (@ flow.result.id ) created
+  - end
+
+  - (create_ticket_simple)
+  - say: Creating ticket (automatic linked user)...
+  - type: meya.zendesk.support.component.ticket.create
+    integration: integration.zendesk.support
+  - say: Ticket (@ flow.result.id ) created
+  - end

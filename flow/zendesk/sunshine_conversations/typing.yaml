@@ -1,0 +1,23 @@
+triggers:
+  - keyword: sunco_typing
+
+steps:
+  - say: >
+      You can explicitly control typing by turning them on and off.
+      For example let's turn typing on for 3 seconds, off for 1 second, then on for
+      2 seconds...
+  - typing: on
+  - delay: 3
+  - typing: off
+  - delay: 1
+  - typing: on
+  - delay: 2
+  - ask: Done!
+    quick_replies:
+      - OK, try typing again
+  - say: >
+      Typing indicators automatically get turned off when a new message is
+      sent. For example, let's turn typing on for 3 seconds, then a message will appear...
+  - typing: on
+  - delay: 3
+  - say: This 'say' event turned off the typing indicator.

@@ -7,7 +7,7 @@ steps:
   - (dialogflow_form)
   - ask_form: Enter NLU text
     expect: dialogflow
-    integration: integration.dialogflow
+    integration: integration.google.dialogflow.dialogflow
     icon: (@ config.icon.question )
     language: en
     retries: 1
@@ -17,7 +17,7 @@ steps:
   - (dialogflow_composer)
   - ask: Enter NLU text e.g. large size
     expect: dialogflow
-    integration: integration.dialogflow
+    integration: integration.google.dialogflow.dialogflow
     language: en
     intent: size
   - jump: print
@@ -25,7 +25,7 @@ steps:
   - (dialogflow_composer_no_catchall)
   - ask: Enter NLU text e.g. large size
     expect: dialogflow
-    integration: integration.dialogflow
+    integration: integration.google.dialogflow.dialogflow
     language: en
     retries: 1
     min_confidence: 0.75
@@ -36,7 +36,7 @@ steps:
 
   - (dialogflow_detect)
   - detect_dialogflow: size large
-    integration: integration.dialogflow
+    integration: integration.google.dialogflow.dialogflow
     language: en
     min_confidence: 0.75
   - jump: print

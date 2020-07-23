@@ -59,7 +59,7 @@ steps:
   - ask: Ready for others to join
     tiles:
       - title: Thread
-        description: (@ thread.__thread_id__ )
+        description: (@ thread.id )
   - say: When you're done, run "user_disconnect"
   - end
 
@@ -69,7 +69,7 @@ steps:
     integration: integration.orb
     thread_id: (@ flow.result )
   - integration: integration.orb
-    magic_link: (@ user.page_open_url )
+    magic_link: (@ thread.page_open.url )
     integration_user_id: (@ flow.integration_user_id )
     integration_thread_id: (@ flow.integration_thread_id )
     button_id: false
@@ -86,4 +86,4 @@ steps:
     buttons:
       - text: Disconnect
         javascript: location.reload()
-  - disconnect_member_id: (@ flow.event.data.member_id )
+  - disconnect_user_id: (@ flow.event.data.user_id )

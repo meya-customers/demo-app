@@ -1,0 +1,16 @@
+triggers:
+  - agent_command: zendesk_support_verify_phone
+
+steps:
+  # Publish as the agent
+  - flow_set:
+      event_user_id: (@ flow.event.data.user_id )
+  - ask: OK, to verify, what is your phone number?
+  - flow_set: phone
+  - type: meya.zendesk.support.component.user.show
+    integration: integration.zendesk.support
+  - flow_set: user
+  - type: meya.zendesk.support.component.ticket.update
+    integration: integration.zendesk.support
+    comment: Verified (@ flow.phone == flow.user.phone )
+    comment_public: false

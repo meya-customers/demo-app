@@ -1,6 +1,7 @@
 triggers:
   - type: image
-    when: (@ event_user.type.user and "Hubble" not in event.data.url )
+    when: (@ event_user.type.user and thread.mode.bot and "Hubble" not in event.data.url
+      )
   - keyword: image
   - keyword: image_no_ask
     action:

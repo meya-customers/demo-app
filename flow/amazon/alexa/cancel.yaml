@@ -1,0 +1,4 @@
+triggers:
+  - event_type: meya.amazon.alexa.event.intent.cancel
+steps:
+  - say: You triggered the Alexa cancel intent.

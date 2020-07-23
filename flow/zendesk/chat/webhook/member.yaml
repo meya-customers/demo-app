@@ -1,0 +1,20 @@
+triggers:
+  - zendesk_chat_event_type: chat.memberjoin
+    action:
+      jump: join
+  - zendesk_chat_event_type: chat.memberleave
+    action:
+      jump: leave
+
+steps:
+  - (join)
+  - status: (@ flow.result.display_name ) has joined the chat
+  - end
+
+  - (leave)
+  - status: (@ flow.result.display_name ) has left the chat
+  - if: (@ flow.result.last_agent)
+    then:
+      say: What do you want to do now?
+    else: next
+  - end

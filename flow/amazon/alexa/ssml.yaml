@@ -1,0 +1,18 @@
+triggers:
+  - keyword: demo alexa ssml
+steps:
+  # Alexa SSML reference: https://developer.amazon.com/en-US/docs/alexa/custom-skills/speech-synthesis-markup-language-ssml-reference.html
+  - say: Here is an example of an excited voice.
+  - delay: 1
+  - say: >
+      <amazon:emotion name="excited" intensity="high">
+      Christina wins this round!
+      </amazon:emotion>
+  - delay: 1
+  - say: Here is an example of a disappointed voice.
+  - delay: 1
+  - say: >
+      <amazon:emotion name="disappointed" intensity="high">
+      Here I am with a brain the size of a planet
+      and they ask me to pick up a piece of paper.
+      </amazon:emotion>

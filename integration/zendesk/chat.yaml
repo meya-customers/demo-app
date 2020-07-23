@@ -1,0 +1,2 @@
+type: meya.zendesk.chat.integration
+account_key: (@ vault.zendesk.chat.account_key )

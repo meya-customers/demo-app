@@ -1,0 +1,14 @@
+triggers:
+  - agent_command: get_order
+
+steps:
+  # Publish as the agent
+  - flow_set:
+      event_user_id: (@ flow.event.data.user_id )
+  - ask: Which order do you need help with?
+    buttons:
+      - text: Order 12345
+        result: 12345
+      - text: Order 67890
+        result: 67890
+  - say: OK, order (@ flow.result )

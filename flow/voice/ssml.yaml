@@ -1,0 +1,11 @@
+triggers:
+  - keyword: demo voice ssml
+steps:
+  - say: Hey, this is the voice ssml demo.
+  - say: >
+      Here is some SSML with <emphasis level="strong">strong</emphasis>
+      emphasis.
+  - say: Delays are also implemented as SSML. I'm going to wait for 5 seconds.
+  - delay: 5
+  - say: And we're back. Great!
+  - say: Thanks, that's it for now.

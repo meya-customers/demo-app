@@ -1,0 +1,11 @@
+triggers:
+  - keyword: zendesk_support_user_search
+
+steps:
+  - ask_form: What is the user's email?
+    expect: email_address
+  - type: meya.zendesk.support.component.user.search
+    integration: integration.zendesk.support
+    query:
+      - email:(@ flow.result )
+  - say: Users found are (@ flow.result )

@@ -1,0 +1,14 @@
+triggers:
+  - keyword: zendesk_support_ticket_update
+    when: true
+
+steps:
+  - type: meya.zendesk.support.component.ticket.show
+    integration: integration.zendesk.support
+  - flow_set: ticket
+  - say: Current subject (@ flow.ticket.subject )
+  - ask: New subject?
+  - type: meya.zendesk.support.component.ticket.update
+    integration: integration.zendesk.support
+    subject: (@ flow.result )
+  - say: Done

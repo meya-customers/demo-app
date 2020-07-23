@@ -1,20 +1,20 @@
 triggers:
   - expect: dialogflow
-    integration: integration.dialogflow
+    integration: integration.google.dialogflow.dialogflow
     language: en
     intent_regex: ^greet
     action:
       data:
         intent_type: greet
   - expect: dialogflow
-    integration: integration.dialogflow
+    integration: integration.google.dialogflow.dialogflow
     language: en
     intent: size
     action:
       data:
         intent_type: size
   - expect: dialogflow
-    integration: integration.dialogflow
+    integration: integration.google.dialogflow.dialogflow
     language: en
     intent_regex: ^smalltalk\.
     action:

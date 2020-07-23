@@ -1,0 +1,36 @@
+triggers:
+  - keyword: zendesk_chat_session_start
+  - keyword: zendesk_chat_session_start_2
+    action:
+      jump: transfer
+      data:
+        name: Test Visitor
+        email: test@meya.ai
+        phone: 123-456-7890
+
+steps:
+  - (name)
+  - ask_form: Name?
+    icon: (@ config.icon.person )
+  - flow_set: name
+  - (email)
+  - ask_form: Email?
+    expect: email_address
+  - flow_set: email
+  - (phone)
+  - ask_form: Phone?
+    icon: (@ config.icon.phone )
+  - flow_set: phone
+
+  - (transfer)
+  - open_chat
+  - say: Start session -> (@ flow.name ) (@ flow.email ) (@ flow.phone )
+  - type: meya.zendesk.chat.component.session.start
+    integration: integration.zendesk.chat
+    visitor_name: (@ flow.name )
+    visitor_email: (@ flow.email )
+    visitor_phone: (@ flow.phone )
+    visitor_user_agent: (@ thread.page_open.user_agent )
+    visitor_referrer: (@ thread.page_open.url )
+    tags: [demo, meya]
+    department: Support

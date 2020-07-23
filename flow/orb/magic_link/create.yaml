@@ -17,14 +17,14 @@ steps:
   - jump: (@ flow.result )
 
   - (magic_link_create_page_open)
-  - magic_link: (@ user.page_open_url or "https://example.org" )
+  - magic_link: (@ thread.page_open.url )
     integration: integration.orb
     button_id: false
     single_use: false
   - jump: show
 
   - (magic_link_create_context_button)
-  - magic_link: (@ user.page_open_url or "https://example.org" )
+  - magic_link: (@ thread.page_open.url )
     integration: integration.orb
     button_id: _static_button
     button_context:
@@ -33,7 +33,7 @@ steps:
   - jump: show
 
   - (magic_link_create_dynamic_button)
-  - magic_link: (@ user.page_open_url or "https://example.org" )
+  - magic_link: (@ thread.page_open_url )
     integration: integration.orb
     button_id: true
     single_use: true

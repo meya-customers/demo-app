@@ -1,0 +1,4 @@
+triggers:
+  - event_type: meya.amazon.alexa.event.intent.help
+steps:
+  - say: You triggered the Alexa help intent.

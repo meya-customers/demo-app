@@ -1,0 +1,8 @@
+triggers:
+  - keyword: zendesk_chat_session_end
+    when: true
+
+steps:
+  - say: Ending session...
+  - type: meya.zendesk.chat.component.session.end
+    integration: integration.zendesk.chat

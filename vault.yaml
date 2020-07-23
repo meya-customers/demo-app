@@ -1,5 +1,6 @@
-smooch.api_key_id: xxx
-smooch.api_secret: x
+sunshine_conversations.app_id: xxx
+sunshine_conversations.api_key_id: xxx
+sunshine_conversations.api_secret: xxx
 sendgrid.api_key: xxx
 sendgrid.email_address: xxx
 dialogflow.service_account_key:
@@ -13,13 +14,10 @@ dialogflow.service_account_key:
   token_uri: https://oauth2.googleapis.com/token
   auth_provider_x509_cert_url: https://www.googleapis.com/oauth2/v1/certs
   client_x509_cert_url: xxx
-live_agent.api_root: https://sfla-relay.meyastag.meya.ai
-live_agent.username: meya
 live_agent.api_endpoint: https://d.la2-c1-iad.salesforceliveagent.com/chat/rest/
 live_agent.organization_id: xxx
 live_agent.deployment_id: xxx
 live_agent.button_id: xxx
-live_agent.password: xxx
 freshchat.app_id: xxx
 freshchat.api_root: https://api.freshchat.com
 freshchat.api_token: xxx
@@ -36,3 +34,9 @@ webhook.postback_url: xxx
 webhook.api_key: xxx
 postmark.server_token: xxx
 mandrill.api_key: xxx
+zendesk.chat.account_key: xxx
+zendesk.support.subdomain: zendesk_domain_name
+zendesk.support.bot_agent_email: username@domain.com
+zendesk.support.bot_agent_api_token: xxx
+zendesk.support.target_password: xxx
+alexa.skill_id: xxx

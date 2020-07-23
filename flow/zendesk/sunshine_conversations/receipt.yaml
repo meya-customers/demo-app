@@ -1,0 +1,46 @@
+triggers:
+  - event_type: meya.presence.event.receipt.read
+    bot: bot.notification
+    when: (@ thread.read_count is not none )
+
+  # run this to reset and start the counter
+  - keyword: sunco_read_receipt_start
+    action:
+      jump: reset
+
+  # stops the read receipt counter
+  - keyword: sunco_read_receipt_stop
+    action:
+      jump: stop
+
+  # outputs the number of read receipts since started
+  - keyword: sunco_read_count
+    action:
+      jump: read_count
+
+steps:
+  - if: (@ thread.read_count is none )
+    then:
+      jump: reset
+    else:
+      jump: increment
+
+  - (reset)
+  - thread_set:
+      read_count: 1
+  - say: Starting read receipt counter.
+  - end
+
+  - (increment)
+  - thread_set:
+      read_count: (@ thread.read_count + 1 )
+  - end
+
+  - (read_count)
+  - say: The total read count is (@ thread.read_count )
+  - end
+
+  - (stop)
+  - say: Stopping read receipt counting
+  - thread_set:
+      read_count:

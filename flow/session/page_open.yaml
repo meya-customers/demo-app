@@ -1,7 +1,7 @@
 triggers:
   - type: page_open
     magic_link_error: false
-    when: (@ not thread.open_page )
+    when: (@ not thread.page_open )
     action:
       data:
         page: snow capped mountains
@@ -14,7 +14,7 @@ triggers:
 steps:
   - (welcome)
   - thread_set:
-      open_page: true
+      page_open: (@ flow.event.data )
 # uncomment if you want to track in freshchat
 #  - type: meya.component.csp_track
 #    integration: integration.freshchat

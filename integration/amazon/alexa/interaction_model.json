@@ -1,0 +1,50 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "meya demo",
+            "intents": [
+                {
+                    "name": "CatchAll",
+                    "slots": [
+                        {
+                            "name": "any",
+                            "type": "AMAZON.Person"
+                        }
+                    ],
+                    "samples": [
+                        "{any}"
+                    ]
+                },
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": [
+                        "cancel"
+                    ]
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": [
+                        "i need help",
+                        "help me",
+                        "help"
+                    ]
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": [
+                        "stop"
+                    ]
+                },
+                {
+                    "name": "AMAZON.NavigateHomeIntent",
+                    "samples": [
+                        "reset",
+                        "go home",
+                        "restart"
+                    ]
+                }
+            ],
+            "types": []
+        }
+    }
+}

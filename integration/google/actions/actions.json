@@ -1,0 +1,50 @@
+{
+    "actions": [
+        {
+            "description": "Start Intent",
+            "name": "START",
+            "fulfillment": {
+                "conversationName": "meya"
+            },
+            "intent": {
+                "name": "actions.intent.MAIN"
+            }
+        },
+        {
+            "description": "Say-to Intent",
+            "name": "SAY_TO",
+            "fulfillment": {
+                "conversationName": "meya"
+            },
+            "intent": {
+                "name": "meya.intent.TEXT",
+                "parameters": [
+                    {
+                        "name": "text",
+                        "type": "SchemaOrg_Text"
+                    }
+                ],
+                "trigger": {
+                    "queryPatterns": [
+                        "$SchemaOrg_Text:text"
+                    ]
+                }
+            }
+        }
+    ],
+    "conversations": {
+        "meya": {
+            "name": "meya",
+            "url": "YOUR_WEBHOOK_URL",
+            "fulfillmentApiVersion": 2,
+            "inDialogIntents": [
+                {
+                    "name": "actions.intent.CANCEL"
+                },
+                {
+                    "name": "actions.intent.NO_INPUT"
+                }
+            ]
+        }
+    }
+}

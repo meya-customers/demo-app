@@ -1,3 +1,0 @@
-type: meya.zendesk.sunshine_conversations.integration
-key_id: (@ vault.smooch.api_key_id )
-secret: (@ vault.smooch.api_secret )

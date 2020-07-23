@@ -1,0 +1,2 @@
+type: meya.amazon.alexa.integration
+skill_id: (@ vault.alexa.skill_id )

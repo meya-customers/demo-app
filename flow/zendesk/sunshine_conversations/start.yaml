@@ -1,0 +1,13 @@
+triggers:
+  - event_type: meya.thread.event.start
+  - keyword: sunco_start
+
+steps:
+  - say: Welcome to the conversation! 👋
+  - typing: on
+  - delay: 2
+  - ask: What's your favorite color?
+    quick_replies:
+      - Red
+      - Blue
+  - say: What a coincidence! (@ flow.result ) is my favorite color, too. 😃

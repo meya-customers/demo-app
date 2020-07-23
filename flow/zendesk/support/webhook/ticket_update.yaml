@@ -1,0 +1,30 @@
+triggers:
+  - type: meya.zendesk.support.trigger.ticket.update
+    bot: bot.notification
+
+steps:
+  - (check_status)
+  - if: (@ flow.ticket.status != flow.old_ticket.status )
+    then: next
+    else:
+      jump: check_assignee
+  - status: Ticket (@ flow.ticket.id) is now (@ flow.ticket.status )
+
+  - (check_assignee)
+  - if: (@ flow.ticket.assignee_id != flow.old_ticket.assignee_id )
+    then: next
+    else: end
+  - if: (@ not flow.ticket.assignee_id )
+    then:
+      jump: no_assignee
+    else: next
+  - type: meya.zendesk.support.component.user.show
+    integration: integration.zendesk.support
+    user_id: (@ flow.ticket.assignee_id )
+  - status: >
+      Ticket (@ flow.ticket.id) is now assigned to
+      (@ flow.result.alias or flow.result.name )
+  - end
+
+  - (no_assignee)
+  - status: Ticket (@ flow.ticket.id) status is now unassigned

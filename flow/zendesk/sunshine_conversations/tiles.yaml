@@ -1,0 +1,54 @@
+triggers:
+  - keyword: sunco_tiles
+
+steps:
+  - typing: on
+  - layout: column
+    tiles:
+      - title: Tacos
+        description: Description
+        image:
+          url: https://www.cookingclassy.com/wp-content/uploads/2017/06/salsa-chicken-tacos-2.jpg
+        rows:
+          -   - cell: Blah
+                value: xyx
+          -   - cell: Blah
+                value: xxx
+        buttons:
+          - text: Select
+            icon:
+              url: (@ config.icon.sun )
+            action:
+              jump: tacos
+          - text: Static Button
+            button_id: _static_button
+            button_context:
+              product: Tacos
+          - text: More info
+            url: https://www.cookingclassy.com/instant-pot-slow-cooker-salsa-chicken-tacos/
+      - title: Ramen
+        description: Description
+        image:
+          url: https://40aprons.com/wp-content/uploads/2016/01/bacon-ramen-6.jpg
+        buttons:
+          - text: Select
+            action:
+              jump: ramen
+          - text: Static Button
+            button_id: _static_button
+            button_context:
+              product: Ramen
+          - text: More info
+            url: https://40aprons.com/bacon-ramen/
+
+  - (tacos)
+  - typing: on
+  - delay: 1
+  - say: You chose Tacos.
+  - end
+
+  - (ramen)
+  - typing: on
+  - delay: 1
+  - say: You chose Ramen.
+  - end

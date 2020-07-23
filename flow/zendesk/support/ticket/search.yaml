@@ -1,0 +1,11 @@
+triggers:
+  - keyword: zendesk_support_ticket_search
+
+steps:
+  - type: meya.zendesk.support.component.user.show
+    integration: integration.zendesk.support
+  - type: meya.zendesk.support.component.ticket.search
+    integration: integration.zendesk.support
+    query:
+      - requester_id:(@ flow.result.id )
+  - ask: Your tickets are (@ flow.result | map(attribute="id") | join(", ") )

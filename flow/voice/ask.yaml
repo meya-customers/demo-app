@@ -1,0 +1,35 @@
+triggers:
+  - keyword: demo voice ask
+steps:
+  - say: Hey, this is the voice ask demo.
+  - say: >
+      I'm going to ask you a question that is backed by a Dialogflow NLU model.
+
+  - (question)
+  - ask: Do you like chocolates?
+    expect: dialogflow
+    integration: integration.google.dialogflow.dialogflow
+    error_message: >
+      Sorry, I didn't understand that. Do you like chocolates?
+    intent:
+      - input_yes
+      - input_no
+    quick_replies:
+      - Yes
+      - No
+  - value: (@ flow.result )
+    case:
+      input_yes:
+        jump: yes
+      input_no:
+        jump: no
+    default:
+      jump: question
+
+  - (yes)
+  - say: Great! So do I.
+  - end
+
+  - (no)
+  - say: Aaah, that's a pitty, you're really missing out.
+
