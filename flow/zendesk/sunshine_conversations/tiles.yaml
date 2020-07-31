@@ -22,7 +22,7 @@ steps:
               jump: tacos
           - text: Static Button
             button_id: _static_button
-            button_context:
+            context:
               product: Tacos
           - text: More info
             url: https://www.cookingclassy.com/instant-pot-slow-cooker-salsa-chicken-tacos/
@@ -36,7 +36,7 @@ steps:
               jump: ramen
           - text: Static Button
             button_id: _static_button
-            button_context:
+            context:
               product: Ramen
           - text: More info
             url: https://40aprons.com/bacon-ramen/

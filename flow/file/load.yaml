@@ -9,7 +9,7 @@ steps:
   - say: Custom JSON 👇
   - file_path: template/file/custom_json.txt
     template: true
-    context:
+    template_context:
       key: "custom:\nkey"
       value:
         complex:

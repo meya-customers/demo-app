@@ -27,13 +27,13 @@ steps:
   - magic_link: (@ thread.page_open.url )
     integration: integration.orb
     button_id: _static_button
-    button_context:
+    context:
       product: jam
     single_use: false
   - jump: show
 
   - (magic_link_create_dynamic_button)
-  - magic_link: (@ thread.page_open_url )
+  - magic_link: (@ thread.page_open.url )
     integration: integration.orb
     button_id: true
     single_use: true

@@ -30,7 +30,7 @@ steps:
     retries: 1
     min_confidence: 0.75
     intent: size
-    context: false
+    input_context: false
     catchall: false
   - jump: print
 

@@ -27,7 +27,7 @@ steps:
         url: https://example.org/?n=5
       - text: Static 6
         button_id: _static_button
-        button_context:
+        context:
           product: marmalade
     composer:
       visibility: hide
