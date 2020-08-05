@@ -9,11 +9,6 @@ steps:
         description: Description
         image:
           url: https://www.cookingclassy.com/wp-content/uploads/2017/06/salsa-chicken-tacos-2.jpg
-        rows:
-          -   - cell: Blah
-                value: xyx
-          -   - cell: Blah
-                value: xxx
         buttons:
           - text: Select
             icon:

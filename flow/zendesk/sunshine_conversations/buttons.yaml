@@ -1,0 +1,66 @@
+triggers:
+  - keyword: sunco_postback
+    action:
+      jump: sunco_postback
+  - keyword: sunco_reply
+    action:
+      jump: sunco_reply
+steps:
+  - (sunco_postback)
+  - buttons:
+      - text: Result 1
+        result:
+          key: 1
+      - text: Result 2
+        result:
+          - two
+          - two
+      - text: Button Flow
+        action:
+          flow: flow.button.button
+      - text: Jump 1
+        action:
+          jump: jump_1
+      - text: Google
+        url: https://google.com
+    # These quick replies will not be handled by Sunshine Conversations because
+    # Sunshine Conversations does not allow both buttons and quick replies mixed
+    # on a message.
+    quick_replies:
+      - Text 1
+      - Text 2
+      - text: Jump 2
+        action:
+          jump: jump_2
+
+  - say: You chose (@ flow.result ) 🔥
+  - end
+
+  - (jump_1)
+  - say: You've reached Jump 1
+  - end
+
+  - (sunco_reply)
+  - say: Here are quick replies.
+    quick_replies:
+      - Text 1
+      - Text 2
+      - text: Jump 2
+        context:
+          key_1: Value 1
+          key_2: Value 2
+          key_3: 123454
+          key_4: false
+        action:
+          jump: jump_2
+      - text: This is a quick reply with a long text string that will jump to Jump
+          2
+        action:
+          jump: jump_2
+      # Sunshine Conversations does not support quick reply links
+      - text: Google
+        url: https://google.com
+
+  - (jump_2)
+  - say: You've reached Jump 2
+  - end
