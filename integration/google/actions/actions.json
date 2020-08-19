@@ -25,9 +25,7 @@
                     }
                 ],
                 "trigger": {
-                    "queryPatterns": [
-                        "$SchemaOrg_Text:text"
-                    ]
+                    "queryPatterns": ["$SchemaOrg_Text:text"]
                 }
             }
         }

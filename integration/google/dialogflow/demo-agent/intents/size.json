@@ -1,50 +1,50 @@
 {
-  "id": "f26c9305-e79d-42aa-9ec4-3a83b75b84ca",
-  "name": "size",
-  "auto": true,
-  "contexts": [],
-  "responses": [
-    {
-      "resetContexts": false,
-      "affectedContexts": [],
-      "parameters": [
+    "id": "f26c9305-e79d-42aa-9ec4-3a83b75b84ca",
+    "name": "size",
+    "auto": true,
+    "contexts": [],
+    "responses": [
         {
-          "id": "e7469452-ac47-45a3-aba2-2af9c40e110c",
-          "required": false,
-          "dataType": "@size",
-          "name": "size",
-          "value": "$size",
-          "promptMessages": [],
-          "noMatchPromptMessages": [],
-          "noInputPromptMessages": [],
-          "outputDialogContexts": [],
-          "isList": false
+            "resetContexts": false,
+            "affectedContexts": [],
+            "parameters": [
+                {
+                    "id": "e7469452-ac47-45a3-aba2-2af9c40e110c",
+                    "required": false,
+                    "dataType": "@size",
+                    "name": "size",
+                    "value": "$size",
+                    "promptMessages": [],
+                    "noMatchPromptMessages": [],
+                    "noInputPromptMessages": [],
+                    "outputDialogContexts": [],
+                    "isList": false
+                }
+            ],
+            "messages": [
+                {
+                    "type": 0,
+                    "lang": "en",
+                    "condition": "",
+                    "speech": [
+                        "Great, I\u0027ll put your order in for a $size",
+                        "Ok, thanks, I\u0027ve specified $size on your order",
+                        "I\u0027ve updated your size to $size on your order"
+                    ]
+                }
+            ],
+            "defaultResponsePlatforms": {
+                "telegram": true
+            },
+            "speech": []
         }
-      ],
-      "messages": [
-        {
-          "type": 0,
-          "lang": "en",
-          "condition": "",
-          "speech": [
-            "Great, I\u0027ll put your order in for a $size",
-            "Ok, thanks, I\u0027ve specified $size on your order",
-            "I\u0027ve updated your size to $size on your order"
-          ]
-        }
-      ],
-      "defaultResponsePlatforms": {
-        "telegram": true
-      },
-      "speech": []
-    }
-  ],
-  "priority": 500000,
-  "webhookUsed": false,
-  "webhookForSlotFilling": false,
-  "fallbackIntent": false,
-  "events": [],
-  "conditionalResponses": [],
-  "condition": "",
-  "conditionalFollowupEvents": []
+    ],
+    "priority": 500000,
+    "webhookUsed": false,
+    "webhookForSlotFilling": false,
+    "fallbackIntent": false,
+    "events": [],
+    "conditionalResponses": [],
+    "condition": "",
+    "conditionalFollowupEvents": []
 }

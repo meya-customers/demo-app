@@ -11,37 +11,23 @@
                             "type": "AMAZON.Person"
                         }
                     ],
-                    "samples": [
-                        "{any}"
-                    ]
+                    "samples": ["{any}"]
                 },
                 {
                     "name": "AMAZON.CancelIntent",
-                    "samples": [
-                        "cancel"
-                    ]
+                    "samples": ["cancel"]
                 },
                 {
                     "name": "AMAZON.HelpIntent",
-                    "samples": [
-                        "i need help",
-                        "help me",
-                        "help"
-                    ]
+                    "samples": ["i need help", "help me", "help"]
                 },
                 {
                     "name": "AMAZON.StopIntent",
-                    "samples": [
-                        "stop"
-                    ]
+                    "samples": ["stop"]
                 },
                 {
                     "name": "AMAZON.NavigateHomeIntent",
-                    "samples": [
-                        "reset",
-                        "go home",
-                        "restart"
-                    ]
+                    "samples": ["reset", "go home", "restart"]
                 }
             ],
             "types": []

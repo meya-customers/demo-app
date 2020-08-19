@@ -1,47 +1,29 @@
 [
-  {
-    "value": "L",
-    "synonyms": [
-      "L",
-      "lar",
-      "large"
-    ]
-  },
-  {
-    "value": "M",
-    "synonyms": [
-      "M",
-      "md",
-      "med",
-      "medium"
-    ]
-  },
-  {
-    "value": "S",
-    "synonyms": [
-      "S",
-      "sm",
-      "small",
-      "smaller",
-      "sml"
-    ]
-  },
-  {
-    "value": "XL",
-    "synonyms": [
-      "XL",
-      "extra large"
-    ]
-  },
-  {
-    "value": "XXL",
-    "synonyms": [
-      "XXL",
-      "dbl xl",
-      "double extra large",
-      "double x",
-      "double xl",
-      "extra extra large"
-    ]
-  }
+    {
+        "value": "L",
+        "synonyms": ["L", "lar", "large"]
+    },
+    {
+        "value": "M",
+        "synonyms": ["M", "md", "med", "medium"]
+    },
+    {
+        "value": "S",
+        "synonyms": ["S", "sm", "small", "smaller", "sml"]
+    },
+    {
+        "value": "XL",
+        "synonyms": ["XL", "extra large"]
+    },
+    {
+        "value": "XXL",
+        "synonyms": [
+            "XXL",
+            "dbl xl",
+            "double extra large",
+            "double x",
+            "double xl",
+            "extra extra large"
+        ]
+    }
 ]

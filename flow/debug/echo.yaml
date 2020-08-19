@@ -1,0 +1,6 @@
+triggers:
+  - keyword: ping
+
+steps:
+  - type: component.time.now
+  - say: pong (@ flow.result )
