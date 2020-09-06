@@ -1,8 +1,16 @@
 triggers:
   - event_type: meya.thread.event.start
   - keyword: sunco_start
+    when: (@ event.data.context.get("action") in ["start", "open"] )
+  - keyword: sunco_start_bypass
 
 steps:
+  - if: (@ flow.event.data.context.get("source") )
+    then: next
+    else:
+      jump: welcome
+  - say: I see you are using the `(@ flow.event.data.context.source.type )` client.
+  - (welcome)
   - say: Welcome to the conversation! 👋
   - typing: on
   - delay: 2

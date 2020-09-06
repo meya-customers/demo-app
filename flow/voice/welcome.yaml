@@ -1,0 +1,49 @@
+triggers:
+  - type: meya.session.trigger.chat.open
+    when: (@ thread.voice )
+  - keyword: voice
+
+steps:
+  - (welcome)
+  - say: Welcome to the voice demo.
+  - if: (@ thread.voice )
+    then: next
+    else:
+      jump: question
+  - say: I can see that you're on a voice enabled device.
+
+  - (question)
+  - ask: Would you like a free t-shirt?
+    expect: dialogflow
+    integration: integration.google.dialogflow.dialogflow
+    error_message: >
+      Sorry, I didn't understand that. Would you like a free t-shirt?
+    intent:
+      - input_yes
+      - input_no
+    quick_replies:
+      - Yes
+      - No
+  - value: (@ flow.result )
+    case:
+      input_yes: next
+      input_no: end
+    default:
+      jump: welcome
+
+  - (t-shirt)
+  - ask: Cool, what size? We have small, medium, large, extra-large and double xl.
+    expect: dialogflow
+    integration: integration.google.dialogflow.dialogflow
+    error_message: >
+      Sorry, I didn't understand that. What size? You can say small, medium or large.
+    language: en
+    intent: size
+    quick_replies:
+      - Small
+      - Medium
+      - Large
+      - XL
+      - XXL
+  - say: Alright. I'll put in an order for an (@ flow.dialogflow_response.queryResult.parameters.size
+      )
