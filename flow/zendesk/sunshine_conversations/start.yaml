@@ -1,7 +1,5 @@
 triggers:
-  - event_type: meya.thread.event.start
-  - keyword: sunco_start
-    when: (@ event.data.context.get("action") in ["start", "open"] )
+  - lifecycle_id: start
   - keyword: sunco_start_bypass
 
 steps:

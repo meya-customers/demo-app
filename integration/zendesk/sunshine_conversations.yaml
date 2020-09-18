@@ -2,3 +2,4 @@ type: meya.zendesk.sunshine_conversations.integration
 app_id: (@ vault.sunshine_conversations.app_id )
 key_id: (@ vault.sunshine_conversations.api_key_id )
 secret: (@ vault.sunshine_conversations.api_secret )
+#lifecycle_events: false|*true

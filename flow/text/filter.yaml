@@ -1,0 +1,9 @@
+triggers:
+  - keyword: filter
+
+steps:
+  - say: The next message will be filtered (1 of 3)
+  - typing: on
+  - delay: 3
+  - say: This message is filtered (quack) (2 of 3)
+  - say: Done. (3 of 3)

@@ -1,0 +1,26 @@
+triggers:
+  - lifecycle_id: flow.zendesk.support.webhook.ticket_solved
+
+steps:
+  - thread_set:
+      mode: bot
+  - ask: Did we solve your problem?
+    buttons:
+      - text: Yes
+        action: next
+      - text: No
+        action:
+          jump: reopen
+  - type: meya.zendesk.support.component.ticket.update
+    integration: integration.zendesk.support
+    status: closed
+  - say: Glad to help!
+  - end
+
+  - (reopen)
+  - thread_set:
+      mode: agent
+  - type: meya.zendesk.support.component.ticket.update
+    integration: integration.zendesk.support
+    status: open
+  - say: Sorry, to hear that 😢

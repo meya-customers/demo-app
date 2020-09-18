@@ -4,7 +4,7 @@ triggers:
 
 steps:
   - flow_set:
-      mode: (@ flow.groups[0] )
+      mode: (@ flow.groups[0] or none )
   - say: Setting mode to (@ flow.mode )...
   - thread_set:
       mode: (@ flow.mode )

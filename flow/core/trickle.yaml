@@ -1,0 +1,23 @@
+triggers:
+  - regex: >
+      trickle
+      (?:
+          [\s_]
+          (?P<count> \d+ )
+      )?
+
+steps:
+  - flow_set:
+      max_count: (@ flow.groups.count | int )
+      count: 0
+
+  - (start)
+  - flow_set:
+      count: (@ flow.count + 1)
+  - say: Flood - (@ flow.count )
+  - delay: 0.5
+  - if: (@ flow.count < flow.max_count )
+    then:
+      jump: start
+    else: next
+  - say: Trickle complete

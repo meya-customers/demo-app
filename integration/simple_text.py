@@ -1,6 +1,5 @@
 from dataclasses import dataclass
 from meya.db.view.thread import ThreadView
-from meya.element.field import response_field
 from meya.entry import Entry
 from meya.voice.integration.integration import VoiceIntegration
 from typing import ClassVar

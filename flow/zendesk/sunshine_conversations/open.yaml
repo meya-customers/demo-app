@@ -1,0 +1,5 @@
+triggers:
+  - lifecycle_id: open
+
+steps:
+  - say: Welcome back!

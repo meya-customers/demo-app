@@ -10,3 +10,5 @@ untracked_user_data:
   - SIN
   - CC
   - password
+filter:
+  tx: false

@@ -1,0 +1,28 @@
+triggers:
+  - regex: >
+      loop
+      (?:
+          [\s_]
+          (?P<count> \d+ )
+      )?
+
+steps:
+  - flow_set:
+      index: 0
+      count: (@ flow.groups.count | int )
+  - if: (@ flow.count > 0 and flow.count <= 1000 )
+    then: next
+    else:
+      jump: error
+
+  - (go)
+  - say: Loop (@ flow.index + 1) of (@ flow.count )
+  - if: (@ flow.index + 1 < flow.count )
+    then:
+      jump: go
+      data:
+        index: (@ flow.index + 1 )
+    else: end
+
+  - (error)
+  - say: Count must be between 1 and 1000.

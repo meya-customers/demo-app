@@ -2,7 +2,7 @@ triggers:
   - regex: >
       flood
       (?:
-          \s
+          [\s_]
           (?P<count> \d+ )
       )?
 

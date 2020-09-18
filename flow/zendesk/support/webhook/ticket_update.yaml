@@ -13,7 +13,8 @@ steps:
   - (check_assignee)
   - if: (@ flow.ticket.assignee_id != flow.old_ticket.assignee_id )
     then: next
-    else: end
+    else:
+      jump: solved
   - if: (@ not flow.ticket.assignee_id )
     then:
       jump: no_assignee
@@ -24,7 +25,15 @@ steps:
   - status: >
       Ticket (@ flow.ticket.id) is now assigned to
       (@ flow.result.alias or flow.result.name )
-  - end
+  - jump: solved
 
   - (no_assignee)
   - status: Ticket (@ flow.ticket.id) status is now unassigned
+  - jump: solved
+
+  - (solved)
+  - if: (@ flow.ticket.status != flow.old_ticket.status and flow.ticket.status ==
+      "solved" )
+    then:
+      lifecycle: flow.zendesk.support.webhook.ticket_solved
+    else: end

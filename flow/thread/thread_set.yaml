@@ -3,7 +3,7 @@ triggers:
 
 steps:
   - (start)
-  - ask: start (@ thread.__data__ )
+  - ask: start (@ thread.data )
     tiles:
       - title: Set
         buttons:
@@ -74,7 +74,7 @@ steps:
   - jump: end
 
   - (end)
-  - say: end (@ thread.__data__ )
+  - say: end (@ thread.data )
     quick_replies:
       - thread_set
   - end

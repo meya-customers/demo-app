@@ -3,7 +3,7 @@ triggers:
 
 steps:
   - (start)
-  - ask: start (@ user.__data__ )
+  - ask: start (@ user.data )
     tiles:
       - title: Set
         buttons:
@@ -74,7 +74,7 @@ steps:
   - jump: end
 
   - (end)
-  - say: end (@ user.__data__ )
+  - say: end (@ user.data )
     quick_replies:
       - user_set
   - end
