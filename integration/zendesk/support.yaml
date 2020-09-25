@@ -4,6 +4,7 @@ bot_agent_email: (@ vault.zendesk.support.bot_agent_email )
 bot_agent_api_token: (@ vault.zendesk.support.bot_agent_api_token )
 target_password: (@ vault.zendesk.support.target_password )
 markdown: true
+#include_text_with_media: true|*false
 #filter:
 #  tx: >
 #    meya.event.entry.interactive AND NOT (
