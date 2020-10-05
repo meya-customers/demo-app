@@ -57,6 +57,7 @@ class SimpleTextIntegration(VoiceIntegration):
             request_id=session.simple_request_id,
             status=200,
             data=dict(ok=True, text=text),
+            url=self.gateway_webhook_url,
         )
         session.simple_request_id = None
 
