@@ -1,0 +1,22 @@
+triggers:
+  - lifecycle_id: start_chat
+    when: (@ not thread.page_open )
+
+steps:
+  - thread_set:
+      page_open: (@ flow.event.data )
+  - component.session.track
+  - say: Start your journey...
+    quick_replies:
+      - button
+      - webv1_typing
+      - text: ǝɯɐu
+        action:
+          flow: flow.text.ask_name
+      - text: hello
+        action:
+          say: hello back
+      - text: next
+        action: next
+  - say: After hero
+  - end

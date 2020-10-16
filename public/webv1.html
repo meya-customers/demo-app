@@ -1,0 +1,12 @@
+<title>Web v1</title>
+<script>
+    // Rebuild and configure web widget URLs to use
+    window.loclSettings = {
+        app_id: 'web',
+        account_id: 'acct-xxx',
+        bot_id: 'app-xxx',
+        base_url: 'http://localhost:3000',
+        locl_base_url: 'https://grid-xxx.meya.ai/gateway/v2/webv1/integration.webv1'
+    };
+</script>
+<script>!function(){function t(){var t=n.createElement("script");t.type="text/javascript",t.async=!0,t.src=e.loclSettings.base_url+"/js/embed.js?x="+Math.random();var a=n.getElementsByTagName("script")[0];a.parentNode.insertBefore(t,a)}var e=window,a=e.Locl;if("function"==typeof a)a("reattach_activator"),a("update",loclSettings);else{var n=document,c=function(){c.c(arguments)};c.q=[],c.c=function(t){c.q.push(t)},e.Locl=c,e.attachEvent?e.attachEvent("onload",t):e.addEventListener("load",t,!1)}}();</script>
