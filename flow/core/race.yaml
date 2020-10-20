@@ -1,0 +1,41 @@
+triggers:
+  - keyword: race
+
+steps:
+  - say: >
+      Race start
+      (@ user.race_a )
+      (@ user.race_b )
+      (@ user.race_c )
+      (@ user.race_d )
+      (@ user.race_e )
+      (@ user.race_f )
+      (@ user.race_g )
+      (@ user.race_h )
+      (@ user.race_i )
+      (@ user.race_j )
+  - user_set:
+      race_a: (@ "🔥" if user.race_a == "💧" else "💧" )
+      race_b: (@ "🔥" if user.race_b == "💧" else "💧" )
+      race_c: (@ "🔥" if user.race_c == "💧" else "💧" )
+      race_d: (@ "🔥" if user.race_d == "💧" else "💧" )
+      race_e: (@ "🔥" if user.race_e == "💧" else "💧" )
+      race_f: (@ "🔥" if user.race_f == "💧" else "💧" )
+      race_g: (@ "🔥" if user.race_g == "💧" else "💧" )
+      race_h: (@ "🔥" if user.race_h == "💧" else "💧" )
+      race_i: (@ "🔥" if user.race_i == "💧" else "💧" )
+      race_j: (@ "🔥" if user.race_j == "💧" else "💧" )
+  - say: >
+      Race finish
+      (@ user.race_a )
+      (@ user.race_b )
+      (@ user.race_c )
+      (@ user.race_d )
+      (@ user.race_e )
+      (@ user.race_f )
+      (@ user.race_g )
+      (@ user.race_h )
+      (@ user.race_i )
+      (@ user.race_j )
+    quick_replies:
+      - race
