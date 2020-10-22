@@ -1,0 +1,5 @@
+type: meya.whatsapp.integration
+account_sid: (@ vault.twilio.account_sid )
+auth_token: (@ vault.twilio.auth_token )
+phone_number: (@ vault.whatsapp.phone_number )
+markdown: true

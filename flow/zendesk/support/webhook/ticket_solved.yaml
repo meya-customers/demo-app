@@ -5,12 +5,13 @@ steps:
   - thread_set:
       mode: bot
   - ask: Did we solve your problem?
-    buttons:
-      - text: Yes
-        action: next
-      - text: No
-        action:
-          jump: reopen
+    quick_replies:
+      - Yes
+      - No
+  - if: (@ flow.result == "Yes" )
+    then: next
+    else:
+      jump: reopen
   - type: meya.zendesk.support.component.ticket.update
     integration: integration.zendesk.support
     status: closed

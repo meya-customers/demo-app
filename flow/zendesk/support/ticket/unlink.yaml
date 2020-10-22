@@ -6,4 +6,6 @@ steps:
   - say: Unlinking...
   - type: component.zendesk.support.ticket.unlink
     integration: integration.zendesk.support
+  - thread_set:
+      mode: bot
   - say: Done

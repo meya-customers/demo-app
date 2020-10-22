@@ -1,0 +1,61 @@
+triggers:
+  - keyword: whatsapp_send_message
+
+steps:
+  - (input)
+  - ask_form: What WhatsApp number do you want to send to?
+    label: Phone
+    icon: (@ config.icon.phone )
+    placeholder: 'Mobile phone #'
+  - flow_set: to
+
+  - (lookup)
+  - type: meya.twilio.component.lookup
+    integration: integration.twilio
+    phone_number: (@ flow.to )
+  - if: (@ flow.ok )
+    then:
+      jump: valid
+    else:
+      jump: invalid
+
+  - (invalid)
+  - say: ❌ Invalid phone number. Try again. (@ flow.status ) -  (@ flow.data )
+  - end
+
+  - (valid)
+  - flow_set: enriched_phone
+  - flow_set:
+      to: (@ flow.enriched_phone.phone_number )
+  - say: |
+      ✅ Valid phone number.
+      Formatted: (@ flow.enriched_phone.national_format )
+      Country:  (@ flow.enriched_phone.country_code )
+      E164: (@ flow.enriched_phone.phone_number )
+
+  - (text)
+  - ask_form: What message to send?
+    label: Message
+    icon: (@ config.icon.message )
+    placeholder: ex. Hi there!
+  - flow_set: body
+
+  - (send)
+#  - type: meya.whatsapp.component.message.send
+  - type: meya.twilio.component.message.send
+    integration: integration.whatsapp
+    to: whatsapp:(@ flow.to )
+    body: (@ flow.body )
+  - if: (@ flow.ok )
+    then:
+      jump: sent
+    else:
+      jump: not_sent
+
+  - (not_sent)
+  - say: ❌ Something went wrong. No message was sent. (@ flow.status ) -  (@ flow.data
+      )
+  - end
+
+  - (sent)
+  - say: ✅ A WhatsApp message was sent to (@ flow.enriched_phone.national_format )

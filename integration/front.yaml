@@ -1,0 +1,7 @@
+type: meya.front.integration
+api_token: (@ vault.front.api_token )
+bot_teammate_email: (@ vault.front.bot_teammate_email )
+channel_id: (@ vault.front.channel_id )
+unassign_mode: agent
+filter:
+  tx: false

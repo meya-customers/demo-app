@@ -1,0 +1,7 @@
+triggers:
+  - regex: \bhours\b
+
+steps:
+  - say: >
+      Our Customer Service hours are Monday to Saturday:
+      from 09:00 am to 6:30 pm ET 😊

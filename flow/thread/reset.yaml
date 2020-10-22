@@ -1,0 +1,9 @@
+triggers:
+  - keyword: reset
+    when: true
+
+steps:
+  - say: Resetting thread mode...
+  - thread_set:
+      mode:
+  - say: Done.

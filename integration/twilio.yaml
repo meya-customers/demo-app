@@ -1,3 +1,4 @@
 type: meya.twilio.integration
 account_sid: (@ vault.twilio.account_sid )
 auth_token: (@ vault.twilio.auth_token )
+phone_number: (@ vault.twilio.phone_number )

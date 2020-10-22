@@ -1,0 +1,17 @@
+triggers:
+  - regex: \bfront.human\b
+
+steps:
+  - if: (@ user.name )
+    then:
+      jump: escalate
+    else: next
+  - ask: What's your name?
+  - user_set: name
+  - say: Nice to meet, you (@ user.name )! 👋
+
+  - (escalate)
+  - say: One moment while I find someone to help...
+  - type: meya.front.component.conversation.update
+    integration: integration.front
+    assignee_email:

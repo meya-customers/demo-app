@@ -25,6 +25,9 @@ mailgun.domain: sandbox535817ca675748659d37bcdec4b6cea1.mailgun.org
 mailgun.api_key: xxx
 twilio.account_sid: xxx
 twilio.auth_token: xxx
+# quotes are required otherwise interpreted as `int`
+twilio.phone_number: '+18005551234'
+whatsapp.phone_number: whatsapp:+18005551234
 slack.webhook_url: xxx
 segment.write_key: xxx
 calendly.api_key: xxx
@@ -40,3 +43,6 @@ zendesk.support.bot_agent_email: username@domain.com
 zendesk.support.bot_agent_api_token: xxx
 zendesk.support.target_password: xxx
 alexa.skill_id: xxx
+front.api_token: xxx
+front.channel_id: xxx
+front.bot_teammate_email: xxx

@@ -1,10 +1,10 @@
 triggers:
-  - regex: ^mode_(.*)$
+  - regex: ^mode.(.+)$
     when: true
 
 steps:
   - flow_set:
-      mode: (@ flow.groups[0] or none )
+      mode: (@ flow.groups[0] )
   - say: Setting mode to (@ flow.mode )...
   - thread_set:
       mode: (@ flow.mode )
