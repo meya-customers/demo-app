@@ -1,0 +1,40 @@
+triggers:
+  - regex: ^user_create_or_update_.*$
+    action:
+      jump: (@ flow.result )
+
+steps:
+  - (user_create_or_update_user_id)
+  - say: Creating or updating user using user.id...
+  - type: meya.zendesk.support.component.user.create_or_update
+    integration: integration.zendesk.support
+    link: true
+    external_id: (@ user.id )
+  - jump: result
+
+  - (user_create_or_update_email)
+  - say: Creating or updating user using email...
+  - type: meya.zendesk.support.component.user.create_or_update
+    integration: integration.zendesk.support
+    link: true
+    email: support@meya.ai
+  - jump: result
+
+  - (user_create_or_update_no_id)
+  - say: Creating or updating user without id or email...
+  - type: meya.zendesk.support.component.user.create_or_update
+    integration: integration.zendesk.support
+    link: true
+  - jump: result
+
+  - (user_create_or_update_email_and_user_id)
+  - say: Creating or updating user using email and user.id...
+  - type: meya.zendesk.support.component.user.create_or_update
+    integration: integration.zendesk.support
+    link: true
+    external_id: (@ user.id )
+    email: support@meya.ai
+  - jump: result
+
+  - (result)
+  - say: User (@ flow.result.id ) created or updated

@@ -17,3 +17,4 @@ markdown: true
 #auto_reopen_ticket: true|*agent|false
 #unlink: [solved, closed], *[closed], []
 #extract_html_links: *true|false
+#upload_attachments: *true|false
