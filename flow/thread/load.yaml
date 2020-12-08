@@ -1,0 +1,11 @@
+triggers:
+  - keyword: thread_load
+
+steps:
+  - ask: Thread ID?
+    quick_replies:
+      - text: Skip
+        result: (@ thread.id )
+  - flow_set: thread_id
+  - thread_load: (@ flow.thread_id )
+  - say: Thread (@ flow.thread_id) data (@ flow.result )

@@ -1,9 +1,0 @@
-triggers:
-  - keyword: lifecycle_test
-
-steps:
-  - say: Emitting lifecycle `flow.zendesk.support.webhook.ticket_solved`
-  - lifecycle: flow.zendesk.support.webhook.ticket_solved
-    context:
-      foo: bar
-  - say: done

@@ -1,0 +1,9 @@
+triggers:
+  - keyword: sunco_jwt
+
+steps:
+  - ask: What is your external ID?
+  - type: component.zendesk.sunshine_conversations.jwt
+    integration: integration.zendesk.sunshine_conversations
+    external_id: (@ flow.result )
+  - say: SunCo JWT (@ flow.result )

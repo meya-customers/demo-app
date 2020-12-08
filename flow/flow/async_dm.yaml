@@ -1,0 +1,39 @@
+triggers:
+  - keyword: dm
+
+steps:
+  - ask: Thread ID?
+  - flow_set: thread_id
+
+  - (message)
+  - ask: Message?
+  - flow_set: message
+  - flow: flow.flow.async_dm
+    jump: send
+    data:
+      message: (@ flow.message )
+      sender_thread_id: (@ thread.id )
+      event_user_id: (@ flow.event.data.user_id )
+    async: true
+    thread_id: (@ flow.thread_id )
+  - thread_set:
+      mode:
+  - end
+
+  - (send)
+  - thread_set:
+      mode: user
+  - say: (@ flow.message )
+  - flow_set:
+      event_user_id:
+  - ask: Would you like to reply?
+    buttons:
+      - text: Yes
+        action:
+          jump: message
+          data:
+            thread_id: (@ flow.sender_thread_id )
+      - text: No
+        action: next
+  - thread_set:
+      mode:

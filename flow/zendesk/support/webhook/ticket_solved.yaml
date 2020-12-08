@@ -1,6 +1,3 @@
-triggers:
-  - lifecycle_id: flow.zendesk.support.webhook.ticket_solved
-
 steps:
   - thread_set:
       mode: bot

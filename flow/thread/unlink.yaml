@@ -1,0 +1,18 @@
+triggers:
+  - keyword: thread_unlink
+
+steps:
+  - ask: Thread ID?
+    quick_replies:
+      - text: Skip
+        result:
+  - flow_set: thread_id
+  - ask: Integration ID?
+    quick_replies:
+      - text: Skip
+        result: (@ flow.event.data.integration_id )
+  - flow_set: integration_id
+  - type: thread_unlink
+    thread_id: (@ flow.thread_id )
+    integration: (@ flow.integration_id )
+  - say: Done

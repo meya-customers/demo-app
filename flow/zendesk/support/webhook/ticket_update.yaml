@@ -35,5 +35,7 @@ steps:
   - if: (@ flow.ticket.status != flow.old_ticket.status and flow.ticket.status ==
       "solved" )
     then:
-      lifecycle: flow.zendesk.support.webhook.ticket_solved
+      flow: flow.zendesk.support.webhook.ticket_solved
+      bot: bot.default
+      async: true
     else: end

@@ -1,0 +1,79 @@
+triggers:
+  - type: meya.zendesk.support.trigger.ticket.unhandled
+
+steps:
+  # Try to find the ZDS Meya user link
+  - user_try_lookup: (@ flow.requester.id | string )
+    integration: integration.zendesk.support
+  - flow_set: user_id
+  - if: (@ flow.user_id )
+    then: next
+    else:
+      jump: sunco_find_by_email
+
+  # Try to find the SunCo Meya user link
+  - type: user_try_reverse_lookup
+    user_id: (@ flow.user_id )
+    integration: integration.zendesk.sunshine_conversations
+  - flow_set: sunco_app_user_id
+  - if: (@ flow.sunco_app_user_id )
+    then:
+      jump: sunco_user_ready
+    else: next
+
+  # Try to find the SunCo user via ZDS email (require a result)
+  - (sunco_find_by_email)
+  - type: meya.zendesk.sunshine_conversations.component.app_user.get
+    integration: integration.zendesk.sunshine_conversations
+    external_id: (@ flow.requester.email )
+  - flow_set:
+      sunco_app_user_id: (@ flow.result.user_id or flow.result._id )
+
+  # Identify the SunCo Meya user
+  - user_identify: (@ flow.sunco_app_user_id )
+    integration: integration.zendesk.sunshine_conversations
+  - flow_set: user_id
+
+  # Link the Meya user to ZDS
+  - user_link: (@ flow.requester.id | string )
+    user_id: (@ flow.user_id )
+    integration: integration.zendesk.support
+
+  # Try to find the SunCo Meya thread link
+  - (sunco_user_ready)
+  - thread_try_lookup: (@ flow.sunco_app_user_id )
+    integration: integration.zendesk.sunshine_conversations
+  - if: (@ flow.result )
+    then: next
+    else:
+      jump: sunco_thread_link
+
+  # Use the existing SunCo Meya thread
+  - flow_set: thread_id
+  - jump: sunco_thread_ready
+
+  # Link the new Meya thread to SunCo
+  - (sunco_thread_link)
+  - flow_set:
+      thread_id: (@ thread.id )
+  - thread_link: (@ flow.sunco_app_user_id )
+    thread_id: (@ flow.thread_id )
+    integration: integration.zendesk.sunshine_conversations
+
+  # Set the new thread primary user
+  - thread_set:
+      primary_user_id: (@ flow.user_id )
+    thread_id: (@ flow.thread_id )
+
+  # Link the Meya thread to ZDS
+  - (sunco_thread_ready)
+  - thread_link: (@ flow.ticket.id | string )
+    thread_id: (@ flow.thread_id )
+    integration: integration.zendesk.support
+
+  # Redo ZDS RX
+  - type: meya.zendesk.support.component.ticket.rx
+    integration: integration.zendesk.support
+    thread_id: (@ flow.thread_id )
+    ticket: (@ flow.ticket )
+    current_user: (@ flow.current_user )

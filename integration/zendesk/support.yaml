@@ -4,6 +4,11 @@ bot_agent_email: (@ vault.zendesk.support.bot_agent_email )
 bot_agent_api_token: (@ vault.zendesk.support.bot_agent_api_token )
 target_password: (@ vault.zendesk.support.target_password )
 markdown: true
+filter:
+  rx_unhandled_ticket: >
+    ticket.tags:sunco_send
+    AND ticket.status:(new OR open OR pending)
+    AND current_user.role:(NOT end-user)
 #include_text_with_media: true|*false
 #filter:
 #  tx: >

@@ -1,0 +1,25 @@
+triggers:
+  - keyword: async
+
+steps:
+  - ask: Async?
+    buttons:
+      - text: Yes
+        result: true
+      - text: No
+        result: false
+  - flow_set: async
+  - flow_set:
+      text: parent
+  - flow: flow.flow.async
+    jump: target
+    data:
+      text: child
+    async: (@ flow.async )
+
+  - (target)
+  - say: Starting (@ flow.text )...
+  - delay: 1
+  - say: Done (@ flow.text )
+    quick_replies:
+      - async

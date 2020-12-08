@@ -1,0 +1,10 @@
+triggers:
+  - type: trigger.text.flow_routing
+    action:
+      flow: (@ flow.flow )
+      jump: (@ flow.jump )
+      data: (@ flow.data )
+
+steps:
+  # Routing should go to a different flow, not this one
+  - say: Unexpected routing

@@ -1,0 +1,12 @@
+triggers:
+  - keyword: sunco_app_user
+
+steps:
+  - ask: User ID or external ID?
+    quick_replies:
+      - text: Skip
+        result:
+  - type: meya.zendesk.sunshine_conversations.component.app_user.get
+    integration: integration.zendesk.sunshine_conversations
+    user_id: (@ flow.result )
+  - say: SunCo app user (@ flow.result )

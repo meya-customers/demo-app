@@ -1,0 +1,11 @@
+triggers:
+  - keyword: user_load
+
+steps:
+  - ask: User ID?
+    quick_replies:
+      - text: Skip
+        result: (@ user.id )
+  - flow_set: user_id
+  - user_load: (@ flow.user_id )
+  - say: User (@ flow.user_id) data (@ flow.result )

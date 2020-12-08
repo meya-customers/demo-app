@@ -3,4 +3,6 @@ triggers:
 
 steps:
   - ask: What to make upper?
+
+  - (say)
   - say_upper: (@ flow.result )
