@@ -1,0 +1,25 @@
+triggers:
+  - keyword: sensitive_data_scope
+
+steps:
+  - say: Setting data...
+  - type: component.sensitive_data.guess_init
+    from: 1
+    to: 100
+  - flow_set: secret
+  - user_set: secret
+  - thread_set: secret
+
+  - say: flow.secret (@ flow.secret )
+  - say: encrypted_flow.secret (@ encrypted_flow.secret )
+  - say: redacted_flow.secret (@ redacted_flow.secret )
+
+  - say: user.secret (@ user.secret )
+  - say: encrypted_user.secret (@ encrypted_user.secret )
+  - say: redacted_user.secret (@ redacted_user.secret )
+
+  - say: thread.secret (@ thread.secret )
+  - say: encrypted_thread.secret (@ encrypted_thread.secret )
+  - say: redacted_thread.secret (@ redacted_thread.secret )
+
+  - say: Done

@@ -1,0 +1,40 @@
+triggers:
+  - keyword: make_outbound_call
+
+steps:
+  - if: (@ user.name)
+    then:
+      jump: get phone number
+    else: next
+  - ask: What's your name?
+  - user_set: name
+
+  - (get phone number)
+  - say: Hi (@ user.name)!
+
+  - if: (@ user.phone)
+    then:
+      jump: get order number
+    else: next
+  - ask: What's your phone number?
+  - user_set: phone
+
+  - (get order number)
+  - ask: What's your order number
+  - user_set: order_number
+
+  - user_try_lookup: (@ user.phone)
+    integration: integration.twilio_voice
+
+  - type: user_unlink
+    user_id: (@ flow.result)
+    integration: integration.twilio_voice
+
+  - user_link: (@ user.phone)
+    integration: integration.twilio_voice
+
+  - say: cool! I'm calling you now
+
+  - type: meya.twilio.voice.component.call
+    to: (@ user.phone)
+    integration: integration.twilio_voice

@@ -1,0 +1,5 @@
+triggers:
+  - lifecycle_id: webhook_call_lifecycle
+
+steps:
+  - say: webhook_call_lifecycle sucessfully triggered

@@ -1,0 +1,32 @@
+triggers:
+  - type: meya.twilio.voice.trigger.ringing
+    direction: inbound
+
+steps:
+  - type: meya.twilio.voice.component.gather
+    timeout: 2
+    input: speech
+    hints: sales support
+    ask: Welcome! Do you need sales or support?
+  - flow_set: decision
+
+  - if: (@ flow.decision in ["sales", "support"])
+    then:
+      jump: transfer call
+    else: next
+
+  - say: Invalid option
+  - type: meya.twilio.voice.component.hangup
+
+  - (transfer call)
+  - say: We are transfering you to (@ flow.decision)
+  - if: (@ flow.decision == "sales")
+    then:
+      flow_set:
+        number: '+12267793766'
+    else:
+      flow_set:
+        number: '+12267793766'
+
+  - type: meya.twilio.voice.component.dial
+    number: (@ flow.number)

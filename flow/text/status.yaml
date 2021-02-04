@@ -1,8 +1,8 @@
 triggers:
   - keyword: status
-  - keyword: status_ephemeral
+  - regex: ^status_.*$
     action:
-      jump: status_ephemeral
+      jump: (@ flow.result )
 
 steps:
   - status: This is a status message

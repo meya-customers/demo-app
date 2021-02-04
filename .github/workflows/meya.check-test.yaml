@@ -5,7 +5,7 @@ on:
   repository_dispatch:
   push:
     branches:
-      - '*'
+      - '**'
 
 jobs:
   build-and-deploy:
@@ -22,6 +22,7 @@ jobs:
         uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
         if: github.ref == 'refs/heads/master'
         with:
+          version: 321.0.0
           project_id: ${{ secrets.google_project_id }}
           service_account_key: ${{ secrets.google_auth_json_b64 }}
           export_default_credentials: true
@@ -43,6 +44,9 @@ jobs:
         run: meya check
       - name: Run tests
         run: meya test
+      - name: Reset shadow git
+        if: github.ref == 'refs/heads/master'
+        run: meya git reset --hard
       - name: Deploy app
         if: github.ref == 'refs/heads/master'
         run: meya push --force --build-image

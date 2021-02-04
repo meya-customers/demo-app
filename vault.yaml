@@ -29,10 +29,12 @@ twilio.auth_token: xxx
 twilio.phone_number: '+18005551234'
 whatsapp.phone_number: whatsapp:+18005551234
 slack.webhook_url: xxx
+segment.enabled: false
 segment.write_key: xxx
 calendly.api_key: xxx
 calendly.event_link: xxx
 clearbit.api_key: xxx
+webhook.enabled: false
 webhook.postback_url: xxx
 webhook.api_key: xxx
 postmark.server_token: xxx
@@ -43,6 +45,7 @@ zendesk.support.bot_agent_email: username@domain.com
 zendesk.support.bot_agent_api_token: xxx
 zendesk.support.target_password: xxx
 alexa.skill_id: xxx
+front.enabled: false
 front.api_token: xxx
 front.channel_id: xxx
 front.bot_teammate_email: xxx

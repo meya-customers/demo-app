@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from meya.element.field import response_field
 from meya.text.trigger import TextTrigger
 from meya.text.trigger.trigger import TextTriggerResponse
-from meya.trigger.entry.match import TriggerMatchEntry
+from meya.trigger.element import TriggerMatchResult
 from typing import Any
 from typing import Dict
 from typing import Optional
@@ -16,7 +16,7 @@ class FlowRoutingTrigger(TextTrigger):
         jump: Optional[str] = response_field()
         data: Optional[Dict[str, Any]] = response_field()
 
-    async def match(self) -> TriggerMatchEntry:
+    async def match(self) -> TriggerMatchResult:
         if not self.entry.text.startswith("routing_"):
             return self.fail()
 

@@ -1,4 +1,5 @@
 type: meya.segment.integration
+enabled: (@ vault.segment.enabled )
 write_key: (@ vault.segment.write_key )
 tracked_entries:
   - meya.csp.event

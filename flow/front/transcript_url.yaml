@@ -1,0 +1,21 @@
+triggers:
+  - keyword: front_integration_url_transcript
+
+steps:
+
+  - ask_form: Email?
+    expect: email_address
+  - flow_set:
+      email: (@ flow.result)
+
+  - ask: Choose an animal
+    buttons:
+      - text: Cat
+        url: https://media.giphy.com/media/WWyT3VgEgIK8U/giphy.gif
+      - text: Goat
+        url: http://placegoat.com/200/200
+      - text: Continue
+
+  - type: meya.front.component.conversation.update
+    integration: integration.front
+    assignee_email:

@@ -1,0 +1,37 @@
+triggers:
+  - keyword: zendesk_integration_url_transcript
+
+steps:
+  - ask_form: Name?
+    label: Name
+    icon: (@ config.icon.person )
+    quick_replies:
+      - text: Skip (generate)
+        result:
+  - flow_set: name
+
+  - ask_form: Email?
+    expect: email_address
+    quick_replies:
+      - text: Skip (blank)
+        result:
+  - flow_set: email
+
+  - say: Creating or updating user...
+  - type: meya.zendesk.support.component.user.create_or_update
+    integration: integration.zendesk.support
+    name: (@ flow.name )
+    email: (@ flow.email )
+  - say: User (@ flow.result.id ) created or updated
+  - say: Creating ticket...
+  - type: meya.zendesk.support.component.ticket.create
+    integration: integration.zendesk.support
+  - say: Ticket (@ flow.result.id ) created
+
+  - ask: Choose an animal
+    buttons:
+      - text: Cat
+        url: https://media.giphy.com/media/WWyT3VgEgIK8U/giphy.gif
+      - text: Goat
+        url: http://placegoat.com/200/200
+      - text: Continue

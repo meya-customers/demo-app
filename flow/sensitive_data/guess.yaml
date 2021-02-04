@@ -1,0 +1,37 @@
+triggers:
+  - keyword: guess
+
+steps:
+  - type: component.sensitive_data.guess_init
+    from: 1
+    to: 100
+  - flow_set: secret
+  - say: I'm thinking of a number between 1 and 100...
+
+  - (loop)
+  - ask: What do you think it is?
+    quick_replies:
+      - text: Stop
+        action:
+          jump: stop
+  - flow_set: guess
+  - type: component.sensitive_data.guess_number
+    secret: (@ flow.secret )
+    guess: (@ flow.guess | int )
+  - jump: (@ flow.result )
+
+  - (high)
+  - say: Nope, the number is higher than (@ flow.guess )
+  - jump: loop
+
+  - (low)
+  - say: Try again, the number is lower than (@ flow.guess )
+  - jump: loop
+
+  - (correct)
+  - say: Nice job, you got it! The number was (@ flow.guess )!
+
+  - (stop)
+  - say: Thanks for playing, see you later
+    quick_replies:
+      - guess

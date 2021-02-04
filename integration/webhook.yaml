@@ -1,4 +1,5 @@
 type: meya.webhook.integration
+enabled: (@ vault.webhook.enabled )
 postback_url: (@ vault.webhook.postback_url )
 api_key: (@ vault.webhook.api_key )
 suppress_echo: false
@@ -8,6 +9,8 @@ filter:
     AND NOT data.user.id:u-x
   rx: >
     meya.http.entry.response
+    OR meya.lifecycle.event.event
+    OR meya.zendesk.support.event.ticket.unhandled
     OR (
       meya.text.event
       AND NOT text:*purple*

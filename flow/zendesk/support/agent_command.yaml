@@ -1,7 +1,14 @@
 triggers:
   - agent_command: zendesk_support_verify_phone
+    action:
+      jump: verify_phone
+
+  - agent_command: zendesk_support_get_price\s(?P<product>\S+)
+    action:
+      jump: get_price
 
 steps:
+  - (verify_phone)
   # Publish as the agent
   - flow_set:
       event_user_id: (@ flow.event.data.user_id )
@@ -13,4 +20,16 @@ steps:
   - type: meya.zendesk.support.component.ticket.update
     integration: integration.zendesk.support
     comment: Verified (@ flow.phone == flow.user.phone )
+    comment_public: false
+
+  - (get_price)
+  - flow_set:
+      price_table:
+        shoes: 40
+        socks: 8
+        sandals: 20
+  - type: meya.zendesk.support.component.ticket.update
+    integration: integration.zendesk.support
+    comment: Price for (@ flow.groups.product ) $(@ flow.price_table[flow.groups.product]
+      )
     comment_public: false

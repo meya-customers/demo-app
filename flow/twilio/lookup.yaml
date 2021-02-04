@@ -21,10 +21,8 @@ steps:
   - if: (@ flow.ok )
     then:
       jump: valid
-    else:
-      jump: invalid
+    else: next
 
-  - (invalid)
   - say: ❌ Invalid phone number. Try again. (@ flow.status ) -  (@ flow.data )
   - delay: 2
   - jump: input

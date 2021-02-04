@@ -45,6 +45,11 @@ steps:
   - flow_set: link_ticket
 
   - (name)
+
+  # Start "prechat" mode to collect sensitive details, all user responses will be encrypted
+  - thread_set:
+      mode: prechat
+
   - ask_form: Name?
     label: Name
     icon: (@ config.icon.person )
@@ -81,6 +86,10 @@ steps:
       - text: Skip (use transcript)
         result:
   - flow_set: comment
+
+  # Done "prechat" mode
+  - thread_set:
+      mode:
 
   - (create)
   - say: Creating or updating user...

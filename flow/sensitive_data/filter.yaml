@@ -1,0 +1,27 @@
+triggers:
+  - keyword: sensitive_data_filter
+
+steps:
+  - say: Setting data...
+  - type: component.sensitive_data.guess_init
+    from: 1
+    to: 100
+  - flow_set:
+      secret:
+        value: (@ encrypted_flow.result )
+      non_secret:
+        value: (@ flow.result )
+      invalid:
+        value:
+          🔐🙈: xyz
+
+  - say: secret (@ flow.secret.value )
+  - say: non_secret (@ flow.non_secret.value )
+  - say: invalid (@ flow.invalid.value )
+
+  - say: encrypt_sensitive (@ flow.non_secret.value | encrypt_sensitive )
+  - say: decrypt_sensitive (@ flow.secret.value | decrypt_sensitive )
+  - say: try_decrypt_sensitive (@ flow.event.data.text | try_decrypt_sensitive )
+  - say: redact_sensitive (@ flow.secret.value | redact_sensitive )
+
+  - say: Done

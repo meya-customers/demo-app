@@ -11,10 +11,10 @@ from yarl import URL
 @dataclass
 class CustomLogElement(LogElement):
     async def process(self) -> List[Entry]:
-        if isinstance(self.entry, TextEvent) and "custom_log" in (
-            self.entry.text or ""
+        if isinstance(self.redacted_entry, TextEvent) and "custom_log" in (
+            self.redacted_entry.text or ""
         ):
-            msg = f"CUSTOM TEXT LOG: {self.entry.text}"
+            msg = f"CUSTOM TEXT LOG: {self.redacted_entry.text}"
             print(msg)
             self.log.info(msg)
 
