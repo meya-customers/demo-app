@@ -1,0 +1,36 @@
+triggers:
+  - regex: ^template_.*$
+    action:
+      jump: (@ flow.result )
+
+steps:
+  - (template_slice)
+  - flow_set:
+      uuid: as0d9fjasd9fj
+  - say: slice (@ flow.uuid[:4] )
+  - end
+
+  - (template_select)
+  - flow_set:
+      result:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+  - say: select (@ flow.result | select("even") | list )
+  - end
+
+  - (template_map)
+  - flow_set:
+      result:
+        - [0, 1]
+        - [10, 12]
+        - [20, 23]
+        - [30, 34]
+  - say: map (@ flow.result | map(attribute="1") | list )
+  - end
+
+  - (template_default)
+  - say: default (@ flow.bogus | default("DEFAULT") )
+  - end

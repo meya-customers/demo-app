@@ -26,20 +26,34 @@ jobs:
             "pygit2>=1.1.1" \
             "meya-sdk>=2.0.0" \
             "meya-cli>=2.0.0"
-      - name: Authenticate using Meya auth token
+      - name: Meya auth [staging]
+        if: github.ref == 'refs/heads/develop'
+        run: |
+          meya auth add --grid-url https://grid-staging.meya.ai --auth-token ${{ secrets.staging_auth_token }}
+      - name: Meya connect [staging]
+        if: github.ref == 'refs/heads/develop'
+        run: |
+          meya connect --grid-url https://grid-staging.meya.ai --app-id ${{ secrets.staging_app_id }}
+      - name: Meya auth [production]
+        if: github.ref == 'refs/heads/master'
         run: |
           meya auth add --grid-url https://grid.meya.ai --auth-token ${{ secrets.auth_token }}
-      - name: Connect to production app
+      - name: Meya connect [production]
+        if: github.ref == 'refs/heads/master'
         run: |
           meya connect --grid-url https://grid.meya.ai --app-id ${{ secrets.app_id }}
       - name: Check code syntax and formatting
+        if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/develop'
         run: meya check
       - name: Run tests
         run: meya test
-      - name: Deploy app
+      - name: Deploy app [staging]
+        if: github.ref == 'refs/heads/develop'
+        run: meya push --force --build-image
+      - name: Deploy app [production]
         if: github.ref == 'refs/heads/master'
         run: meya push --force --build-image
-      - name: Set up Google Cloud SDK
+      - name: Set up Google Cloud SDK [production]
         uses: google-github-actions/setup-gcloud@master
         if: github.ref == 'refs/heads/master'
         with:
@@ -47,11 +61,11 @@ jobs:
           project_id: ${{ secrets.google_project_id }}
           service_account_key: ${{ secrets.google_auth_json_b64 }}
           export_default_credentials: true
-      - name: Deploy website
+      - name: Deploy website [production]
         if: github.ref == 'refs/heads/master'
         run: gsutil -h 'Cache-Control:public, max-age=86400, s-maxage=10' cp public/index.html
           gs://meya-v2-demo
-      - name: Push snapshot
+      - name: Push snapshot [production]
         if: github.ref == 'refs/heads/master' && !startsWith(github.repository, 'meya-customers/')
         run: |
           git config user.email build@meya.ai

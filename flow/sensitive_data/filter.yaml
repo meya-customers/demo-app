@@ -21,7 +21,7 @@ steps:
 
   - say: encrypt_sensitive (@ flow.non_secret.value | encrypt_sensitive )
   - say: decrypt_sensitive (@ flow.secret.value | decrypt_sensitive )
-  - say: try_decrypt_sensitive (@ flow.event.data.text | try_decrypt_sensitive )
+  - say: try_decrypt_sensitive (@ flow.invalid.value | try_decrypt_sensitive )
   - say: redact_sensitive (@ flow.secret.value | redact_sensitive )
 
   - say: Done
