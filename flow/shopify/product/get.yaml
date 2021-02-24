@@ -1,0 +1,13 @@
+triggers:
+  - keyword: shopify_product_get
+
+steps:
+  - ask: product id?
+
+  - type: meya.shopify.component.product.get
+    product_id: (@ flow.result | int)
+    integration: integration.shopify
+
+  - say: 'result: '
+  - delay: 1
+  - say: (@ flow.result | string)

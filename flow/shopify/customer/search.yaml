@@ -1,0 +1,13 @@
+triggers:
+  - keyword: shopify_customer_search
+
+steps:
+  - ask: customer email?
+
+  - type: meya.shopify.component.customer.search
+    email: (@ flow.result)
+    integration: integration.shopify
+
+  - say: 'customers: '
+  - delay: 1
+  - say: (@ flow.result | string)

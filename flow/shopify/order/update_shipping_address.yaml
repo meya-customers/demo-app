@@ -1,0 +1,33 @@
+triggers:
+  - keyword: shopify_order_update_shipping_address
+
+steps:
+  - ask_form: Shipping address?
+  - flow_set: address
+
+  - ask_form: Address 2?
+  - flow_set: address_2
+
+  - ask_form: City?
+  - flow_set: city
+
+  - ask_form: Postal code?
+  - flow_set: postal_code
+
+  - ask_form: Country?
+  - flow_set: country
+
+  - ask_form: Province?
+  - flow_set: province
+
+  - type: meya.shopify.component.order.update_shipping_address
+    order_id: (@ flow.order_id | int)
+    address: (@ flow.address )
+    address_2: (@ flow.address_2 )
+    city: (@ flow.city )
+    postal_code: (@ flow.postal_code )
+    country: (@ flow.country )
+    province: (@ flow.province )
+    integration: integration.shopify
+
+  - say: Shipping address updated successfully

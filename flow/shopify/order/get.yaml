@@ -1,0 +1,13 @@
+triggers:
+  - keyword: shopify_order_get
+
+steps:
+  - ask: order id?
+
+  - type: meya.shopify.component.order.get
+    order_id: (@ flow.result | int)
+    integration: integration.shopify
+
+  - say: 'order: '
+  - delay: 1
+  - say: (@ flow.result)

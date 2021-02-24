@@ -1,0 +1,11 @@
+triggers:
+  - keyword: shopify_customer_get
+
+steps:
+  - ask: customer id?
+
+  - type: meya.shopify.component.customer.get
+    customer_id: (@ flow.result | int)
+    integration: integration.shopify
+
+  - say: customer (@ flow.result )

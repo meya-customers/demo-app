@@ -1,0 +1,13 @@
+triggers:
+  - keyword: shopify_order_open
+
+steps:
+  - ask: order id?
+
+  - type: meya.shopify.component.order.open
+    order_id: (@ flow.result | int)
+    integration: integration.shopify
+
+  - say: 'result: '
+  - delay: 1
+  - say: (@ flow.result | string)

@@ -1,0 +1,28 @@
+triggers:
+  - keyword: shopify_order_cancel
+
+steps:
+  - ask: order id?
+  - flow_set: order_id
+
+  - ask: Please let us know the reason you're cancelling
+    quick_replies:
+      - text: customer
+        result: customer
+      - text: fraud
+        result: fraud
+      - text: inventory
+        result: inventory
+      - text: declined
+        result: declined
+      - text: other
+        result: other
+
+  - type: meya.shopify.component.order.cancel
+    order_id: (@ flow.order_id | int)
+    reason: (@ flow.result )
+    integration: integration.shopify
+
+  - say: 'result: '
+  - delay: 1
+  - say: (@ flow.result | string)

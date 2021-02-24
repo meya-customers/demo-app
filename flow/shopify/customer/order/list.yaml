@@ -1,0 +1,16 @@
+triggers:
+  - keyword: shopify_customer_order_list
+
+steps:
+  - ask: customer id?
+
+  - type: meya.shopify.component.customer.order.list
+    customer_id: (@ flow.result | int)
+    financial_status: any
+    fulfillment_status: any
+    status: any
+    integration: integration.shopify
+
+  - say: 'customers: '
+  - delay: 1
+  - say: (@ flow.result | string)

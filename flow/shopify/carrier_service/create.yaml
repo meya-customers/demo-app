@@ -1,0 +1,11 @@
+triggers:
+  - keyword: shopify_carrier_service_create
+
+steps:
+  - type: meya.shopify.component.carrier_service.create
+    name: test_carrier_service
+    integration: integration.shopify
+
+  - say: result
+  - delay: 1
+  - say: (@ flow.result)

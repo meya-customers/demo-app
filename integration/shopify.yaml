@@ -1,0 +1,4 @@
+type: meya.shopify.integration
+store_url: (@ vault.shopify.store_url)
+api_key: (@ vault.shopify.api_key)
+password: (@ vault.shopify.password)

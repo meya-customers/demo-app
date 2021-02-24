@@ -1,0 +1,27 @@
+triggers:
+  - keyword: shopify_order_refund
+
+steps:
+  - ask: customer id?
+
+  - type: meya.shopify.component.customer.order.list
+    customer_id: (@ flow.result | int)
+    financial_status: any
+    fulfillment_status: any
+    status: any
+    integration: integration.shopify
+
+  - type: meya.shopify.component.order.display
+    orders: (@ flow.result)
+    integration: integration.shopify
+
+  - ask: Select order for refund
+    tiles: (@ flow.result)
+
+  - type: meya.shopify.component.order.refund
+    order: (@ flow.result)
+    integration: integration.shopify
+
+  - say: 'result: '
+  - delay: 1
+  - say: (@ flow.result | string)

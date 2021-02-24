@@ -49,3 +49,6 @@ front.enabled: false
 front.api_token: xxx
 front.channel_id: xxx
 front.bot_teammate_email: xxx
+shopify.api_key: xxx
+shopify.password: xxx
+shopify.store_url: domain.myshopify.com
