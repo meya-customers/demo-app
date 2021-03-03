@@ -92,6 +92,7 @@ steps:
       mode:
 
   - (create)
+  - note: This is a note before ticket creation
   - say: Creating or updating user...
   - type: meya.zendesk.support.component.user.create_or_update
     integration: integration.zendesk.support
@@ -108,11 +109,14 @@ steps:
     subject: (@ flow.subject )
     comment: (@ flow.comment )
   - say: Ticket (@ flow.result.id ) created
+  - note: This is a note after ticket creation
   - end
 
   - (create_ticket_simple)
+  - note: This is a note before ticket creation
   - say: Creating ticket (automatic linked user)...
   - type: meya.zendesk.support.component.ticket.create
     integration: integration.zendesk.support
   - say: Ticket (@ flow.result.id ) created
+  - note: This is a note after ticket creation
   - end

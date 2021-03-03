@@ -1,0 +1,69 @@
+triggers:
+  - keyword: prechat
+  - regex: ^prechat_.*$
+
+steps:
+  # Start "prechat" mode to collect sensitive details, all user responses will be encrypted
+  - flow_set: branch
+  - say: Prechat starting
+  - thread_set:
+      mode: prechat
+  - jump: (@ flow.branch )
+
+  - (prechat)
+  - ask: Name?
+  - jump: done_prechat
+
+  - (prechat_email)
+  - ask: Email?
+    expect: email_address
+  - jump: done_prechat
+
+  - (prechat_email_form)
+  - ask_form: Email?
+    expect: email_address
+  - jump: done_prechat
+
+  - (prechat_regex)
+  - ask: Red or blue?
+    regex: red|blue
+  - jump: done_prechat
+
+  - (prechat_file)
+  - ask: File?
+    expect: file
+  - jump: done_prechat
+
+  - (prechat_image)
+  - ask: Image?
+    expect: image
+  - jump: done_prechat
+
+  - (prechat_dialogflow)
+  - ask: Size?
+    expect: dialogflow
+    integration: integration.google.dialogflow.dialogflow
+    language: en
+    intent: size
+  - jump: done_prechat
+
+  - (prechat_dialogflow_form)
+  - ask_form: Size?
+    expect: dialogflow
+    integration: integration.google.dialogflow.dialogflow
+    language: en
+    intent: size
+  - jump: done_prechat
+
+  # End "prechat" mode
+  - (done_prechat)
+  - user_set: result
+  - thread_set: result
+  - say: Prechat done
+  - thread_set:
+      mode:
+
+  - say: Event (@ flow.event )
+  - say: Flow scope (@ flow.result ) / ENCRYPTED (@ encrypted_flow.result )
+  - say: User scope (@ user.result ) / ENCRYPTED (@ encrypted_user.result )
+  - say: Thread scope (@ thread.result ) / ENCRYPTED (@ encrypted_thread.result )

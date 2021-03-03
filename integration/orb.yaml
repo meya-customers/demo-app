@@ -7,3 +7,5 @@ launcher:
   type: message
   icon: (@ config.icon.help )
   text: Help
+collect:
+  location: user

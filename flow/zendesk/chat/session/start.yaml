@@ -23,6 +23,7 @@ steps:
   - flow_set: phone
 
   - (transfer)
+  - note: This is a note before chat start
   - open_chat
   - say: Start session -> (@ flow.name ) (@ flow.email ) (@ flow.phone )
   - type: meya.zendesk.chat.component.session.start
@@ -34,3 +35,4 @@ steps:
     visitor_referrer: (@ thread.page_open.url )
     tags: [demo, meya]
     department: Support
+  - note: This is a note after chat start

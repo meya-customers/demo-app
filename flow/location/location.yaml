@@ -1,0 +1,16 @@
+triggers:
+  - keyword: location
+
+steps:
+  - if: (@ user.location )
+    then:
+      jump: display_location
+    else: next
+
+  - say: We couldn't determine you location.
+  - end
+
+  - (display_location)
+  - say: I see you're from (@ user.location.country_flag_emoji )
+  - say: Here is all the location data we have
+  - say: (@ user.location | string )

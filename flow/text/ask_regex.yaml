@@ -1,5 +1,5 @@
 triggers:
-  - regex: regex
+  - keyword: regex
 
 steps:
   - ask: What's your postal code?
