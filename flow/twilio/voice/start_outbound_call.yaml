@@ -24,17 +24,17 @@ steps:
   - user_set: order_number
 
   - user_try_lookup: (@ user.phone)
-    integration: integration.twilio_voice
+    integration: integration.twilio.voice
 
   - type: user_unlink
     user_id: (@ flow.result)
-    integration: integration.twilio_voice
+    integration: integration.twilio.voice
 
   - user_link: (@ user.phone)
-    integration: integration.twilio_voice
+    integration: integration.twilio.voice
 
   - say: cool! I'm calling you now
 
   - type: meya.twilio.voice.component.call
     to: (@ user.phone)
-    integration: integration.twilio_voice
+    integration: integration.twilio.voice

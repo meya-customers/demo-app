@@ -11,7 +11,7 @@ steps:
 
   - (lookup)
   - type: meya.twilio.component.lookup
-    integration: integration.twilio
+    integration: integration.twilio.twilio
     phone_number: (@ flow.to )
   - if: (@ flow.ok )
     then:
@@ -41,7 +41,7 @@ steps:
 
   - (sms)
   - type: meya.twilio.component.message.send
-    integration: integration.twilio
+    integration: integration.twilio.twilio
     to: (@ flow.to )
     body: (@ flow.body )
   - if: (@ flow.ok )

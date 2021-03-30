@@ -1,0 +1,4 @@
+steps:
+  - typing: on
+  - delay: 2
+  - say: Done.

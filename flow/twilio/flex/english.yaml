@@ -1,0 +1,24 @@
+steps:
+  - if: (@ user.name )
+    then:
+      jump: salutation
+    else: next
+
+  - ask_form: What's your name
+  - user_set: name
+
+  - (salutation)
+  - say: Hello (@ user.name)
+
+  - ask: What type of issue are you experiencing?
+    buttons:
+      - text: Hardware
+        result: hardware
+      - text: Software
+        result: software
+
+  - say: Cool, let me find someone to help you
+
+  - flow: flow.twilio.flex.start_chat
+    data:
+      issue: (@ flow.result)

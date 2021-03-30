@@ -1,0 +1,26 @@
+triggers:
+  - keyword: typing
+
+steps:
+  - say: Please choose the typing indicator you'd like to see. You can return here
+      by typing 'typing'. You can see the typing indicator at any time by typing 'typing_on'.
+  - buttons:
+      - text: Indicator with say event
+        action:
+          flow: flow.typing_indicator.with_say
+      - text: Indicator with timeout
+        action:
+          flow: flow.typing_indicator.typing_on
+      - text: Indicator with typing off event
+        action:
+          flow: flow.typing_indicator.with_typing_off
+      - text: Indicator with say + quick replies
+        action:
+          flow: flow.typing_indicator.with_quick_replies
+      - text: Indicator with status message
+        action:
+          flow: flow.typing_indicator.with_status
+      - text: Indicator with tiles
+        action:
+          flow: flow.typing_indicator.with_tiles
+  - end

@@ -1,0 +1,29 @@
+id: flow.twilio.flex.reservation_accepted
+triggers:
+  - event_type: meya.twilio.flex.event.reservation_accepted
+
+steps:
+  - status: Agent (@ flow.event.data.agent_name ) entered chat
+---
+id: flow.twilio.flex.reservation_completed
+triggers:
+  - event_type: meya.twilio.flex.event.reservation_completed
+
+steps:
+  - status: The agent ended the chat
+---
+id: flow.twilio.flex.task_queue_entered
+triggers:
+  - event_type: meya.twilio.flex.event.task_queue_entered
+
+steps:
+  - status: >
+      Your request was accepted by flex. Your task's priority is set at (@ flow.event.data.task_priority)
+
+---
+id: flow.twilio.flex.task_canceled
+triggers:
+  - event_type: meya.twilio.flex.event.task_canceled
+
+steps:
+  - status: Your task has not being accepted

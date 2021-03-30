@@ -14,57 +14,99 @@ jobs:
       - uses: actions/checkout@v2
         with:
           token: ${{ secrets.custom_github_token }}
+
       - name: Set up Python 3.9
         uses: actions/setup-python@v1
         with:
           python-version: 3.9
+
+      - name: Set up environment [testing]
+        run: |
+          echo "MEYA_AUTH_TOKEN=${{ secrets.staging_auth_token }}" >> $GITHUB_ENV
+          MEYA_GRID_DOMAIN=$(echo ${{ secrets.staging_grid_url }} | awk -F[/:] '{print $4}')
+          echo "MEYA_GRID_DOMAIN=$MEYA_GRID_DOMAIN" >> $GITHUB_ENV
+
+      - name: Set up environment [staging]
+        if: github.ref == 'refs/heads/develop'
+        run: |
+          echo "google_project_id=${{ secrets.google_project_id }}" >> $GITHUB_ENV
+          echo "google_auth_json_b64=${{ secrets.google_auth_json_b64 }}" >> $GITHUB_ENV
+          echo "MEYA_AUTH_TOKEN=${{ secrets.staging_auth_token }}" >> $GITHUB_ENV
+          echo "MEYA_GRID_URL=${{ secrets.staging_grid_url }}" >> $GITHUB_ENV
+          echo "MEYA_CDN_URL=${{ secrets.staging_cdn_url }}" >> $GITHUB_ENV
+          echo "MEYA_APP_ID=${{ secrets.staging_app_id }}" >> $GITHUB_ENV
+          echo "DEMO_CDN_BUCKET=${{ secrets.staging_demo_cdn_bucket }}" >> $GITHUB_ENV
+          MEYA_GRID_DOMAIN=$(echo ${{ secrets.staging_grid_url }} | awk -F[/:] '{print $4}')
+          echo "MEYA_GRID_DOMAIN=$MEYA_GRID_DOMAIN" >> $GITHUB_ENV
+
+      - name: Set up environment [production]
+        if: github.ref == 'refs/heads/master'
+        run: |
+          echo "google_project_id=${{ secrets.google_project_id }}" >> $GITHUB_ENV
+          echo "google_auth_json_b64=${{ secrets.google_auth_json_b64 }}" >> $GITHUB_ENV
+          echo "MEYA_AUTH_TOKEN=${{ secrets.auth_token }}" >> $GITHUB_ENV
+          echo "MEYA_GRID_URL=${{ secrets.grid_url }}" >> $GITHUB_ENV
+          echo "MEYA_CDN_URL=${{ secrets.cdn_url }}" >> $GITHUB_ENV
+          echo "MEYA_APP_ID=${{ secrets.app_id }}" >> $GITHUB_ENV
+          echo "DEMO_CDN_BUCKET=${{ secrets.demo_cdn_bucket }}" >> $GITHUB_ENV
+          MEYA_GRID_DOMAIN=$(echo ${{ secrets.grid_url }} | awk -F[/:] '{print $4}')
+          echo "MEYA_GRID_DOMAIN=$MEYA_GRID_DOMAIN" >> $GITHUB_ENV
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install --upgrade \
-            --extra-index-url https://meya:${{ secrets.auth_token }}@grid.meya.ai/registry/pypi \
+            --extra-index-url https://meya:$MEYA_AUTH_TOKEN@$MEYA_GRID_DOMAIN/registry/pypi \
             "pygit2>=1.1.1" \
             "meya-sdk>=2.0.0" \
             "meya-cli>=2.0.0"
-      - name: Meya auth [staging]
-        if: github.ref == 'refs/heads/develop'
+
+      - name: Run tests
+        run: meya test
+
+      - name: Meya auth
+        if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/develop'
         run: |
-          meya auth add --grid-url https://grid-staging.meya.ai --auth-token ${{ secrets.staging_auth_token }}
-      - name: Meya connect [staging]
-        if: github.ref == 'refs/heads/develop'
+          meya auth add --grid-url $MEYA_GRID_URL --auth-token $MEYA_AUTH_TOKEN
+
+      - name: Meya connect
+        if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/develop'
         run: |
-          meya connect --grid-url https://grid-staging.meya.ai --app-id ${{ secrets.staging_app_id }}
-      - name: Meya auth [production]
-        if: github.ref == 'refs/heads/master'
-        run: |
-          meya auth add --grid-url https://grid.meya.ai --auth-token ${{ secrets.auth_token }}
-      - name: Meya connect [production]
-        if: github.ref == 'refs/heads/master'
-        run: |
-          meya connect --grid-url https://grid.meya.ai --app-id ${{ secrets.app_id }}
+          meya connect --grid-url $MEYA_GRID_URL  --app-id $MEYA_APP_ID
+
       - name: Check code syntax and formatting
         if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/develop'
         run: meya check
-      - name: Run tests
-        run: meya test
-      - name: Deploy app [staging]
-        if: github.ref == 'refs/heads/develop'
+
+      - name: Deploy app
+        if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/develop'
         run: meya push --force --build-image
-      - name: Deploy app [production]
-        if: github.ref == 'refs/heads/master'
-        run: meya push --force --build-image
-      - name: Set up Google Cloud SDK [production]
+
+      - name: Set up Google Cloud SDK
         uses: google-github-actions/setup-gcloud@master
-        if: github.ref == 'refs/heads/master'
+        if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/develop'
         with:
           version: 321.0.0
-          project_id: ${{ secrets.google_project_id }}
-          service_account_key: ${{ secrets.google_auth_json_b64 }}
+          project_id: ${{ env.google_project_id }}
+          service_account_key: ${{ env.google_auth_json_b64 }}
           export_default_credentials: true
+
+      - name: Deploy website [staging]
+        if: github.ref == 'refs/heads/develop'
+        run: |
+          python public/edit_index.py \
+            --grid-url $MEYA_GRID_URL \
+            --cdn-url $MEYA_CDN_URL \
+            --app-id $MEYA_APP_ID \
+            public/index.html > /tmp/index.html \
+          && gsutil -h 'Cache-Control:public, max-age=86400, s-maxage=10' cp /tmp/index.html \
+            gs://$DEMO_CDN_BUCKET
+
       - name: Deploy website [production]
         if: github.ref == 'refs/heads/master'
         run: gsutil -h 'Cache-Control:public, max-age=86400, s-maxage=10' cp public/index.html
-          gs://meya-v2-demo
+          gs://$DEMO_CDN_BUCKET
+
       - name: Push snapshot [production]
         if: github.ref == 'refs/heads/master' && !startsWith(github.repository, 'meya-customers/')
         run: |

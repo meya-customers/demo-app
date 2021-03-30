@@ -1,0 +1,31 @@
+triggers:
+  - agent_command: ask_issue_frequency
+
+  - agent_command: done_check
+    action:
+      jump: done check
+
+steps:
+  - ask: How frequently does the issue occur?
+    buttons:
+      - text: Once a week
+        result: once a week
+      - text: Two to four times a week
+        result: two to four times a week
+      - text: Everyday
+        result: everyday
+      - text: Multiple times a day
+        result: multiple times a day
+  - end
+
+  - (done check)
+  - ask: Can I help you with anything else?
+    buttons:
+      - text: Yes, please
+        action: next
+      - text: No, thank you
+        action:
+          flow: flow.twilio.flex.end_chat
+          transfer: true
+
+  - ask: Please describe your issue

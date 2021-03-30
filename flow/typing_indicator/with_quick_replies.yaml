@@ -1,0 +1,7 @@
+steps:
+  - typing: on
+  - delay: 2
+  - say: Choose
+    quick_replies:
+      - text: First
+      - text: Second

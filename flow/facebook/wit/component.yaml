@@ -1,0 +1,44 @@
+triggers:
+  - regex: ^wit.*$
+    action:
+      jump: (@ flow.result )
+
+steps:
+  - (wit_form)
+  - ask_form: Enter NLU text
+    expect: wit
+    integration: integration.facebook.wit
+    icon: (@ config.icon.question )
+    retries: 1
+    min_confidence: 0.75
+  - jump: print
+
+  - (wit_composer)
+  - ask: Enter NLU text e.g. large size
+    expect: wit
+    integration: integration.facebook.wit
+    intent: size
+  - jump: print
+
+  - (wit_composer_no_catchall)
+  - ask: Enter NLU text e.g. large size
+    expect: wit
+    integration: integration.facebook.wit
+    retries: 1
+    min_confidence: 0.75
+    intent: size
+    catchall: false
+  - jump: print
+
+  - (wit_detect)
+  - detect_wit: size large
+    integration: integration.facebook.wit
+    min_confidence: 0.5
+  - jump: print
+
+  - (print)
+  - say: OK (@ flow.ok )
+  - say: Confidence (@ flow.get("confidence") )
+  - say: Intent (@ flow.get("result") )
+  - say: Details (@ flow.get("wit_response") )
+  - end

@@ -1,0 +1,6 @@
+steps:
+  - say: Typing on...
+  - typing: on
+  - delay: 2
+  - say: Typing off...
+  - typing: off

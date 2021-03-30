@@ -1,0 +1,5 @@
+triggers:
+  - keyword: typing_off
+
+steps:
+  - typing: off

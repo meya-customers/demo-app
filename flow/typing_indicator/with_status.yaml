@@ -1,0 +1,4 @@
+steps:
+  - typing: on
+  - delay: 2
+  - status: This is a status

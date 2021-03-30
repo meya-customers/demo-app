@@ -27,6 +27,8 @@ twilio.account_sid: xxx
 twilio.auth_token: xxx
 # quotes are required otherwise interpreted as `int`
 twilio.phone_number: '+18005551234'
+twilio_flex.flex_flow_sid: xxx
+twilio_flex.flex_chat_service_sid: xxx
 whatsapp.phone_number: whatsapp:+18005551234
 slack.webhook_url: xxx
 segment.enabled: false
@@ -52,3 +54,4 @@ front.bot_teammate_email: xxx
 shopify.api_key: xxx
 shopify.password: xxx
 shopify.store_url: domain.myshopify.com
+wit.api_token: xxx

@@ -10,8 +10,12 @@ steps:
   - user_set: name
   - say: Nice to meet, you (@ user.name )! 👋
 
+  - note: This note appears before agent escalation
+
   - (escalate)
   - say: One moment while I find someone to help...
   - type: meya.front.component.conversation.update
     integration: integration.front
     assignee_email:
+
+  - note: This note appears after agent escalation

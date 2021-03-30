@@ -1,0 +1,5 @@
+type: meya.twilio.flex.integration
+auth_token: (@ vault.twilio.auth_token )
+account_sid: (@ vault.twilio.account_sid )
+flex_flow_sid: (@ vault.twilio_flex.flex_flow_sid )
+flex_chat_service_sid: (@ vault.twilio_flex.flex_chat_service_sid )

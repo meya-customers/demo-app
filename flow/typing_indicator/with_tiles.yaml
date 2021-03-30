@@ -1,0 +1,5 @@
+steps:
+  - typing: on
+  - delay: 2
+  - type: component.tile.yes_no
+    text: Do you want to continue?

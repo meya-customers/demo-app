@@ -16,7 +16,7 @@ steps:
 
   - (lookup)
   - type: meya.twilio.component.lookup
-    integration: integration.twilio
+    integration: integration.twilio.twilio
     phone_number: (@ flow.phone_number )
   - if: (@ flow.ok )
     then:

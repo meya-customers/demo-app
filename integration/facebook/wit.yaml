@@ -1,0 +1,2 @@
+type: meya.facebook.wit.integration
+api_token: (@ vault.wit.api_token)

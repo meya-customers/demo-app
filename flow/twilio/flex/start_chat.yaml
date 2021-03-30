@@ -1,0 +1,18 @@
+steps:
+  - type: meya.twilio.flex.component.start_chat
+    chat_friendly_name: (@ user.name) - (@ flow.issue) issue
+    task_attributes:
+      language: (@ user.language)
+    send_transcript: true
+    integration: integration.twilio.flex
+
+  - if: (@ user.location )
+    then:
+      jump: display_location
+    else: next
+
+  - note: Couldn't determine customer location
+  - end
+
+  - (display_location)
+  - note: customer location (@ user.location | string )

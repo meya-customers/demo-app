@@ -1,0 +1,11 @@
+triggers:
+  - expect: wit
+    integration: integration.facebook.wit
+    intent_regex: weather_condition$
+    locale: pt_BR
+
+
+steps:
+  - continue_screen
+  - say: Intent (@ flow.get("result") )
+  - say: Details (@ flow.get("wit_response") )

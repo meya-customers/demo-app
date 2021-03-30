@@ -36,6 +36,9 @@ steps:
       - chat
       - text: next
         action: next
+      - text: typing
+        action:
+          flow: flow.typing_indicator.typing_indicator_initial
   - say: After hero
   - end
 

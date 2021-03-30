@@ -1,0 +1,8 @@
+triggers:
+  - keyword: end_flex_channel
+    when: true
+
+steps:
+  - type: meya.twilio.flex.component.end_chat
+    text: Thank's for the support, bye
+    integration: integration.twilio.flex

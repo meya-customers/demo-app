@@ -1,0 +1,15 @@
+triggers:
+  - keyword: start_flex_flow
+
+steps:
+  - jump: (@ user.language)
+
+  - (pt)
+  - (pt-BR)
+  - flow: flow.twilio.flex.portuguese
+    transfer: true
+
+  - (en)
+  - (en-US)
+  - flow: flow.twilio.flex.english
+    transfer: true
