@@ -1,0 +1,4 @@
+type: meya.zendesk.help_center.integration
+subdomain: (@ vault.zendesk.support.subdomain )
+bot_agent_email: (@ vault.zendesk.support.bot_agent_email )
+bot_agent_api_token: (@ vault.zendesk.support.bot_agent_api_token )

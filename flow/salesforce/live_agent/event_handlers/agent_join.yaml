@@ -1,0 +1,5 @@
+triggers:
+  - event_type: meya.salesforce.live_agent.event.session.agent.conference.join
+
+steps:
+  - say: (@ flow.event.data.agent_name ) has joined the conversation.

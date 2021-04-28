@@ -1,0 +1,10 @@
+steps:
+  - select: Subscription
+    default: Monthly
+    options:
+      - Pay-as-you-go
+      - Monthly
+      - Yearly
+  - say: Your subscription is (@ flow.result )
+    quick_replies:
+      - select

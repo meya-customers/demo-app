@@ -1,0 +1,13 @@
+steps:
+  - select: Pizza Toppings
+    icon: (@ config.icon.pie )
+    multi: true
+    options:
+      - Pineapple
+      - Tomato
+      - text: Pepperoni
+      - text: Onions
+      - Cheese
+  - say: You've selected the following toppings... (@ flow.result )
+    quick_replies:
+      - select

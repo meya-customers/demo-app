@@ -1,0 +1,11 @@
+triggers:
+  - agent_command: matrix
+    when: (@ thread.mode == "red" )
+
+steps:
+  # Publish as the agent
+  - flow_set:
+      event_user_id: (@ flow.event.data.user_id )
+  - say: This is what the matrix looks like
+  - url: https://media.giphy.com/media/fV0oSDsZ4UgdW/giphy.gif
+    alt: The Matrix visible as flowing green code

@@ -1,0 +1,14 @@
+triggers:
+  - regex: live.agent
+    ignorecase: true
+
+steps:
+  - open_chat
+  - type: meya.csp.component.session.agent.request
+    say: Transferring you to the next available agent.
+    integration: integration.salesforce.live_agent
+    note: Here is a note for the agent.
+    data:
+      Name__c: Frank
+      Surname__c: Underwood
+      Income__c: 1,000,000.00 USD

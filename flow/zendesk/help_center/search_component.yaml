@@ -1,0 +1,54 @@
+triggers:
+  - keyword: zendesk_help_center_search
+
+steps:
+  - (ask search term)
+  - ask: What would you like to search for? (e.g. Help)
+  - flow_set: search_query
+
+  - (search)
+  - type: meya.zendesk.help_center.component.search
+    query: (@ flow.search_query )
+    per_page: 2
+    page: (@ flow.get('page', 1))
+    integration: integration.zendesk.help_center
+  - flow_set: search_result
+
+  - type: meya.zendesk.help_center.component.display
+    search_response: (@ flow.get("result") )
+
+  - if: (@ flow.result )
+    then: next
+    else:
+      jump: not found
+
+  - ask: Articles
+    button_style: text
+    tiles: (@ flow.result)
+
+  - if: (@ flow.search_result.next_page )
+    then:
+      jump: see more
+    else: next
+  - end
+
+  - (see more)
+  - flow_set:
+      page: (@ flow.get('page', 1) + 1)
+
+  - say:
+    quick_replies:
+      - text: Show me more
+        action:
+          jump: search
+      - text: Try again
+        action:
+          jump: ask search term
+  - end
+
+  - (not found)
+  - say: Sorry, I couldn't find anything for '(@ flow.search_query)'
+    quick_replies:
+      - text: Try again
+        action:
+          jump: ask search term

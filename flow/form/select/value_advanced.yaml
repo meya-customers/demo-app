@@ -1,0 +1,22 @@
+steps:
+  - select: Product
+    icon: (@ config.icon.pie )
+    multi: true
+    default:
+      - Other
+      - Extra
+    options:
+      - text: Pencils
+        value: [4, 8, 9]
+      - text: Paper
+        value:
+          lined: true
+          quantity: 50
+      - Other
+      - text: Extra
+        value: false
+      - text: N/A
+        value:
+  - say: You've selected (@ flow.result )
+    quick_replies:
+      - select

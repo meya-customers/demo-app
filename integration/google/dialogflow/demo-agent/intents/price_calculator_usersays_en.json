@@ -1,0 +1,62 @@
+[
+    {
+        "id": "4e5906c2-0320-4ee3-a487-9265b73bd3bd",
+        "data": [
+            {
+                "text": "How Meya is priced",
+                "userDefined": false
+            }
+        ],
+        "isTemplate": false,
+        "count": 0,
+        "updated": 0
+    },
+    {
+        "id": "e89b1185-f857-4dab-b258-eba5f4d49c0a",
+        "data": [
+            {
+                "text": "Meya MAU",
+                "userDefined": false
+            }
+        ],
+        "isTemplate": false,
+        "count": 0,
+        "updated": 0
+    },
+    {
+        "id": "b6511aa4-38cb-4f1b-b587-7d37338f1720",
+        "data": [
+            {
+                "text": "How to calculate meya MAU",
+                "userDefined": false
+            }
+        ],
+        "isTemplate": false,
+        "count": 0,
+        "updated": 0
+    },
+    {
+        "id": "1400f6ca-10e4-469b-8b40-cb74b3b0d1bd",
+        "data": [
+            {
+                "text": "Pricing calculator",
+                "userDefined": false
+            }
+        ],
+        "isTemplate": false,
+        "count": 0,
+        "updated": 0
+    },
+    {
+        "id": "1400f6ca-10e4-469b-8b40-cb74b3b0d1bd",
+        "data": [
+            {
+                "text": "How to calculate Meya costs",
+                "userDefined": false
+            }
+        ],
+        "isTemplate": false,
+        "count": 0,
+        "updated": 0
+    }
+]

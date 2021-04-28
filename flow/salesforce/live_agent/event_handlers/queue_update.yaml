@@ -1,0 +1,13 @@
+triggers:
+  - event_type: meya.salesforce.live_agent.event.session.queue.update
+    # This prevents event spoofing
+    # TODO: We need to create a meya.trigger.system_type trigger with the check built in
+    when: (@ event_user.type.system )
+
+steps:
+  - say: You're now in queue position (@ flow.event.data.position | int )
+  - if: (@ flow.event.data.position > 0 )
+    then:
+      flow: flow.salesforce.live_agent.end_chat
+      transfer: true
+    else: end

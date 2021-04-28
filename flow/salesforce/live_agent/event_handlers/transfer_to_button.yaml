@@ -1,0 +1,8 @@
+triggers:
+  - event_type: meya.salesforce.live_agent.event.session.transfer_to_button
+
+steps:
+  - say: |
+      (@ flow.event.data.agent_name ) is transferring you, please wait for the
+      next available agent.
+

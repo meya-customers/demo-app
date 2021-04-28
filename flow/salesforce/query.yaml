@@ -1,0 +1,40 @@
+triggers:
+  - regex: ^salesforce_query.*$
+    action:
+      jump: (@ flow.result )
+
+steps:
+  - (salesforce_query_user_by_email)
+  - ask: What's the user email
+    expect: email_address
+  - flow_set: search_query
+
+  - type: meya.salesforce.component.query
+    soql_query: SELECT name, id from User WHERE email = '(@ flow.search_query)'
+    integration: integration.salesforce.salesforce
+
+  - flow_set: search_result
+  - jump: check_result
+
+  - (salesforce_query_contact_by_email)
+  - ask: What's the contact email
+    expect: email_address
+  - flow_set: search_query
+
+  - type: meya.salesforce.component.query
+    soql_query: SELECT name, email, id from Contact WHERE email = '(@ flow.search_query)'
+    integration: integration.salesforce.salesforce
+  - flow_set: search_result
+  - jump: check_result
+
+  - (check_result)
+  - if: (@ flow.search_result.records)
+    then:
+      jump: render user id
+    else: next
+
+  - say: No results found for '(@ flow.search_query)'
+  - end
+
+  - (render user id)
+  - say: User id (@ flow.search_result.records[0].Id )

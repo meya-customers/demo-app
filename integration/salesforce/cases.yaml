@@ -1,0 +1,6 @@
+type: meya.salesforce.cases.integration
+instance_base_url: (@ vault.salesforce.instance_base_url)
+client_id: (@ vault.salesforce.client_id)
+client_secret: (@ vault.salesforce.client_secret)
+username: (@ vault.salesforce.username)
+password: (@ vault.salesforce.password)

@@ -1,0 +1,32 @@
+steps:
+  - select: Month
+    icon: (@ config.icon.pie )
+    search: true
+    options:
+      - January
+      - February
+      - March
+      - April
+      - May
+      - June
+      - July
+      - August
+      - September
+      - October
+      - November
+      - December
+      - janvier
+      - février
+      - mars
+      - avril
+      - mai
+      - juin
+      - juillet
+      - août
+      - septembre
+      - octobre
+      - novembre
+      - décembre
+  - say: You've selected (@ flow.result )
+    quick_replies:
+      - select

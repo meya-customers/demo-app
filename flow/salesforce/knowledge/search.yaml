@@ -1,0 +1,31 @@
+triggers:
+  - keyword: salesforce_knowledge_search_articles
+
+steps:
+  - ask: Please tell me how can I help you (e.g. Help)?
+    regex: ^[a-zA-Z0-9]+$
+  - flow_set: search_query
+
+  - type: meya.salesforce.knowledge.component.search
+    soql_query: (@ flow.search_query)
+    article_body_field_name: Answer__c
+    integration: integration.salesforce.knowledge
+
+  - flow_set: search_result
+
+  - if: (@ flow.search_result.articles)
+    then:
+      jump: render
+    else: next
+
+  - say: No results found for '(@ flow.search_query)'
+  - end
+
+  - (render)
+  - type: meya.salesforce.knowledge.component.display
+    search_response: (@ flow.search_result.articles)
+    integration: integration.salesforce.knowledge
+
+  - ask: Articles for '(@ flow.search_query)'
+    button_style: text
+    tiles: (@ flow.result)

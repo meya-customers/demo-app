@@ -1,0 +1,11 @@
+triggers:
+  - expect: zendesk_help_center
+    integration: integration.zendesk.help_center
+
+steps:
+  - type: meya.zendesk.help_center.component.display
+    search_response: (@ flow.zendesk_help_desk_response)
+
+  - ask: Hey! Check the articles I found
+    button_style: text
+    tiles: (@ flow.result)

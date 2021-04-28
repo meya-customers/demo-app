@@ -1,0 +1,13 @@
+triggers:
+  - expect: salesforce_knowledge
+    integration: integration.salesforce.knowledge
+    article_body_field_name: Answer__c
+
+steps:
+  - type: meya.salesforce.knowledge.component.display
+    search_response: (@ flow.salesforce_knowledge_response.articles)
+    integration: integration.salesforce.knowledge
+
+  - ask: Articles for '(@ flow.search_query)'
+    button_style: text
+    tiles: (@ flow.result)

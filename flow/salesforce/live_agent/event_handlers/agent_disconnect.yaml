@@ -1,0 +1,7 @@
+triggers:
+  - event_type: meya.salesforce.live_agent.event.session.agent.disconnect
+
+steps:
+  - say: The agent has disonnected
+  - flow: flow.salesforce.live_agent.end_chat
+    transfer: true

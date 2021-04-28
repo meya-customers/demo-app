@@ -9,3 +9,4 @@ launcher:
   text: Help
 collect:
   location: user
+identity_verification: (@ vault.orb.identity_verification )

@@ -1,0 +1,14 @@
+steps:
+  - ask: Do you want to continue with the agent conversation?
+    buttons:
+      - text: Yes
+        result:
+          option: yes
+      - text: No
+        result:
+          option: no
+  - if: (@ flow.result.option == "no" )
+    then: next
+    else: end
+  - type: meya.csp.component.session.end
+    integration: integration.salesforce.live_agent

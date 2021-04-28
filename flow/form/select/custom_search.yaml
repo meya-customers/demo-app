@@ -1,0 +1,16 @@
+steps:
+  - select: Color
+    icon: (@ config.icon.pie )
+    custom: true
+    search: true
+    placeholder: Enter/search here
+    options:
+      - Red
+      - Orange
+      - Yellow
+      - Green
+      - Blue
+      - Purple
+  - say: Picked (@ flow.result )
+    quick_replies:
+      - select

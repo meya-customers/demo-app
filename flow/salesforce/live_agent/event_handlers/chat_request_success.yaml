@@ -1,0 +1,11 @@
+triggers:
+  - event_type: meya.salesforce.live_agent.event.session.agent.request.ok
+
+steps:
+  - say: Chat request success, you're in queue position (@ flow.event.data.queue_position
+      | int )
+  - if: (@ flow.event.data.queue_position > 0 )
+    then:
+      flow: flow.salesforce.live_agent.end_chat
+      transfer: true
+    else: end

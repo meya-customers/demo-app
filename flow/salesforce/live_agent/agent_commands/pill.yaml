@@ -1,0 +1,28 @@
+triggers:
+  - agent_command: ^.*pill.*
+
+steps:
+  # Publish as the agent
+  - flow_set:
+      event_user_id: (@ flow.event.data.user_id )
+  - say: Executing the `/slash` command.
+  - ask: Which pill?
+    buttons:
+      - text: Blue
+        action:
+          jump: blue_pill
+      - text: Red
+        action:
+          jump: red_pill
+
+  - (blue_pill)
+  - say: Welcome to the real world!
+  - thread_set:
+      mode: blue
+  - end
+
+  - (red_pill)
+  - say: Welcome back to the Matrix.
+  - thread_set:
+      mode: red
+  - end

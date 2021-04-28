@@ -1,0 +1,5 @@
+triggers:
+  - event_type: meya.salesforce.live_agent.event.session.agent.request.error
+
+steps:
+  - say: Chat request failed.

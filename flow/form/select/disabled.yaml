@@ -1,0 +1,12 @@
+steps:
+  - select: Manufacturer
+    icon: (@ config.icon.pie )
+    options:
+      - EVOO
+      - A Open
+      - text: ABIT
+        disabled: true
+      - text: Acer
+  - say: You've selected (@ flow.result )
+    quick_replies:
+      - select

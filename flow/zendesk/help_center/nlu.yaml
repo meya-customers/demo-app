@@ -1,0 +1,47 @@
+triggers:
+  - expect: dialogflow
+    integration: integration.google.dialogflow.dialogflow
+    language: en
+    intent: price_calculator
+    action:
+      jump: dialogflow
+
+  - expect: wit
+    integration: integration.facebook.wit
+    intent: documentation
+    locale: en
+
+steps:
+  - type: component.facebook.wit.parse_entities
+    entities: (@ flow.wit_response.entities)
+  - flow_set:
+      query_term: (@ flow.get('entities', [{}])[0].get('value', 'help') | string)
+
+  - jump: search article
+
+  - (dialogflow)
+  - flow_set:
+      query_term: (@ flow.result)
+
+  - (search article)
+  - type: meya.zendesk.help_center.component.search
+    query: (@ flow.query_term)
+    integration: integration.zendesk.help_center
+
+  - type: meya.zendesk.help_center.component.display
+    search_response: (@ flow.get("result") )
+  - if: (@ flow.result)
+    then: next
+    else:
+      jump: not found
+
+  - ask: Look what I found for '(@ flow.query_term)'
+    button_style: text
+    tiles: (@ flow.result)
+  - end
+
+  - (not found)
+  - say: >
+      Sorry didn't find any article for '(@ flow.query_term)', please try to refine
+      your question
+  - end

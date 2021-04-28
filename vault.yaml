@@ -55,3 +55,10 @@ shopify.api_key: xxx
 shopify.password: xxx
 shopify.store_url: domain.myshopify.com
 wit.api_token: xxx
+salesforce.instance_base_url: https://your_salesforce_instance.salesforce.com
+salesforce.client_id: xxx
+salesforce.client_secret: xxx
+salesforce.username: xxx
+salesforce.password: xxx
+salesforce.knowledge_base_url: xxx
+orb.identity_verification: true

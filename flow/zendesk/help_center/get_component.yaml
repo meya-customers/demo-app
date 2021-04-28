@@ -1,0 +1,15 @@
+triggers:
+  - keyword: zendesk_help_center_get
+
+steps:
+  - ask: What's the article id
+  - type: meya.zendesk.help_center.component.article.get
+    article_id: (@ flow.result | int)
+    integration: integration.zendesk.help_center
+
+  - type: meya.zendesk.help_center.component.display
+    search_response: (@ flow.get("result") )
+
+  - ask: Articles
+    button_style: text
+    tiles: (@ flow.result)

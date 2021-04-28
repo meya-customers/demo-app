@@ -1,0 +1,11 @@
+triggers:
+  - agent_command: training
+    when: (@ thread.mode == "blue" )
+
+steps:
+  # Publish as the agent
+  - flow_set:
+      event_user_id: (@ flow.event.data.user_id )
+  - say: Neo training
+  - url: https://media.giphy.com/media/V2ojLo7PvhVug/giphy.gif
+    alt: Neo gestures "come on"

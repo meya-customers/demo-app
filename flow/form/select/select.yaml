@@ -1,0 +1,33 @@
+triggers:
+  - keyword: select
+
+steps:
+  - say: Please choose the select you'd like to see
+  - buttons:
+      - text: Basic
+        action:
+          flow: flow.form.select.basic
+      - text: Multi
+        action:
+          flow: flow.form.select.multi
+      - text: Search
+        action:
+          flow: flow.form.select.search
+      - text: Custom
+        action:
+          flow: flow.form.select.custom
+      - text: Custom search
+        action:
+          flow: flow.form.select.custom_search
+      - text: Default
+        action:
+          flow: flow.form.select.default
+      - text: Disabled
+        action:
+          flow: flow.form.select.disabled
+      - text: Value (text)
+        action:
+          flow: flow.form.select.value_text
+      - text: Value (advanced)
+        action:
+          flow: flow.form.select.value_advanced

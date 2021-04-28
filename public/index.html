@@ -284,6 +284,9 @@
         <a class="orb-nav-link" href="?embed=false">
             embed=false
         </a>
+        <a class="orb-nav-link" href="?user=u1">
+            user=u1
+        </a>
     </nav>
     <nav class="orb-nav">
         <span class="orb-nav-link">
@@ -321,11 +324,17 @@
     // timeOnPage()
 </script>
 <script type="text/javascript">
+    const pageParams = new URL(location.href).searchParams
+    const userId = pageParams.get("user")
     window.orbConfig = {
         connectionOptions: {
             gridUrl: "https://grid.meya.ai",
             appId: "app-73c6d31d4f544a72941e21fb518b5737",
             integrationId: "integration.orb",
+            ...(userId ? {
+                userId,
+                threadId: "main",
+            } : {})
         },
         theme: { "brandColor": "#4989ea" },
         launcher: {

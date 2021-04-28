@@ -1,0 +1,9 @@
+steps:
+  - select: Age
+    options:
+      - 10-19
+      - 20-60
+      - text: 60+
+  - say: Your age range is (@ flow.result )
+    quick_replies:
+      - select

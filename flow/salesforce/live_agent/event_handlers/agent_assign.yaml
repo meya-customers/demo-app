@@ -1,0 +1,5 @@
+triggers:
+  - event_type: meya.salesforce.live_agent.event.session.assign
+
+steps:
+  - say: You've been transferred to (@ flow.event.data.agent_name )

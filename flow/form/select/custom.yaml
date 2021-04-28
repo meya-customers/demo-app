@@ -1,0 +1,12 @@
+steps:
+  - select: Activity
+    icon: (@ config.icon.pie )
+    custom: true
+    placeholder: Enter here
+    options:
+      - Ride a bike
+      - Drive a car
+      - Go on boat ride
+  - say: You'd like to (@ flow.result )!
+    quick_replies:
+      - select

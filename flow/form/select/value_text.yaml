@@ -1,0 +1,13 @@
+steps:
+  - select: Manufacturer
+    icon: (@ config.icon.pie )
+    options:
+      - EVOO
+      - A Open
+      - text: Acer
+        value: acer_123
+      - text: 3rd party
+        value: other
+  - say: You've selected (@ flow.result )
+    quick_replies:
+      - select

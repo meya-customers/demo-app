@@ -1,0 +1,44 @@
+triggers:
+  - regex: ^salesforce_add_comment_by.*$
+    action:
+      jump: (@ flow.result )
+
+steps:
+  - (salesforce_add_comment_by_case_number)
+  - ask: Case number?
+    regex: ^[0-9]{8}$
+  - flow_set: case_number
+
+  - type: meya.salesforce.component.query
+    soql_query: SELECT id from Case WHERE CaseNumber = '(@ flow.case_number)'
+    integration: integration.salesforce.salesforce
+  - flow_set: search_result
+
+  - if: (@ flow.search_result.records)
+    then: next
+    else:
+      jump: not_found
+
+  - flow_set:
+      case_id: (@ flow.search_result.records[0].Id )
+  - jump: question
+
+  - (salesforce_add_comment_by_case_id)
+  - ask: Case id?
+    regex: ^[a-zA-Z0-9]{18}$
+  - flow_set: case_id
+
+  - (question)
+  - ask: Comment?
+  - flow_set: comment
+
+  - type: meya.salesforce.cases.component.comment.add
+    comment: (@ flow.comment)
+    case_id: (@ flow.case_id)
+    integration: integration.salesforce.cases
+
+  - say: Comment added case (@ flow.result.id)
+  - end
+
+  - (not_found)
+  - say: Case not found for case number '(@ flow.case_number)'
