@@ -5,9 +5,9 @@ triggers:
 
 steps:
   - type: meya.salesforce.knowledge.component.display
-    search_response: (@ flow.salesforce_knowledge_response.articles)
+    search_response: (@ flow.salesforce_knowledge_response.articles )
     integration: integration.salesforce.knowledge
 
-  - ask: Articles for '(@ flow.search_query)'
+  - ask: Articles for '(@ flow.search_query )'
     button_style: text
-    tiles: (@ flow.result)
+    tiles: (@ flow.result )

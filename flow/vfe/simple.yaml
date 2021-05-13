@@ -1,0 +1,29 @@
+triggers:
+  - keyword: editor_simple
+
+steps:
+  - say: Modernize your business with Meya's CX automation platform. Deliver conversational
+      AI, workflow automation and more.
+  - delay: 2
+  - say: Continue?
+  - buttons:
+      - text: Yes
+        action:
+          jump: continue
+      - text: No
+        action:
+          jump: stop
+
+  - (continue)
+  - type: component.core.data_2
+    data_1:
+      x: 1
+      y:
+        z:
+          true: false
+          4: 8
+  - say: data_2 (@ flow )
+  - end
+
+  # Nothing left to do
+  - (stop)

@@ -10,14 +10,14 @@ steps:
   - flow_set: case_number
 
   - type: meya.salesforce.component.query
-    soql_query: SELECT id from Case WHERE CaseNumber = '(@ flow.case_number)'
+    soql_query: SELECT id from Case WHERE CaseNumber = '(@ flow.case_number )'
     integration: integration.salesforce.salesforce
   - flow_set: search_result
 
-  - if: (@ flow.search_result.records)
+  - if: (@ flow.search_result.records )
     then: next
     else:
-      jump: not found
+      jump: not_found
 
   - flow_set:
       case_id: (@ flow.search_result.records[0].Id )
@@ -33,12 +33,14 @@ steps:
   - flow_set: subject
 
   - type: meya.salesforce.cases.component.update
-    subject: (@ flow.subject)
-    case_id: (@ flow.case_id)
+    subject: (@ flow.subject )
+    case_id: (@ flow.case_id )
+    custom_fields:
+      ThreadId__c: (@ thread.id )
     integration: integration.salesforce.cases
 
-  - say: Case (@ flow.result.id) updated
+  - say: Case (@ flow.result.id ) updated
   - end
 
-  - (not found)
-  - say: Case not found for case number '(@ flow.case_number)'
+  - (not_found)
+  - say: Case not found for case number '(@ flow.case_number )'

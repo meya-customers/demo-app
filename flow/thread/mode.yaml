@@ -1,6 +1,6 @@
 triggers:
   - regex: ^mode.(.+)$
-    when: true
+    when: (@ event_user.type.user )
 
 steps:
   - flow_set:

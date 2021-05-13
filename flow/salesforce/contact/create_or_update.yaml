@@ -1,0 +1,67 @@
+triggers:
+  - keyword: salesforce_contact_create_or_update
+
+steps:
+  - ask: First name?
+  - user_set: first_name
+
+  - ask: Last name?
+  - user_set: last_name
+
+  - ask: Email?
+    expect: email_address
+  - user_set: email
+
+  - type: meya.salesforce.component.query
+    soql_query: SELECT id, name from Contact WHERE email = '(@ user.email )'
+    integration: integration.salesforce.salesforce
+  - flow_set: search_result
+
+  - if: (@ flow.search_result.records )
+    then:
+      jump: contact_found
+    else: next
+
+  - type: meya.salesforce.component.contact.create
+    first_name: (@ user.first_name )
+    last_name: (@ user.last_name )
+    email: (@ user.email )
+    custom_fields:
+      MeyaUserId__c: (@ user.id )
+    integration: integration.salesforce.salesforce
+  - user_set:
+      salesforce_contact_id: (@ flow.result.id )
+
+  - say: Contact (@ user.salesforce_contact_id ) created
+  - end
+
+  - (contact_found)
+  - user_set:
+      salesforce_contact_id: (@ flow.search_result.records[0].Id )
+
+  - ask: A contact with that email address already exists do you like to update that
+      contact?
+    buttons:
+      - text: Yes
+        action: next
+      - text: No
+        action:
+          jump: canceled
+
+  - type: meya.salesforce.component.contact.update
+    contact_id: (@ user.salesforce_contact_id )
+    first_name: (@ user.first_name )
+    last_name: (@ user.last_name )
+    custom_fields:
+      MeyaUserId__c: (@ user.id )
+    integration: integration.salesforce.salesforce
+  - user_set:
+      salesforce_contact_id: (@ flow.result.id )
+
+  - say: Contact (@ user.salesforce_contact_id ) updated
+  - end
+
+  - (canceled)
+  - user_set:
+      first_name: (@ flow.search_result.records[0].Name )
+  - say: Operation canceled, thank you!

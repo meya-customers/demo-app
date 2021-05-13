@@ -7,7 +7,7 @@ steps:
   - flow_set: search_query
 
   - type: meya.salesforce.knowledge.component.search
-    soql_query: (@ flow.search_query)
+    soql_query: (@ flow.search_query )
     article_body_field_name: Answer__c
     integration: integration.salesforce.knowledge
 
@@ -18,14 +18,14 @@ steps:
       jump: render
     else: next
 
-  - say: No results found for '(@ flow.search_query)'
+  - say: No results found for '(@ flow.search_query )'
   - end
 
   - (render)
   - type: meya.salesforce.knowledge.component.display
-    search_response: (@ flow.search_result.articles)
+    search_response: (@ flow.search_result.articles )
     integration: integration.salesforce.knowledge
 
-  - ask: Articles for '(@ flow.search_query)'
+  - ask: Articles for '(@ flow.search_query )'
     button_style: text
-    tiles: (@ flow.result)
+    tiles: (@ flow.result )

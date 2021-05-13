@@ -10,11 +10,11 @@ steps:
   - flow_set: case_number
 
   - type: meya.salesforce.component.query
-    soql_query: SELECT id from Case WHERE CaseNumber = '(@ flow.case_number)'
+    soql_query: SELECT id from Case WHERE CaseNumber = '(@ flow.case_number )'
     integration: integration.salesforce.salesforce
   - flow_set: search_result
 
-  - if: (@ flow.search_result.records)
+  - if: (@ flow.search_result.records )
     then: next
     else:
       jump: not_found
@@ -33,12 +33,12 @@ steps:
   - flow_set: comment
 
   - type: meya.salesforce.cases.component.comment.add
-    comment: (@ flow.comment)
-    case_id: (@ flow.case_id)
+    comment: (@ flow.comment )
+    case_id: (@ flow.case_id )
     integration: integration.salesforce.cases
 
-  - say: Comment added case (@ flow.result.id)
+  - say: Comment added to the case '(@ flow.result.id )'
   - end
 
   - (not_found)
-  - say: Case not found for case number '(@ flow.case_number)'
+  - say: Case not found for case number '(@ flow.case_number )'
