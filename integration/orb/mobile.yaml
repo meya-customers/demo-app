@@ -1,0 +1,5 @@
+id: integration.orb.mobile
+type: meya.orb.mobile.integration
+collect:
+  location: user
+identity_verification: (@ vault.orb.identity_verification )

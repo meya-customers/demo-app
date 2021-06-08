@@ -1,3 +1,4 @@
+id: integration.orb
 type: meya.orb.integration
 container: document.querySelector("#orb-mount")
 theme:

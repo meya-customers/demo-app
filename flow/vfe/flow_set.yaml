@@ -1,0 +1,13 @@
+triggers:
+  - keyword: vfe_flow_set
+
+steps:
+  - say: Flow set
+  - flow_set:
+      result: x
+      name: N A M E
+      items:
+        - 1
+        - 2
+        - 3
+  - flow_set: other

@@ -1,0 +1,19 @@
+triggers:
+  - keyword: vfe_quick_replies
+
+steps:
+  - say: Quick replies
+    quick_replies:
+      - Option A
+      - text: Option B
+        action:
+          jump: branch
+      - text: Option C
+        action: end
+      - text: Option D
+        result: value
+  - say: Next (@ flow.result )
+  - end
+
+  - (branch)
+  - say: Branch

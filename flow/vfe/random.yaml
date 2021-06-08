@@ -1,0 +1,13 @@
+triggers:
+  - keyword: vfe_random
+
+steps:
+  - random:
+      - say: OK
+      - rating: faces
+        title: How did you enjoy your experience?
+      - end
+      - jump: other
+
+  - (other)
+  - say: Other

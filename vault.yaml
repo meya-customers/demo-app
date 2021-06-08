@@ -24,7 +24,8 @@ freshchat.api_token: xxx
 mailgun.domain: sandbox535817ca675748659d37bcdec4b6cea1.mailgun.org
 mailgun.api_key: xxx
 twilio.account_sid: xxx
-twilio.auth_token: xxx
+twilio.api_key_sid: xxx
+twilio.api_key_secret: xxx
 # quotes are required otherwise interpreted as `int`
 twilio.phone_number: '+18005551234'
 twilio_flex.flex_flow_sid: xxx
@@ -51,6 +52,7 @@ front.enabled: false
 front.api_token: xxx
 front.channel_id: xxx
 front.bot_teammate_email: xxx
+front.client_token: xxx
 shopify.api_key: xxx
 shopify.password: xxx
 shopify.store_url: domain.myshopify.com

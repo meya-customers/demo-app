@@ -1,5 +1,5 @@
 triggers:
-  - keyword: editor_simple
+  - keyword: vfe_simple
 
 steps:
   - say: Modernize your business with Meya's CX automation platform. Deliver conversational

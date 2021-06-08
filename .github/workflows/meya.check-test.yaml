@@ -23,6 +23,8 @@ jobs:
       - name: Set up environment [testing]
         run: |
           echo "MEYA_AUTH_TOKEN=${{ secrets.staging_auth_token }}" >> $GITHUB_ENV
+          echo "MEYA_GRID_URL=${{ secrets.staging_grid_url }}" >> $GITHUB_ENV
+          echo "MEYA_APP_ID=${{ secrets.staging_app_id }}" >> $GITHUB_ENV
           MEYA_GRID_DOMAIN=$(echo ${{ secrets.staging_grid_url }} | awk -F[/:] '{print $4}')
           echo "MEYA_GRID_DOMAIN=$MEYA_GRID_DOMAIN" >> $GITHUB_ENV
 
@@ -65,17 +67,14 @@ jobs:
         run: meya test
 
       - name: Meya auth
-        if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/develop'
         run: |
           meya auth add --grid-url $MEYA_GRID_URL --auth-token $MEYA_AUTH_TOKEN
 
       - name: Meya connect
-        if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/develop'
         run: |
           meya connect --grid-url $MEYA_GRID_URL  --app-id $MEYA_APP_ID
 
       - name: Check code syntax and formatting
-        if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/develop'
         run: meya check
 
       - name: Deploy app

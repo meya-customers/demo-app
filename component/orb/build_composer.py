@@ -7,6 +7,15 @@ from typing import List
 
 @dataclass
 class BuildComposerComponent(Component):
+    """
+    Build a composer spec using flow scope variables.
+
+    ## The variables
+    - `focus`
+    - `placeholder`
+    - `visibility`
+    """
+
     async def start(self) -> List[Entry]:
         flow = self.entry.data
         composer = {}

@@ -1,0 +1,26 @@
+triggers:
+  - keyword: vfe_tiles
+
+steps:
+  - say: Tiles
+  - tiles:
+      - title: Tile A
+      - title: Tile B
+        description: Description
+        rows:
+          -   - cell: C1
+                value: 1
+              - cell: C2
+                value: 2
+          -   - cell: C3
+                value: 3
+        buttons:
+          - text: Branch
+            action:
+              jump: branch
+
+  - say: Next (@ flow.result )
+  - end
+
+  - (branch)
+  - say: Branch

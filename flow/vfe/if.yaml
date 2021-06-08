@@ -1,0 +1,12 @@
+triggers:
+  - keyword: vfe_if
+
+steps:
+  - ask: If?
+  - if: (@ flow.result | int > 0 )
+    then:
+      jump: positive
+    else: end
+
+  - (positive)
+  - say: Positive

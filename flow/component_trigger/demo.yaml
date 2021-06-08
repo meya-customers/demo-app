@@ -1,0 +1,45 @@
+triggers:
+  - keyword: component_trigger_demo
+
+steps:
+  - say: Name?
+    triggers:
+      - catchall
+  - flow_set: name
+
+  - say: Hi (@ flow.name ) let's play a game? Say 'continue' if you want to test yourself!
+    triggers:
+      - keyword: continue
+
+  - say: cool! let's get started!
+
+  - say: Do you know a palindrome with 4 letters? (e.g. noon)
+    triggers:
+      - type: trigger.text.palindrome
+        minimum: 4
+
+  - say_upper: And one with 5 letters? (e.g. radar)
+    triggers:
+      - type: trigger.text.palindrome
+        minimum: 5
+
+  - say: Wow!!! To end this, what number between 3 to 7 I'm thinking right now...
+    triggers:
+      - regex: ^[3-7]{1}$
+
+  - say: You're right!! (@ flow.result ) is the number I was thinking. Congratulations
+      you're pretty good. See you next time!
+
+  - say: Please enter your email address or upload an image!
+  - type: meya.email.component.address.ask.form
+    triggers:
+      - type: image
+        action:
+          jump: image
+
+  - say: (@ flow.result)
+
+  - end
+
+  - (image)
+  - say: Thanks for sending an image

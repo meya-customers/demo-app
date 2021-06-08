@@ -1,0 +1,17 @@
+triggers:
+  - keyword: vfe_case
+
+steps:
+  - ask: Case one/two/3?
+  - case:
+      one:
+        say: OK
+      two:
+        jump: other
+      '3': end
+    default: next
+  - say: Default
+  - end
+
+  - (other)
+  - say: Other

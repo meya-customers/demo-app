@@ -1,0 +1,15 @@
+triggers:
+  - keyword: vfe_cond
+
+steps:
+  - ask: Case one/two/3?
+  - cond:
+      - (@ flow.result == "one" ):
+          jump: other
+      - (@ (flow.result | int) >= 3 ): end
+    default: next
+  - say: Default
+  - end
+
+  - (other)
+  - say: Other
