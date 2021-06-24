@@ -1,0 +1,31 @@
+triggers:
+  - keyword: front_create_contact
+
+steps:
+  - ask: Name?
+  - flow_set: name
+
+  - ask: External handle?
+    quick_replies:
+      - text: skip
+        action:
+          jump: link_contact
+  - flow_set: handle
+
+  - (link_contact)
+  - ask: Link contact?
+    buttons:
+      - text: Yes
+        result: true
+      - text: No
+        result: false
+  - flow_set: link
+
+  - type: meya.front.component.contact.create
+    name: (@ flow.name )
+    is_spammer: false
+    handle: (@ flow.get('handle') )
+    link: (@ flow.link )
+    integration: integration.front
+
+  - say: 'Successfully created contact - id: (@ flow.result.id )'

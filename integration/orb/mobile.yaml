@@ -3,3 +3,10 @@ type: meya.orb.mobile.integration
 collect:
   location: user
 identity_verification: (@ vault.orb.identity_verification )
+android:
+  service_account_key: (@ vault.orb.mobile.service_account_key )
+ios:
+  auth_key: (@ vault.orb.mobile.auth_key )
+  auth_key_id: (@ vault.orb.mobile.auth_key_id )
+  team_id: (@ vault.orb.mobile.team_id )
+  topic: ai.meya.OrbDemo

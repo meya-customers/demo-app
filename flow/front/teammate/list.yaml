@@ -1,0 +1,8 @@
+triggers:
+  - keyword: front_list_teammates
+
+steps:
+  - type: meya.front.component.teammates.list
+    integration: integration.front
+
+  - say: Teammates data - (@ flow.result )

@@ -1,0 +1,8 @@
+triggers:
+  - keyword: front_list_shifts
+
+steps:
+  - type: meya.front.component.shifts.list
+    integration: integration.front
+
+  - say: Shifts data - (@ flow.result )

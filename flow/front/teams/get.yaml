@@ -1,0 +1,13 @@
+triggers:
+  - keyword: front_get_team
+
+steps:
+  - ask: What's the team id? If you're not sure you could search using `front_list_teams`
+      keyword flow.
+  - flow_set: team_id
+
+  - type: meya.front.component.teams.get
+    team_id: (@ flow.team_id )
+    integration: integration.front
+
+  - say: Team data - (@ flow.result )

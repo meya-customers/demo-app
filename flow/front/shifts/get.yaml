@@ -1,0 +1,13 @@
+triggers:
+  - keyword: front_get_shift
+
+steps:
+  - ask: What's the shift id? If you're not sure you could search using `front_list_shifts`
+      keyword flow.
+  - flow_set: shift_id
+
+  - type: meya.front.component.shifts.get
+    shift_id: (@ flow.shift_id )
+    integration: integration.front
+
+  - say: Shift data - (@ flow.result )

@@ -1,0 +1,8 @@
+triggers:
+  - keyword: front_list_teams
+
+steps:
+  - type: meya.front.component.teams.list
+    integration: integration.front
+
+  - say: Teams data - (@ flow.result )

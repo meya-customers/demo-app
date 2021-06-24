@@ -1,0 +1,13 @@
+triggers:
+  - keyword: front_get_teammate
+
+steps:
+  - ask: What's the teammate id? If you're not sure you could search using `front_list_teammates`
+      keyword flow.
+  - flow_set: teammate_id
+
+  - type: meya.front.component.teammates.get
+    teammate_id: (@ flow.teammate_id )
+    integration: integration.front
+
+  - say: Teammate data - (@ flow.result )

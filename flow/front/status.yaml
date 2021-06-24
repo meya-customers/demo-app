@@ -1,0 +1,31 @@
+id: front.agent.assign
+triggers:
+  - event_type: meya.front.event.agent.assign
+
+steps:
+  - status: Agent (@ flow.event.data.payload.target.data.first_name ) entered chat
+---
+id: front.agent.unassign
+triggers:
+  - event_type: meya.front.event.agent.unassign
+
+steps:
+  - status: Agent (@ flow.event.data.payload.source.data.first_name ) leave the chat
+---
+id: front.tag
+triggers:
+  - event_type: meya.front.event.tag.add
+steps:
+  - status: Tag (@ flow.event.data.payload.name ) added
+---
+id: front.untag
+triggers:
+  - event_type: meya.front.event.tag.remove
+steps:
+  - status: Tag (@ flow.event.data.payload.name ) removed
+---
+id: front.trash
+triggers:
+  - event_type: meya.front.event.trash
+steps:
+  - status: Conversation (@ flow.event.data.payload.conversation.id ) was deleted
