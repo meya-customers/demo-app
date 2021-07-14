@@ -31,3 +31,6 @@ steps:
       - text: Value (advanced)
         action:
           flow: flow.form.select.value_advanced
+      - text: Sequential
+        action:
+          flow: flow.form.select.sequential

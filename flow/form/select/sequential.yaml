@@ -1,0 +1,19 @@
+triggers:
+  - keyword: select_sequential
+
+steps:
+  - select: Issue type
+    options:
+      - Battery
+      - Motor
+      - Wheels
+  - flow_set: issue
+  - select: Product type
+    options:
+      - Car
+      - Bike
+      - Skateboard
+  - flow_set: product
+  - say: Your issue is (@ flow.product ) (@ flow.issue )
+    quick_replies:
+      - select

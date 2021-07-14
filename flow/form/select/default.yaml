@@ -1,3 +1,6 @@
+triggers:
+  - keyword: select_default
+
 steps:
   - select: Subscription
     default: Monthly

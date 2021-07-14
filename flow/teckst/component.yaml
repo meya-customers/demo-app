@@ -1,0 +1,39 @@
+triggers:
+  - regex: ^teckst.*$
+    action:
+      jump: (@ flow.result )
+      data:
+        phone_number: '+12268390208'
+        media_url: https://images.prismic.io/meya-website/2ff30926-42c9-4250-b974-0ee788300da0_wit_robot.png
+steps:
+  - (teckst_send_message)
+  - ask: What's the message do you want to send?
+  - flow_set: message
+
+  - type: meya.teckst.component.message.send
+    message: (@ flow.message )
+    phone_number: (@ flow.phone_number )
+    integration: integration.teckst
+
+  - say: Message sent successfully.
+  - end
+
+  - (teckst_send_media_message)
+  - ask: What's the message do you want to send?
+  - flow_set: message
+
+  - ask: File url? Skip for using template
+    quick_replies:
+      - text: skip
+        action:
+          jump: send_media_message
+  - flow_set: media_url
+
+  - (send_media_message)
+  - type: meya.teckst.component.media.send
+    message: (@ flow.message )
+    media_url: (@ flow.media_url )
+    phone_number: (@ flow.phone_number )
+    integration: integration.teckst
+
+  - say: Media message sent successfully.

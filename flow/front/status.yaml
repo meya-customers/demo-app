@@ -1,16 +1,14 @@
 id: front.agent.assign
 triggers:
   - event_type: meya.front.event.agent.assign
-
 steps:
-  - status: Agent (@ flow.event.data.payload.target.data.first_name ) entered chat
+  - status: Conversation assigned to an agent
 ---
 id: front.agent.unassign
 triggers:
   - event_type: meya.front.event.agent.unassign
-
 steps:
-  - status: Agent (@ flow.event.data.payload.source.data.first_name ) leave the chat
+  - status: Conversation unassigned
 ---
 id: front.tag
 triggers:
@@ -26,6 +24,24 @@ steps:
 ---
 id: front.trash
 triggers:
-  - event_type: meya.front.event.trash
+  - event_type: meya.front.event.conversation.trash
 steps:
   - status: Conversation (@ flow.event.data.payload.conversation.id ) was deleted
+---
+id: front.reopen
+triggers:
+  - event_type: meya.front.event.conversation.reopen
+steps:
+  - status: Conversation (@ flow.event.data.payload.conversation.id ) was reopened
+---
+id: front.archive
+triggers:
+  - event_type: meya.front.event.conversation.archive
+steps:
+  - status: Conversation (@ flow.event.data.payload.conversation.id ) was archived
+---
+id: front.restore
+triggers:
+  - event_type: meya.front.event.conversation.restore
+steps:
+  - status: Conversation (@ flow.event.data.payload.conversation.id ) was restored

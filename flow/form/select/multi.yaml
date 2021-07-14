@@ -1,3 +1,6 @@
+triggers:
+  - keyword: select_multi
+
 steps:
   - select: Pizza Toppings
     icon: (@ config.icon.pie )

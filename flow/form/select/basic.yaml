@@ -1,3 +1,6 @@
+triggers:
+  - keyword: select_basic
+
 steps:
   - select: Age
     options:

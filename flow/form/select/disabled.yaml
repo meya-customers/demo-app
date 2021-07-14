@@ -1,3 +1,6 @@
+triggers:
+  - keyword: select_disabled
+
 steps:
   - select: Manufacturer
     icon: (@ config.icon.pie )

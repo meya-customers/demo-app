@@ -1,9 +1,24 @@
 triggers:
   - keyword: front_update_contact
+
 steps:
   - ask: Contact_id?
+    quick_replies:
+      - text: skip
+        action:
+          jump: ask_handle
   - flow_set: contact_id
+  - jump: ask_spammer
 
+  - (ask_handle)
+  - ask: Contact handle?
+    quick_replies:
+      - text: skip
+        action:
+          jump: ask_spammer
+  - flow_set: contact_handle
+
+  - (ask_spammer)
   - ask: Spammer?
     buttons:
       - text: Yes
@@ -13,7 +28,8 @@ steps:
   - flow_set: spammer
 
   - type: meya.front.component.contact.update
-    contact_id: (@ flow.contact_id )
+    contact_id: (@ flow.get('contact_id') )
+    handle: (@ flow.get('contact_handle') )
     is_spammer: (@ flow.spammer )
     avatar_url: https://images.prismic.io/meya-website/c63a142a-a049-4da2-8c83-842325e31449_scifi-robot.png
     integration: integration.front

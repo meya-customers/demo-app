@@ -1,0 +1,6 @@
+type: meya.teckst.integration
+teckst_client_id: (@ vault.teckst.teckst_client_id)
+teckst_api_key: (@ vault.teckst.teckst_api_key )
+teckst_phone_number: (@ vault.teckst.teckst_phone_number )
+teckst_api_url: (@ vault.teckst.teckst_api_url )
+meya_api_key: (@ vault.teckst.meya_api_key )

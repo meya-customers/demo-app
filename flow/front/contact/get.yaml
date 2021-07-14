@@ -1,0 +1,27 @@
+triggers:
+  - keyword: front_get_contact
+
+steps:
+  - ask: Contact_id?
+    quick_replies:
+      - text: skip
+        action:
+          jump: ask_handle
+  - flow_set: contact_id
+  - jump: get_contact
+
+  - (ask_handle)
+  - ask: Contact handle?
+    quick_replies:
+      - text: skip
+        action:
+          jump: get_contact
+  - flow_set: contact_handle
+
+  - (get_contact)
+  - type: meya.front.component.contact.get
+    contact_id: (@ flow.get('contact_id') )
+    handle: (@ flow.get('contact_handle') )
+    integration: integration.front
+
+  - say: 'Contact found - contact: (@ flow.result )'

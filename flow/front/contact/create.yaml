@@ -1,10 +1,36 @@
 triggers:
   - keyword: front_create_contact
+    action:
+      data:
+        contact_source: custom
 
 steps:
   - ask: Name?
   - flow_set: name
 
+  - ask: Contact source?
+    buttons:
+      - text: custom
+        result: custom
+      - text: smooch
+        result: smooch
+      - text: email address
+        result: email
+      - text: phone
+        result: phone
+      - text: twitter
+        result: twitter
+      - text: facebook
+        result: facebook
+      - text: intercom
+        result: intercom
+    quick_replies:
+      - text: skip
+        action:
+          jump: ask_external_handle
+  - flow_set: contact_source
+
+  - (ask_external_handle)
   - ask: External handle?
     quick_replies:
       - text: skip
@@ -25,6 +51,7 @@ steps:
     name: (@ flow.name )
     is_spammer: false
     handle: (@ flow.get('handle') )
+    source: (@ flow.get('contact_source') )
     link: (@ flow.link )
     integration: integration.front
 

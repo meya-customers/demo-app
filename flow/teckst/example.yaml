@@ -1,0 +1,11 @@
+triggers:
+  - keyword: Gaming support test
+
+steps:
+  - say: For support access www.example.com.br
+  - delay: 1
+  - say: Happy gaming!
+
+  - url: https://unsplash.com/photos/CuFYW1c97w8/download?force=true&w=640
+    text: Photo of a gamming controller
+    alt: Photo of a gamming controller

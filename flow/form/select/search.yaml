@@ -1,3 +1,6 @@
+triggers:
+  - keyword: select_search
+
 steps:
   - select: Month
     icon: (@ config.icon.pie )

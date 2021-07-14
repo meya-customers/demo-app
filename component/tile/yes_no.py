@@ -2,6 +2,7 @@ from dataclasses import dataclass
 from dataclasses import field
 from meya.button.spec import ButtonElementSpec
 from meya.component.element.interactive import InteractiveComponent
+from meya.core.meta_level import MetaLevel
 from meya.element.field import element_field
 from meya.entry import Entry
 from meya.orb import composer_spec
@@ -23,7 +24,7 @@ class ComposerElementSpec(composer_spec.ComposerElementSpec):
 class YesNoTileComponent(InteractiveComponent):
     text: str = element_field()
     composer: ComposerElementSpec = element_field(
-        default_factory=ComposerElementSpec
+        default_factory=ComposerElementSpec, level=MetaLevel.ADVANCED
     )
 
     async def start(self) -> List[Entry]:

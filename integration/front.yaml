@@ -5,10 +5,17 @@ bot_teammate_email: (@ vault.front.bot_teammate_email )
 channel_id: (@ vault.front.channel_id )
 client_token: (@ vault.front.client_token )
 integration_mode: ticketing
-unlink_thread_status:
-  - trash
 agent:
   name: first_initial_last_initial
   avatar:
     monogram: first_initial_last_initial
 unassign_mode: bot
+filter:
+  tx: >-
+    (
+      meya.event.entry.interactive
+      OR meya.csp.event
+      OR meya.button.event.click
+      OR meya.form.event.submit
+    )
+    AND NOT meya.text.event.status

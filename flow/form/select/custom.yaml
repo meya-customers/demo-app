@@ -1,3 +1,6 @@
+triggers:
+  - keyword: select_custom
+
 steps:
   - select: Activity
     icon: (@ config.icon.pie )

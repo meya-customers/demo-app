@@ -1,3 +1,6 @@
+triggers:
+  - keyword: select_value_advanced
+
 steps:
   - select: Product
     icon: (@ config.icon.pie )

@@ -53,6 +53,9 @@ front.api_token: xxx
 front.channel_id: xxx
 front.bot_teammate_email: xxx
 front.client_token: xxx
+front.assignee_email:
+front.tag_ids:
+front.inbox_id:
 shopify.api_key: xxx
 shopify.password: xxx
 shopify.store_url: domain.myshopify.com
@@ -78,3 +81,8 @@ orb.mobile.service_account_key:
 orb.mobile.auth_key: xxx
 orb.mobile.auth_key_id: xxx
 orb.mobile.team_id: xxx
+teckst.teckst_client_id: xxx
+teckst.teckst_api_key: xxx
+teckst.teckst_phone_number: xxx
+teckst.teckst_api_url: xxx
+teckst.meya_api_key: xxx
