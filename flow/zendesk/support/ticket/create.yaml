@@ -108,6 +108,8 @@ steps:
     requester_id: (@ flow.result.id )
     subject: (@ flow.subject )
     comment: (@ flow.comment )
+    ticket_form_id: (@ vault.zendesk.support.ticket_form_id )
+    brand_id: (@ vault.zendesk.support.brand_id )
   - say: Ticket (@ flow.result.id ) created
   - note: This is a note after ticket creation
   - end

@@ -47,6 +47,8 @@ zendesk.support.subdomain: zendesk_domain_name
 zendesk.support.bot_agent_email: username@domain.com
 zendesk.support.bot_agent_api_token: xxx
 zendesk.support.target_password: xxx
+zendesk.support.brand_id:
+zendesk.support.ticket_form_id:
 alexa.skill_id: xxx
 front.enabled: false
 front.api_token: xxx
