@@ -1,0 +1,21 @@
+triggers:
+  - keyword: tile_basic
+
+steps:
+  - say: Here are the currently available rewards...
+  - tiles:
+      - title: Super Nintendo Entertainment System
+        description: 100,000 points
+        image:
+          url: https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/SNES-Mod1-Console-Set.jpg/800px-SNES-Mod1-Console-Set.jpg
+        buttons:
+          - text: Order
+            result: nintendo
+      - title: Sega Genesis
+        description: 75,000 points
+        image:
+          url: https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Sega-Genesis-Mk2-6button.jpg/800px-Sega-Genesis-Mk2-6button.jpg
+        buttons:
+          - text: Order
+            result: sega
+  - say: Great! Your first (@ flow.result ) is on the way!

@@ -3,4 +3,5 @@ account_sid: (@ vault.twilio.account_sid )
 api_key_sid: (@ vault.twilio.api_key_sid )
 api_key_secret: (@ vault.twilio.api_key_secret )
 phone_number: (@ vault.whatsapp.phone_number )
+extra_sms_status_events: (@ vault.whatsapp.extra_sms_status_events )
 markdown: true

@@ -30,8 +30,8 @@ class YesNoTileComponent(InteractiveComponent):
     async def start(self) -> List[Entry]:
         # Modeled after TileAskComponent
         buttons_specs = [
-            ButtonElementSpec(text="Yes", result="Y"),
-            ButtonElementSpec(text="No", result="N"),
+            ButtonElementSpec(text="Yes", result=True),
+            ButtonElementSpec(text="No", result=False),
         ]
 
         buttons = self.get_buttons_and_triggers(buttons_specs)

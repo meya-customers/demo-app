@@ -1,0 +1,45 @@
+triggers:
+  - keyword: front_add_contact_handle
+
+steps:
+  - ask: Contact id?
+    quick_replies:
+      - text: skip
+        action:
+          jump: ask_handle
+  - flow_set: contact_id
+
+  - (ask_handle)
+  - ask: Handle?
+  - flow_set: contact_handle
+
+  - ask: Contact source?
+    buttons:
+      - text: custom
+        result: custom
+      - text: smooch
+        result: smooch
+      - text: email address
+        result: email
+      - text: phone
+        result: phone
+      - text: twitter
+        result: twitter
+      - text: facebook
+        result: facebook
+      - text: intercom
+        result: intercom
+  - flow_set: contact_source
+
+  - type: meya.front.component.contact.handle.add
+    contact_id: (@ flow.get('contact_id') )
+    handle: (@ flow.contact_handle )
+    source: (@ flow.contact_source )
+    integration: integration.front
+
+  - if: (@ not flow.get('ok') )
+    then: end
+    else: next
+
+  - (success_message)
+  - say: Successfully added handle `(@ flow.contact_handle )` to the contact

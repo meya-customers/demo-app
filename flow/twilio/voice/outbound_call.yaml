@@ -8,7 +8,6 @@ steps:
   - say: I see that your order number is (@ user.order_number). How can I help you?
 
   - type: meya.twilio.voice.component.gather
-    timeout: 2
     input: dtmf
     ask: Press 1 for order status, 2 to cancel your order or 3 to talk to an agent
   - flow_set: gather_decision

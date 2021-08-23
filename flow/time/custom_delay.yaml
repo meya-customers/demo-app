@@ -1,0 +1,11 @@
+triggers:
+  - regex: custom_delay
+
+steps:
+  - say: Starting custom delay
+  - type: component.time.custom_delay
+  - say: Done custom delay
+    quick_replies:
+      - custom_delay
+
+

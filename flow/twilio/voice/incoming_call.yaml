@@ -4,7 +4,6 @@ triggers:
 
 steps:
   - type: meya.twilio.voice.component.gather
-    timeout: 2
     input: speech
     hints: sales support
     ask: Welcome! Do you need sales or support?

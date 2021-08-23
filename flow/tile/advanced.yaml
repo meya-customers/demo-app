@@ -1,0 +1,77 @@
+triggers:
+  - keyword: tile_advanced
+
+steps:
+  - ask: Advanced tiles
+    tiles:
+      - image:
+          url: https://cataas.com/cat/says/Tile%200
+        title: Title 0
+        rows:
+          -   - cell: How
+                value: harvesting
+              - cell: A
+                value: clouds
+          -   - cell: Away
+                value: far
+              - cell: Harvesting
+                value: ship
+        buttons:
+          - url: https://cataas.com/cat/says/Link%20button%203
+            text: Link button 3
+          - url: https://cataas.com/cat/says/Link%20button%204
+            text: Link button 4
+          - text: Button 5
+            result: 5
+          - text: Button 6
+            result: 6
+        description: Circumnavigated how far away ship of the imagination star stuff
+          harvesting star light great turbulent clouds a billion trillion
+      - image:
+          url: https://cataas.com/cat/says/Tile%201
+        title: Title 1
+        rows:
+          -   - cell: Stuff
+                value: trillion
+              - cell: Light
+                value: circumnavigated
+          -   - cell: How
+                value: of
+              - cell: Harvesting
+                value: billion
+        buttons:
+          - url: https://cataas.com/cat/says/Link%20button%207
+            text: Link button 7
+          - url: https://cataas.com/cat/says/Link%20button%208
+            text: Link button 8
+          - text: Button 9
+            result: 9
+          - text: Button 10
+            result: 10
+        description: Circumnavigated how far away ship of the imagination star stuff
+          harvesting star light great turbulent clouds a billion trillion
+      - image:
+          url: https://cataas.com/cat/says/Tile%202
+        title: Title 2
+        rows:
+          -   - cell: Circumnavigated
+                value: great
+              - cell: Imagination
+                value: ship
+          -   - cell: Turbulent
+                value: of
+              - cell: Turbulent
+                value: light
+        buttons:
+          - url: https://cataas.com/cat/says/Link%20button%2011
+            text: Link button 11
+          - url: https://cataas.com/cat/says/Link%20button%2012
+            text: Link button 12
+          - text: Button 13
+            result: 13
+          - text: Button 14
+            result: 14
+        description: Circumnavigated how far away ship of the imagination star stuff
+          harvesting star light great turbulent clouds a billion trillion
+  - say: Flow result (@ flow.result )
+

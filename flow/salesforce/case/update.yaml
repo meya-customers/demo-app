@@ -35,6 +35,7 @@ steps:
   - type: meya.salesforce.cases.component.update
     subject: (@ flow.subject )
     case_id: (@ flow.case_id )
+    case_type: Other
     custom_fields:
       ThreadId__c: (@ thread.id )
     integration: integration.salesforce.cases

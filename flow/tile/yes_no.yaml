@@ -1,7 +1,15 @@
 triggers:
-  - keyword: yes_no_tile
+  - keyword: tile_yes_no
 
 steps:
-  - type: component.tile.yes_no
-    text: Do you want to continue?
+  - ask:
+    button_style: action
+    layout: column
+    tiles:
+      - title: Do you want to continue?
+        buttons:
+          - text: Yes
+            result: true
+          - text: No
+            result: false
   - say: Flow result (@ flow.result )

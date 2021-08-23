@@ -26,11 +26,13 @@ mailgun.api_key: xxx
 twilio.account_sid: xxx
 twilio.api_key_sid: xxx
 twilio.api_key_secret: xxx
+twilio.extra_sms_status_events: []
 # quotes are required otherwise interpreted as `int`
 twilio.phone_number: '+18005551234'
 twilio_flex.flex_flow_sid: xxx
 twilio_flex.flex_chat_service_sid: xxx
 whatsapp.phone_number: whatsapp:+18005551234
+whatsapp.extra_sms_status_events: []
 slack.webhook_url: xxx
 segment.enabled: false
 segment.write_key: xxx

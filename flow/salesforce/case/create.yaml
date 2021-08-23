@@ -10,6 +10,7 @@ triggers:
         contact_first_name: John
         contact_last_name: Doe
         contact_email:
+        case_type: Other
         send_transcript: true
 
 steps:
@@ -69,6 +70,7 @@ steps:
     subject: (@ flow.subject )
     priority: P3- Medium
     comments: (@ flow.comment )
+    case_type: (@ flow.case_type )
     send_transcript: (@ flow.send_transcript )
     integration: integration.salesforce.cases
 
