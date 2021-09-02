@@ -10,6 +10,7 @@ agent:
   avatar:
     monogram: first_initial_last_initial
 unassign_mode: bot
+markdown: true
 filter:
   tx: >-
     (

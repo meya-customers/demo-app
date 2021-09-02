@@ -12,6 +12,7 @@ steps:
       > Blockquotes can also be nested...
       [link text](http://dev.nodeca.com)
       [link with title](http://nodeca.github.io/pica/demo/ "title text!")
+      [email link](mailto:support@meya.ai)
       Autoconverted link https://github.com/nodeca/pica
       ``` js
       var foo = function (bar) {
@@ -90,6 +91,7 @@ steps:
   - say: >
       [link text](http://dev.nodeca.com)
       Autoconverted link https://github.com/nodeca/pica
+      Autoconverted email support@meya.ai
     markdown:
       - linkify
   - jump: done
