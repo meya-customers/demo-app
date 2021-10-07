@@ -1,0 +1,22 @@
+triggers:
+  - keyword: twitter_book_selection
+
+steps:
+  - ask: Hi, what's your name?
+  - flow_set: name
+
+  - ask: Please select your preference
+    quick_replies:
+      - text: Science Fiction
+        action:
+          flow: flow.twitter.quick_replies.science_fiction
+          transfer: true
+          data:
+            name: (@ flow.name )
+      - text: Historical romance
+        button_id: twitter_qr_historical_romance
+        context:
+          name: (@ flow.name )
+      - text: Skip
+
+  - say: Oh sorry! I hope to have more options next time.

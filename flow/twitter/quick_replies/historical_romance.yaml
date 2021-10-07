@@ -1,0 +1,5 @@
+triggers:
+  - button_id: twitter_qr_historical_romance
+
+steps:
+  - say: Hey (@ flow.context.name )! I think you'll love Fall of Giants by Ken Follet

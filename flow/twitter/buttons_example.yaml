@@ -1,0 +1,10 @@
+triggers:
+  - keyword: twitter_buttons_example
+
+steps:
+  - ask: Please choose one of the options bellow.
+    buttons:
+      - text: Guides
+        url: https://docs.meya.ai/docs
+      - text: Reference
+        url: https://docs.meya.ai/reference
