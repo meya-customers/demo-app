@@ -1,0 +1,14 @@
+triggers:
+  - keyword: extend_thread_control
+
+steps:
+  - ask: Duration?
+  - flow_set: duration
+
+  - type: meya.facebook.messenger.component.handover.extend_thread_control
+    page_id: (@ vault.facebook.messenger.bookshelf_page_id )
+    recipient_id: (@ thread.data.sender_id )
+    duration: (@ flow.duration )
+    integration: integration.facebook.messenger
+
+  - say: (@ flow.result | string)

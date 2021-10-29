@@ -1,0 +1,11 @@
+triggers:
+  - keyword: take_thread_control
+
+steps:
+  - type: meya.facebook.messenger.component.handover.take_thread_control
+    page_id: (@ vault.facebook.messenger.bookshelf_page_id )
+    recipient_id: (@ thread.data.sender_id )
+    metadata:
+      thread_id: (@ flow.thread.id )
+      user_id: (@ flow.user.id )
+    integration: integration.facebook.messenger

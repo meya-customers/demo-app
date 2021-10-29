@@ -1,0 +1,5 @@
+triggers:
+  - button_id: ramem
+
+steps:
+  - say: Hey I love ramem too :) Enjoy!

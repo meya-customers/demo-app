@@ -1,0 +1,13 @@
+type: meya.facebook.messenger.integration
+app_id: (@ vault.facebook.messenger.app_id )
+verify_token: (@ vault.facebook.messenger.verify_token )
+pages: (@ vault.facebook.messenger.pages )
+filter:
+  tx: >
+    (
+      meya.event.entry.interactive
+      OR meya.presence.event.typing
+      OR meya.csp.event
+      OR meya.button.event.click
+      OR meya.form.event.submit
+    )

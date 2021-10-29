@@ -1,0 +1,16 @@
+triggers:
+  - keyword: pass_thread_control
+
+steps:
+  - typing: on
+  - say: Ok! I'm trasferring you to my buddy :)
+  - delay: 3 # needed it to avoid crosstalk
+
+  - type: meya.facebook.messenger.component.handover.pass_thread_control
+    page_id: (@ vault.facebook.messenger.bookshelf_page_id )
+    recipient_id: (@ thread.data.sender_id )
+    target_app_id: (@ vault.facebook.messenger.secondary_app_id)
+    metadata:
+      thread_id: (@ thread.id )
+      user_id: (@ user.id )
+    integration: integration.facebook.messenger

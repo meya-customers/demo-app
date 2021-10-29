@@ -1,0 +1,12 @@
+triggers:
+  - keyword: get_secondary_receivers
+
+steps:
+  - type: meya.facebook.messenger.component.handover.get_secondary_receivers
+    page_id: (@ vault.facebook.messenger.bookshelf_page_id )
+    fields:
+      - id
+      - name
+    integration: integration.facebook.messenger
+
+  - say: (@ flow.result | string)

@@ -90,3 +90,10 @@ teckst.teckst_api_key: xxx
 teckst.teckst_phone_number: xxx
 teckst.teckst_api_url: xxx
 teckst.meya_api_key: xxx
+facebook.messenger.bookshelf_page_id: xxx
+facebook.messenger.secondary_app_id: xxx
+facebook.messenger.app_id: xxx
+facebook.messenger.verify_token: xxx
+facebook.messenger.pages:
+  - page_id: xxx
+    auth_token: yyyy

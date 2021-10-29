@@ -1,0 +1,12 @@
+triggers:
+  - keyword: fb_messenger_buttons
+steps:
+  - typing: on
+  - delay: 2
+
+  - ask: What do you prefer?
+    buttons:
+      - text: Ramem
+        button_id: ramem
+      - text: Tacos
+        button_id: tacos

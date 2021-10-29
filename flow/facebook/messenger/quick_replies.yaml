@@ -1,0 +1,19 @@
+triggers:
+  - keyword: fb_messenger_qr
+steps:
+  - typing: on
+  - delay: 2
+  - ask: Please choose your dinner
+    quick_replies:
+      - text: Spaghetti
+        context:
+          price: 5
+      - text: Salmon
+        context:
+          price: 6
+      - text: tacos
+        context:
+          price: 3
+        button_id: tacos
+
+  - say: You choose (@ flow.result ). Nice one, enjoy!

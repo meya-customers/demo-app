@@ -1,0 +1,10 @@
+triggers:
+  - keyword: get_thread_owner
+
+steps:
+  - type: meya.facebook.messenger.component.handover.get_thread_owner
+    page_id: (@ vault.facebook.messenger.bookshelf_page_id )
+    recipient_id: (@ thread.data.sender_id )
+    integration: integration.facebook.messenger
+
+  - say: (@ flow.result | string)

@@ -1,0 +1,11 @@
+triggers:
+  - keyword: release_thread_control
+
+steps:
+  - type: meya.facebook.messenger.component.handover.release_thread_control
+    page_id: (@ vault.facebook.messenger.bookshelf_page_id )
+    recipient_id: (@ thread.data.sender_id )
+    metadata:
+      thread_id: (@ thread.id )
+      user_id: (@ user.id )
+    integration: integration.facebook.messenger
