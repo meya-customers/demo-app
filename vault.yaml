@@ -96,4 +96,4 @@ facebook.messenger.app_id: xxx
 facebook.messenger.verify_token: xxx
 facebook.messenger.pages:
   - page_id: xxx
-    auth_token: yyyy
+    access_token: yyyy

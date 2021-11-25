@@ -3,71 +3,13 @@ triggers:
     action:
       data:
         name: Test
-        description: Test description
         avatar_url: https://images.prismic.io/meya-website/c63a142a-a049-4da2-8c83-842325e31449_scifi-robot.png
-        contact_source: custom
 
 steps:
-  - ask: name?
+  - ask: Contact name?
   - flow_set: name
 
-  - ask: Contact source?
-    buttons:
-      - text: custom
-        result: custom
-      - text: smooch
-        result: smooch
-      - text: email address
-        result: email
-      - text: phone
-        result: phone
-      - text: twitter
-        result: twitter
-      - text: facebook
-        result: facebook
-      - text: intercom
-        result: intercom
-    quick_replies:
-      - text: skip
-        action:
-          jump: ask_description
-  - flow_set: contact_source
-
-  - (ask_description)
-  - ask: description?
-    quick_replies:
-      - text: skip
-        action:
-          jump: ask_avatar
-  - flow_set: description
-
-  - (ask_avatar)
-  - ask: Avatar url?
-    quick_replies:
-      - text: skip
-        action:
-          jump: ask_spammer
-  - flow_set: avatar_url
-
-  - (ask_spammer)
-  - ask: Spammer?
-    buttons:
-      - text: Yes
-        result: true
-      - text: No
-        result: false
-  - flow_set: spammer
-
-  - ask: Contact id?
-    quick_replies:
-      - text: skip
-        action:
-          jump: ask_handle
-  - flow_set: contact_id
-  - jump: link_contact
-
-  - (ask_handle)
-  - ask: Handle?
+  - ask: Contact handle?
     quick_replies:
       - text: skip
         action:
@@ -85,12 +27,22 @@ steps:
 
   - type: meya.front.component.contact.create_or_update
     name: (@ flow.get('name') )
-    description: (@ flow.get('description') )
-    is_spammer: (@ flow.get('spammer') )
-    contact_id: (@ flow.get('contact_id') )
-    source: (@ flow.get('contact_source') )
+    avatar_url: (@ flow.get('avatar_url') )
     handle: (@ flow.get('handle') )
     link: (@ flow.link )
     integration: integration.front
 
-  - say: 'Successfully created/updated contact - id: (@ flow.result.id )'
+  - if: (flow.ok)
+    then:
+      jump: success
+    else: next
+
+  - say: Failed to create contact. Please check logs and try again later
+  - end
+
+  - (success)
+  - say: 'Successfully created/updated contact - Result: (@ flow.result )'
+  - user_set:
+      front_contact_handle: (@ flow.result.handle )
+      front_contact_id: (@ flow.result.id )
+  - delay: 3

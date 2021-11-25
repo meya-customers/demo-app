@@ -1,5 +1,5 @@
 triggers:
-  - keyword: front_create_conversation
+  - keyword: front_create_conversation_deprecated
     action:
       data:
         contact_source: custom
@@ -69,6 +69,7 @@ steps:
         result: false
   - flow_set: send_transcript
 
+  # This component is being deprecated
   - type: meya.front.component.conversation.create
     attachments_url:
       - https://images.unsplash.com/photo-1517352551702-336dda93455e?ixlib=rb-1.2.1&q=85&fm=jpg&crop=entropy&cs=srgb&w=1000

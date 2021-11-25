@@ -1,0 +1,101 @@
+triggers:
+  - keyword: front_create_conversation
+
+steps:
+  - flow: flow.front.contact.create_or_update
+
+  - (ask_send_transcript)
+  - ask: Send transcript?
+    buttons:
+      - text: Yes
+        action: next
+      - text: No
+        action:
+          jump: prep_send_message
+
+  - flow_set:
+      retries: 0
+
+  - (send_transcript)
+  - type: meya.front.component.message.send
+    thread_ref: (@ thread.id )
+    contact_id: (@ user.front_contact_id )
+    send_transcript: true
+    integration: integration.front
+
+  - if: (@ flow.ok)
+    then:
+      jump: prep_send_message
+    else: next
+
+  - flow_set:
+      retries: (@ flow.retries + 1)
+
+  - if: (@ flow.retries >= 3 )
+    then:
+      jump: error
+    else:
+      jump: send_transcript
+
+  - (prep_send_message)
+  - flow_set:
+      retries: 0
+
+  - (send_message)
+  - type: meya.front.component.message.send
+    contact_handle: (@ user.front_contact_handle )
+    thread_ref: (@ thread.id )
+    text: Hello!!
+    integration: integration.front
+
+  - if: (@ flow.ok)
+    then:
+      jump: conversation_creation_success
+    else: next
+
+  - flow_set:
+      retries: (@ flow.retries + 1)
+
+  - if: (@ flow.retries >= 3 )
+    then:
+      jump: error
+    else:
+      jump: send_message
+
+  - (conversation_creation_success)
+  - say: Front conversation created. (@ flow.result | string )
+  - ask: Do you want to link the conversation now?
+    buttons:
+      - text: Yes
+        action: next
+      - text: No
+        action: end
+
+  - flow_set:
+      retries: 0
+
+  - (link_thread)
+  - type: meya.front.component.conversation.link
+    message_uid: (@ flow.result.message_uid )
+    integration: integration.front
+
+  - if: (@ flow.ok)
+    then:
+      jump: success
+    else: next
+
+  - flow_set:
+      retries: (@ flow.retries + 1)
+
+  - if: (@ flow.retries >= 3 )
+    then:
+      jump: error
+    else:
+      jump: link_thread
+
+  - (success)
+  - say: Conversation linked successfully :)
+  - end
+
+  - (error)
+  - say: Maximum retries exception.
