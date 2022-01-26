@@ -4,6 +4,7 @@ triggers:
 steps:
   - (book)
   - calendly: (@ vault.calendly.event_link )
+    integration: integration.calendly
     title: Book a demo date
     description: Click "Schedule time" below to setup a face-to-face meeting.
     button_style: text
@@ -22,8 +23,8 @@ steps:
 
   - (success)
   - say: >
-      Meeting booked with (@ flow.result.payload.event.assigned_to[0] )
-      @ (@ flow.result.payload.event.start_time_pretty )
+      Meeting booked with Kaiser Sose
+      @ (@ flow.result.start_time )
   - end
 
   - (fail)

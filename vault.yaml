@@ -37,6 +37,7 @@ slack.webhook_url: xxx
 segment.enabled: false
 segment.write_key: xxx
 calendly.api_key: xxx
+calendly.access_token: xxx
 calendly.event_link: xxx
 clearbit.api_key: xxx
 webhook.enabled: false
