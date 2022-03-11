@@ -1,16 +1,21 @@
 triggers:
-  - regex: ^wit.*$
+  - regex: ^wit_.*$
     action:
       jump: (@ flow.result )
 
 steps:
-  - (wit_form)
-  - ask_form: Enter NLU text
-    expect: wit
+  - (wit_input)
+  - say: Enter NLU text
+  - type: wit_input
     integration: integration.facebook.wit
     icon: (@ config.icon.question )
-    retries: 1
     min_confidence: 0.75
+    required: true
+  - flow_set:
+      confidence: (@ flow.result.confidence )
+      result: (@ flow.result.intent )
+      wit_response: (@ flow.result.wit_response )
+      ok: true
   - jump: print
 
   - (wit_composer)

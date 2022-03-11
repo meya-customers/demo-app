@@ -19,9 +19,10 @@ steps:
     expect: email_address
   - jump: done_prechat
 
-  - (prechat_email_form)
-  - ask_form: Email?
-    expect: email_address
+  - (prechat_email_address_input)
+  - say: Email?
+  - type: email_address_input
+    required: true
   - jump: done_prechat
 
   - (prechat_regex)
@@ -48,11 +49,41 @@ steps:
   - jump: done_prechat
 
   - (prechat_dialogflow_form)
-  - ask_form: Size?
-    expect: dialogflow
+  - say: Size?
+  - type: dialogflow_input
     integration: integration.google.dialogflow.dialogflow
     language: en
     intent: size
+    required: true
+  - jump: done_prechat
+
+  - (prechat_buttons)
+  - buttons:
+      - text: Red
+        result: (@ "red" | encrypt_sensitive )
+      - text: Blue
+        result: (@ "blue" | encrypt_sensitive )
+  - jump: done_prechat
+
+  - (prechat_tiles)
+  - tiles:
+      - title: Red
+        result: (@ "red" | encrypt_sensitive )
+      - title: Blue
+        result: (@ "blue" | encrypt_sensitive )
+  - jump: done_prechat
+
+  - (prechat_choices)
+  - choices:
+      - text: Red
+        value: red
+      - text: Blue
+        value: blue
+  - jump: done_prechat
+
+  - (prechat_rating)
+  - rating: stars
+    title: How did you enjoy your experience?
   - jump: done_prechat
 
   # End "prechat" mode

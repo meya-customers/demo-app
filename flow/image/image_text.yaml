@@ -3,15 +3,15 @@ triggers:
 
 steps:
   - say: first with text...
-  - url: https://media.giphy.com/media/WWyT3VgEgIK8U/giphy.gif
+  - image: https://media.giphy.com/media/WWyT3VgEgIK8U/giphy.gif
     alt: --
     text: Cat squinting 😸
   - say: second with filename...
-  - url: https://media.giphy.com/media/WWyT3VgEgIK8U/giphy.gif
+  - image: https://media.giphy.com/media/WWyT3VgEgIK8U/giphy.gif
     alt: --
     filename: cat-squinting.gif
   - say: last with both...
-  - url: https://media.giphy.com/media/WWyT3VgEgIK8U/giphy.gif
+  - image: https://media.giphy.com/media/WWyT3VgEgIK8U/giphy.gif
     alt: --
     text: Cat squinting 😸
     filename: cat-squinting.gif

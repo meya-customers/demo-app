@@ -5,8 +5,9 @@ triggers:
 
 steps:
   - (salesforce_query_user_by_email)
-  - ask: What's the user email
-    expect: email_address
+  - say: What's the user email
+  - type: email_address_input
+    required: true
   - flow_set:
       search_query: (@ flow.result )
       searching_for: User
@@ -18,8 +19,9 @@ steps:
   - jump: check_result
 
   - (salesforce_query_contact_by_email)
-  - ask: What's the contact email
-    expect: email_address
+  - say: What's the contact email
+  - type: email_address_input
+    required: true
   - flow_set:
       search_query: (@ flow.result )
       searching_for: Contact

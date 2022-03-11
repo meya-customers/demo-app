@@ -1,0 +1,29 @@
+triggers:
+  - keyword: page_dialogflow_input
+
+steps:
+  - page:
+      - info: |
+          # Dialogflow input
+          Fill in the text according the patterns below.
+      - type: dialogflow_input
+        integration: integration.google.dialogflow.dialogflow
+        label: Size
+        icon: (@ config.icon.question )
+        placeholder: e.g. size large
+        language: en
+        intent: size
+        min_confidence: 0.75
+        required: true
+      - type: dialogflow_input
+        integration: integration.google.dialogflow.dialogflow
+        label: Smalltalk
+        icon: (@ config.icon.question )
+        placeholder: e.g. How are you?
+        language: en
+        intent_regex: ^smalltalk\.greetings\.
+        min_confidence: 0.75
+    composer:
+      visibility: collapse
+
+  - say: Your input is (@ flow.result )

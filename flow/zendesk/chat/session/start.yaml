@@ -10,15 +10,20 @@ triggers:
 
 steps:
   - (name)
-  - ask_form: Name?
+  - say: Name?
+  - type: text_input
+    required: true
     icon: (@ config.icon.person )
   - flow_set: name
   - (email)
-  - ask_form: Email?
-    expect: email_address
+  - say: Email?
+  - type: email_address_input
+    required: true
   - flow_set: email
   - (phone)
-  - ask_form: Phone?
+  - say: Phone?
+  - type: text_input
+    required: true
     icon: (@ config.icon.phone )
   - flow_set: phone
 

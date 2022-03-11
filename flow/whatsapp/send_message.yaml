@@ -3,7 +3,9 @@ triggers:
 
 steps:
   - (input)
-  - ask_form: What WhatsApp number do you want to send to?
+  - say: What WhatsApp number do you want to send to?
+  - type: text_input
+    required: true
     label: Phone
     icon: (@ config.icon.phone )
     placeholder: 'Mobile phone #'
@@ -34,7 +36,9 @@ steps:
       E164: (@ flow.enriched_phone.phone_number )
 
   - (text)
-  - ask_form: What message to send?
+  - say: What message to send?
+  - type: text_input
+    required: true
     label: Message
     icon: (@ config.icon.message )
     placeholder: ex. Hi there!

@@ -71,8 +71,9 @@ triggers:
     when: (@ thread.mode is not none )
 
 steps:
-  - hero: Do you want to continue?
-    description: 'Please pick an option:'
+  - say: |
+      ## Do you want to continue?
+      Please pick an option:
   - buttons:
       - text: Continue
         action:

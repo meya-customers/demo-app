@@ -8,8 +8,9 @@ steps:
   - ask: Last name?
   - user_set: last_name
 
-  - ask: Email?
-    expect: email_address
+  - say: Email?
+  - type: email_address_input
+    required: true
   - user_set: email
 
   - type: meya.salesforce.component.query

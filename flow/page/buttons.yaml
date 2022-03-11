@@ -1,0 +1,28 @@
+triggers:
+  - keyword: page_buttons
+
+steps:
+  - page:
+      - info: |
+          # Button time
+          Make your selection as soon as you are ready.
+      - buttons:
+          - text: Yes
+            value: true
+          - text: No
+            value: false
+        label: Question?
+        required: true
+      - buttons:
+          - A
+          - B
+          - C
+          - D
+          - E
+          - F
+          - G
+          - H
+        label: Options?
+        multi: true
+
+  - say: Your input is (@ flow.result )

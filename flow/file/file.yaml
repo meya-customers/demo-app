@@ -7,16 +7,16 @@ triggers:
         no_ask: true
 
 steps:
-  - url: https://upload.wikimedia.org/wikipedia/commons/b/b3/Wiki_markup_cheatsheet_EN.pdf
-    filename: cheatsheet.pdf
+  - file: https://upload.wikimedia.org/wikipedia/commons/b/b3/Wiki_markup_cheatsheet_EN.pdf
+    name: cheatsheet.pdf
     icon: (@ config.icon.pdf_file )
 
-  - url: https://www.w3.org/TR/PNG/iso_8859-1.txt
-    filename: iso.txt
+  - file: https://www.w3.org/TR/PNG/iso_8859-1.txt
+    name: iso.txt
     icon: (@ config.icon.txt_file )
 
-  - url: https://httpbin.org/headers
-    filename: headers.json
+  - file: https://httpbin.org/headers
+    name: headers.json
 
   - if: (@ flow.get("no_ask") )
     then: end

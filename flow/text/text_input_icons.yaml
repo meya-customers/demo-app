@@ -1,0 +1,17 @@
+triggers:
+  - keyword: text_input_icons
+
+steps:
+  - say: What's your name?
+  - type: text_input
+    required: true
+    label: Name
+  - say: Flow result (@ flow.result )
+
+  - say: What hat do you wear?
+  - type: text_input
+    required: true
+    icon: (@ config.icon.hat )
+    label: Hat
+  - say: Flow result (@ flow.result )
+

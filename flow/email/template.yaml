@@ -5,16 +5,21 @@ steps:
   - ask: Let's test sending a templated email
     quick_replies:
       - OK
-  - ask_form: What's your email?
-    expect: email_address
+  - say: What's your email?
+  - type: email_address_input
+    label: email
+    required: true
   - user_set: email
-  - ask_form: What's your name?
+  - say: What's your name?
+  - type: text_input
     label: name
-    autocomplete: name
+    required: true
   - user_set: name
-  - ask_form: What's your favorite color?
+  - say: What's your favorite color?
+  - type: text_input
     icon: streamline-light/12-design/05-colors:painting/color-tubes.svg
-    label: Color
+    label: color
+    required: true
   - flow_set: favorite_color
   - file_path: template/email/welcome.html
     template: true

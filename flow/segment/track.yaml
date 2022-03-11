@@ -8,8 +8,9 @@ triggers:
 
 steps:
   - say: start segment track test...
-  - ask_form: event name?
-    expect: email_address
+  - say: event name?
+  - type: text_input
+    required: true
   - flow_set: event_name
   - (track)
   - track: custom.segment.event.(@ flow.event_name )

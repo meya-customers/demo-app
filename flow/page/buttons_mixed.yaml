@@ -1,0 +1,40 @@
+triggers:
+  - keyword: page_buttons_mixed
+
+steps:
+  - page:
+      - buttons:
+          - Text
+          - text: Value
+            value: value_x
+          - text: Result
+            result: result_x
+          - text: Data
+            data:
+              data_a: 1
+              data_b: 2
+          - text: Action
+            action:
+              jump: action
+              data:
+                action_x: x
+          - text: URL
+            url: https://www.example.org?q=x
+    submit:
+      text: Next
+    composer:
+      visibility: show
+    quick_replies:
+      - text: Action
+        action:
+          jump: action
+          data:
+            action_y: y
+      - text: URL
+        url: https://www.example.org?q=y
+
+  - say: Next executed (@ flow )
+  - end
+
+  - (action)
+  - say: Action executed (@ flow )

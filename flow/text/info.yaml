@@ -1,0 +1,27 @@
+triggers:
+  - keyword: info
+
+steps:
+  - info: |
+      # Info
+      Here is some info
+    quick_replies:
+      - text: Next
+        action: next
+
+  - info: |
+      **This is bold text**
+      *This is italic text*
+      > Blockquotes can also be nested...
+      [link text](http://dev.nodeca.com)
+      [link with title](http://nodeca.github.io/pica/demo/ "title text!")
+      [email link](mailto:support@meya.ai)
+      Autoconverted link https://github.com/nodeca/pica
+      ``` js
+      var foo = function (bar) {
+        return bar++;
+      };
+
+      console.log(foo(5));
+      ```
+      See [more](https://markdown-it.github.io/)

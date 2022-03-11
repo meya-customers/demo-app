@@ -9,8 +9,9 @@ triggers:
       jump: text_4
 
 steps:
-  - hero: Here are some buttons
-    description: 'Please pick one:'
+  - say: |
+      ## Here are some buttons
+      Please pick one:
   - buttons:
       - text: Result 1
         result:

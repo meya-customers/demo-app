@@ -2,8 +2,7 @@ triggers:
   - keyword: tile_options
 
 steps:
-  - ask:
-    button_style: radio
+  - button_style: radio
     layout: column
     tiles:
       - title: How many copies?

@@ -1,10 +1,11 @@
 triggers:
   - keyword: name_form
+
 steps:
-  - say: Hey there...
-  - ask_form: What's your name?
+  - say: Hey there, what's your name?
+  - type: text_input
     label: Name
-    autocomplete: name
+    required: true
     composer:
       visibility: hide
   - user_set: name

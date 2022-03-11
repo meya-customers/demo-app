@@ -4,14 +4,19 @@ triggers:
       jump: (@ flow.result )
 
 steps:
-  - (dialogflow_form)
-  - ask_form: Enter NLU text
-    expect: dialogflow
+  - (dialogflow_input)
+  - say: Enter NLU text
+  - type: dialogflow_input
     integration: integration.google.dialogflow.dialogflow
     icon: (@ config.icon.question )
     language: en
-    retries: 1
     min_confidence: 0.75
+    required: true
+  - flow_set:
+      confidence: (@ flow.result.confidence )
+      result: (@ flow.result.intent )
+      dialogflow_response: (@ flow.result.dialogflow_response )
+      ok: true
   - jump: print
 
   - (dialogflow_composer)

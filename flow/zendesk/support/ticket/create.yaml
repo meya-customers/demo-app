@@ -50,7 +50,9 @@ steps:
   - thread_set:
       mode: prechat
 
-  - ask_form: Name?
+  - say: Name?
+  - type: text_input
+    required: true
     label: Name
     icon: (@ config.icon.person )
     quick_replies:
@@ -58,14 +60,17 @@ steps:
         result:
   - flow_set: name
 
-  - ask_form: Email?
-    expect: email_address
+  - say: Email?
+  - type: email_address_input
+    required: true
     quick_replies:
       - text: Skip (blank)
         result:
   - flow_set: email
 
-  - ask_form: Phone?
+  - say: Phone?
+  - type: text_input
+    required: true
     label: Phone
     icon: (@ config.icon.phone )
     quick_replies:
@@ -73,14 +78,18 @@ steps:
         result:
   - flow_set: phone
 
-  - ask_form: Subject?
+  - say: Subject?
+  - type: text_input
+    required: true
     label: Ticket subject
     quick_replies:
       - text: Skip (generate)
         result:
   - flow_set: subject
 
-  - ask_form: Comment?
+  - say: Comment?
+  - type: text_input
+    required: true
     label: Ticket comment
     quick_replies:
       - text: Skip (use transcript)

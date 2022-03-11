@@ -2,9 +2,9 @@ triggers:
   - keyword: front_integration_url_transcript
 
 steps:
-
-  - ask_form: Email?
-    expect: email_address
+  - say: Email?
+  - type: email_address_input
+    required: true
   - flow_set:
       email: (@ flow.result)
 

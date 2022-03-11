@@ -2,8 +2,7 @@ triggers:
   - keyword: tile_yes_no
 
 steps:
-  - ask:
-    button_style: action
+  - button_style: action
     layout: column
     tiles:
       - title: Do you want to continue?

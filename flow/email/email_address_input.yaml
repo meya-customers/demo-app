@@ -3,7 +3,9 @@ triggers:
 
 steps:
   - (start)
-  - type: meya.email.component.address.ask.form
+  - type: email_address_input
+    required: true
+    icon: (@ config.icon.email_address )
     quick_replies:
       - text: Why do you need my email?
         action:
@@ -13,19 +15,10 @@ steps:
       visibility: collapse
       placeholder: Have a question?
     error_message: Not a valid email address, please try again.
-    retries: 3
-  - cond:
-      - (@ not flow.ok ):
-          jump: invalid_email
-      - (@ flow.result.startswith("test") ):
-          jump: test_email
-    default:
-      jump: valid_email
-
-  - (invalid_email)
-  - say: Could not determine your email address after (@ flow.retry_count) retries.
-  - end:
-      ok: false
+  - if: (@ flow.result.startswith("test") )
+    then:
+      jump: test_email
+    else: next
 
   - (valid_email)
   - say: Hi (@ flow.result )️ 👋

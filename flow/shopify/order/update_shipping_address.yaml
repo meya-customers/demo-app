@@ -2,22 +2,34 @@ triggers:
   - keyword: shopify_order_update_shipping_address
 
 steps:
-  - ask_form: Shipping address?
+  - say: Shipping address?
+  - type: text_input
+    required: true
   - flow_set: address
 
-  - ask_form: Address 2?
+  - say: Address 2?
+  - type: text_input
+    required: true
   - flow_set: address_2
 
-  - ask_form: City?
+  - say: City?
+  - type: text_input
+    required: true
   - flow_set: city
 
-  - ask_form: Postal code?
+  - say: Postal code?
+  - type: text_input
+    required: true
   - flow_set: postal_code
 
-  - ask_form: Country?
+  - say: Country?
+  - type: text_input
+    required: true
   - flow_set: country
 
-  - ask_form: Province?
+  - say: Province?
+  - type: text_input
+    required: true
   - flow_set: province
 
   - type: meya.shopify.component.order.update_shipping_address

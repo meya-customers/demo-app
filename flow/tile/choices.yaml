@@ -1,0 +1,25 @@
+triggers:
+  - keyword: choices
+
+steps:
+  - say: Please choose a pet
+  - required: true
+    choices:
+      - Dog
+      - Cat
+      - Fish
+      - Bird
+    submit:
+      text: Next
+  - say: Flow result (@ flow.result )
+
+  - label: Parks visited
+    multi: true
+    choices:
+      - Algonquin
+      - Fundy
+      - Channel Islands
+      - Gates of the Arctic
+  - say: Flow result (@ flow.result )
+    quick_replies:
+      - text: choices

@@ -1,0 +1,19 @@
+triggers:
+  - keyword: page_regex_input
+
+steps:
+  - page:
+      - info: |
+          # Regex input
+          Fill in the text according the patterns below.
+      - regex_input: ^[a-d]+$
+        label: A to D
+        required: true
+        placeholder: Enter letters A to D
+      - regex_input: ^[e-j]*$
+        label: E to J
+        placeholder: Enter letters E to J
+    composer:
+      visibility: collapse
+
+  - say: Your input is (@ flow.result )

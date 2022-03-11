@@ -1,0 +1,11 @@
+triggers:
+  - keyword: page_text_input
+
+steps:
+  - page:
+      - info: Hi, what is your name?
+      - type: text_input
+        label: Name
+        required: true
+
+  - say: Your input is (@ flow.result )

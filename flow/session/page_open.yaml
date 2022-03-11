@@ -22,8 +22,9 @@ steps:
 #      assign_to_agent: roeland+assistant@meya.ai
 #      assign_to_group: Bot
   - component.session.track
-  - hero: Start your journey...
-    description: Welcome to the (@ flow.page )! 🔮
+  - say: |
+      ## Start your journey...
+      Welcome to the (@ flow.page )! 🔮
     quick_replies:
       - button
       - email

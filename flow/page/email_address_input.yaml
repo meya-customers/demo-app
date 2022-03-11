@@ -1,0 +1,11 @@
+triggers:
+  - keyword: page_email_address_input
+
+steps:
+  - page:
+      - info: Hi, what is your email address?
+      - type: email_address_input
+        label: Email
+        required: true
+
+  - say: Your input is (@ flow.result )

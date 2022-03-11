@@ -1,0 +1,22 @@
+triggers:
+  - keyword: page_media
+
+steps:
+  - page:
+      - info: '## Files'
+      - file: https://upload.wikimedia.org/wikipedia/commons/b/b3/Wiki_markup_cheatsheet_EN.pdf
+        name: cheatsheet.pdf
+        icon: (@ config.icon.pdf_file )
+      - file: https://www.w3.org/TR/PNG/iso_8859-1.txt
+        name: iso.txt
+        icon: (@ config.icon.txt_file )
+      - info: '## Images'
+      - image: https://images.unsplash.com/photo-1476610182048-b716b8518aae?ixlib=rb-1.2.1&q=85&fm=jpg&crop=entropy&cs=srgb&w=1000
+        alt: Photo of a landscape and waterfall
+      - image: https://images.unsplash.com/photo-1517352551702-336dda93455e?ixlib=rb-1.2.1&q=85&fm=jpg&crop=entropy&cs=srgb&w=1000
+        alt: Photo of a llama
+    submit:
+    quick_replies:
+      - text: Done
+        action: next
+  - status: Done

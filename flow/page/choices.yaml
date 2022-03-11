@@ -1,0 +1,29 @@
+triggers:
+  - keyword: page_choices
+
+steps:
+  - page:
+      - info: |
+          # Choice time
+          Make your selection as soon as you are ready.
+      - choices:
+          - text: Yes
+            value: true
+          - text: No
+            value: false
+          - text: Maybe
+            disabled: true
+        label: Question?
+        required: true
+      - choices:
+          - Alpha Centauri
+          - Canes Venatici
+          - Canis Major
+          - text: Coma Berenices
+            disabled: true
+          - Corona Borealis
+          - Piscis Austrinus
+        multi: true
+        label: Options?
+
+  - say: Your input is (@ flow.result )

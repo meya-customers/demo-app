@@ -2,7 +2,9 @@ triggers:
   - keyword: zendesk_integration_url_transcript
 
 steps:
-  - ask_form: Name?
+  - say: Name?
+  - type: text_input
+    required: true
     label: Name
     icon: (@ config.icon.person )
     quick_replies:
@@ -10,8 +12,9 @@ steps:
         result:
   - flow_set: name
 
-  - ask_form: Email?
-    expect: email_address
+  - say: Email?
+  - type: email_address_input
+    required: true
     quick_replies:
       - text: Skip (blank)
         result:

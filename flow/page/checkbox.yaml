@@ -1,0 +1,16 @@
+triggers:
+  - keyword: page_checkbox
+
+steps:
+  - page:
+      - info: |
+          # Checkbox time
+          Make your selection as soon as you are ready.
+      - checkbox: Example here
+        label: Question?
+      - checkbox: I accept
+        label: Legal
+        required: true
+        error_message: Please accept
+
+  - say: Your input is (@ flow.result )

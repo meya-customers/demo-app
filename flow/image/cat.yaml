@@ -7,7 +7,7 @@ triggers:
 
 steps:
   - say: Here's a cat image
-  - url: >-
+  - image: >-
       https://cataas.com/cat/gif?unique=(@
         flow.event.data.text | urlencode
       )

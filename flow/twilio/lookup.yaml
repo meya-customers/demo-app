@@ -8,7 +8,9 @@ triggers:
 
 steps:
   - (input)
-  - ask_form: What's your mobile phone number?
+  - say: What's your mobile phone number?
+  - type: text_input
+    required: true
     label: Phone
     icon: phone
     placeholder: 'Mobile phone #'

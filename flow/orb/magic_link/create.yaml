@@ -54,8 +54,9 @@ steps:
           jump: wait
 
   - (email)
-  - ask_form: What's your email?
-    expect: email_address
+  - say: What's your email?
+  - type: email_address_input
+    required: true
   - flow_set: email_address
   - file_path: template/email/magic_link.html
     template: true

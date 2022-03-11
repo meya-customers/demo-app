@@ -2,8 +2,9 @@ triggers:
   - keyword: zendesk_support_user_search
 
 steps:
-  - ask_form: What is the user's email?
-    expect: email_address
+  - say: What is the user's email?
+  - type: email_address_input
+    required: true
   - type: meya.zendesk.support.component.user.search
     integration: integration.zendesk.support
     query:

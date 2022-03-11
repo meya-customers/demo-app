@@ -1,0 +1,15 @@
+triggers:
+  - keyword: checkbox
+
+steps:
+  - say: Do you agree?
+  - required: true
+    checkbox: I agree
+    submit:
+      text: Next
+
+  - say: Are you a human?
+  - checkbox: I am a human
+  - say: Flow result (@ flow.result )
+    quick_replies:
+      - text: checkbox

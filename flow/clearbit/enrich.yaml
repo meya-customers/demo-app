@@ -8,8 +8,9 @@ triggers:
 
 steps:
   - say: Let's enrich an email using Clearbit.
-  - ask_form: What email to enrich?
-    expect: email_address
+  - say: What email to enrich?
+  - type: email_address_input
+    required: true
   - flow_set: email
   - (enrich)
   - type: meya.clearbit.component.enrich

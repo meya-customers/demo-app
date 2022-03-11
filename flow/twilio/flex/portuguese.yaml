@@ -4,7 +4,9 @@ steps:
       jump: salutation
     else: next
 
-  - ask_form: Qual seu nome?
+  - say: Qual seu nome?
+  - type: text_input
+    required: true
   - user_set: name
 
   - (salutation)

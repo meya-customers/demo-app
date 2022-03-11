@@ -25,7 +25,7 @@ steps:
       placeholder: Ideally your favourite one
   - say: "This was your reply: '(@ flow.result )'"
 
-  - url: https://images.unsplash.com/photo-1560246496-1c10714a3ea0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80
+  - image: https://images.unsplash.com/photo-1560246496-1c10714a3ea0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80
     alt: Toy tiger
   - ask:
     quick_replies:

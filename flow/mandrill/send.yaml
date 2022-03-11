@@ -14,14 +14,21 @@ triggers:
 
 steps:
   - say: Let's test sending an email using Mandrill.
-  - ask_form: What email to send to?
-    expect: email_address
+  - say: What email to send to?
+  - type: email_address_input
+    required: true
   - flow_set: email
-  - ask_form: Name?
+  - say: Name?
+  - type: text_input
+    required: true
   - flow_set: name
-  - ask_form: Subject?
+  - say: Subject?
+  - type: text_input
+    required: true
   - flow_set: subject
-  - ask_form: Text?
+  - say: Text?
+  - type: text_input
+    required: true
   - flow_set: text
   - flow_set:
       html:

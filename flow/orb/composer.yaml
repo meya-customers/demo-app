@@ -89,14 +89,14 @@ steps:
                 - text: b
                   action: next
           composer: (@ flow.composer )
-      - text: ask_email
+      - text: email_address_input
         action:
-          ask_form: Composer
-          expect: email_address
+          type: email_address_input
+          required: true
           composer: (@ flow.composer )
       - text: ask_text
         action:
-          ask_form: Composer
+          type: text_input
           composer: (@ flow.composer )
       - text: ask_file
         action:

@@ -12,14 +12,19 @@ steps:
   - (start)
   - say: start segment identify test...
   - (email)
-  - ask_form: email?
-    expect: email_address
+  - say: email?
+  - type: email_address_input
+    required: true
   - user_set: email
   - (age)
-  - ask_form: age?
+  - say: age?
+  - type: text_input
+    required: true
   - user_set: age
   - (SIN)
-  - ask_form: SIN?
+  - say: SIN?
+  - type: text_input
+    required: true
   - user_set: SIN
   - (identify)
   - identify:
