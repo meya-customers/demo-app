@@ -1,0 +1,213 @@
+triggers:
+  - keyword: header
+  - regex: ^header_.*$
+    action:
+      jump: (@ flow.result )
+
+steps:
+  - (header_button)
+  - page:
+      - info: |
+          # Lots of info here...
+
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    header:
+      buttons:
+        - icon: (@ config.icon.left )
+          action: next
+    submit:
+  - jump: done
+
+  - (header_text_buttons)
+  - status: Text buttons
+    header:
+      buttons:
+        - text: Menu
+          menu:
+            - Item
+        - text: Next
+          action: next
+  - jump: done
+
+  - (header_combined_buttons)
+  - status: Combined buttons
+    header:
+      buttons:
+        - text: Menu
+          icon: (@ config.icon.menu )
+          menu:
+            - Item
+        - text: Next
+          icon: (@ config.icon.right )
+          action: next
+  - jump: done
+
+  - (header_disabled_buttons)
+  - status: Disabled buttons
+    header:
+      buttons:
+        - icon: (@ config.icon.right )
+          disabled: true
+        - text: Next
+          disabled: true
+        - text: Next
+          icon: (@ config.icon.right )
+          disabled: true
+    quick_replies:
+      - text: Continue
+        action: next
+  - jump: done
+
+  - (header_combined_title)
+  - status: Combined title
+    header:
+      buttons:
+        - icon: (@ config.icon.menu )
+          menu:
+            - Item
+      title:
+        text: Sunny
+        icon: (@ config.icon.sun )
+    quick_replies:
+      - text: Continue
+        action: next
+  - jump: done
+
+  - (header_progress)
+  - status: Progress
+    header:
+      progress: (@ flow.progress | default(50) )
+    quick_replies:
+      - text: 0%
+        action:
+          jump: header_progress
+          data:
+            progress: 0
+      - text: 25%
+        action:
+          jump: header_progress
+          data:
+            progress: 25
+      - text: 50%
+        action:
+          jump: header_progress
+          data:
+            progress: 50
+      - text: 75%
+        action:
+          jump: header_progress
+          data:
+            progress: 75
+      - text: 100%
+        action:
+          jump: header_progress
+          data:
+            progress: 100
+      - text: Continue
+        action: next
+  - jump: done
+
+  - (header_progress_percent)
+  - status: Progress
+    header:
+      progress:
+        value: 50
+        show_percent: true
+    quick_replies:
+      - text: Continue
+        action: next
+  - jump: done
+
+  - (header_milestones)
+  - status: Milestones
+    header:
+      milestones: (@ flow.milestones | default([false, true, false]) )
+    quick_replies:
+      - text: (None)
+        action:
+          jump: header_milestones
+          data:
+            milestones: [false, false, false]
+      - text: One
+        action:
+          jump: header_milestones
+          data:
+            milestones: [true, false, false]
+      - text: Two
+        action:
+          jump: header_milestones
+          data:
+            milestones: [false, true, false]
+      - text: Three
+        action:
+          jump: header_milestones
+          data:
+            milestones: [false, false, true]
+      - text: Continue
+        action: next
+  - jump: done
+
+  - (header_text_milestones)
+  - status: Milestones
+    header:
+      milestones:
+        - Alpha
+        - Beta
+        - text: Gamma
+          current: true
+        - Delta
+    quick_replies:
+      - text: Continue
+        action: next
+  - jump: done
+
+  - (header_thread_title)
+  - header:
+      title: Agent mode
+  - status: Agent mode
+    quick_replies:
+      - text: Continue
+        action: next
+  - jump: done
+
+  - (header_thread_buttons)
+  - header:
+      buttons:
+        - icon: (@ config.icon.phone )
+          button_id: _static_button
+          context:
+            product: phone
+        - icon: (@ config.icon.code )
+          button_id: _static_button
+          context:
+            product: code
+      extra_buttons:
+        - icon: (@ config.icon.txt_file )
+          button_id: _static_button
+          context:
+            product: transcript
+  - status: Phone button
+    quick_replies:
+      - text: Continue
+        action: next
+  - jump: done
+
+  - (header_thread_reset)
+  - header:
+  - status: Reset
+    quick_replies:
+      - text: Continue
+        action: next
+  - jump: done
+
+  - (done)
+  - say: Thanks for testing header config
+    header:
+      title: (Done)
+    quick_replies:
+      - (@ flow.result )
+

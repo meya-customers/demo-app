@@ -272,20 +272,20 @@
 </main>
 <footer class="orb-footer">
     <nav class="orb-nav">
-        <span class="orb-nav-link">
-            Blog
-        </span>
-        <span class="orb-nav-link">
-            Press
-        </span>
-        <span class="orb-nav-link">
-            Refer
-        </span>
+        <a class="orb-nav-link" href="?connect=false">
+            connect=false
+        </a>
         <a class="orb-nav-link" href="?embed=false">
             embed=false
         </a>
         <a class="orb-nav-link" href="?user=u1">
-            user=u1
+            user-id=u1
+        </a>
+        <a class="orb-nav-link" href="?integration-id=integration.orb.alt">
+            integration=alt
+        </a>
+        <a class="orb-nav-link" href="?composer-visibility=collapse">
+            composer=collapse
         </a>
     </nav>
     <nav class="orb-nav">
@@ -325,25 +325,28 @@
 </script>
 <script type="text/javascript">
     const pageParams = new URL(location.href).searchParams
-    const userId = pageParams.get("user")
+    const integrationId = pageParams.get("integration-id")
+    const connect = pageParams.get("connect")
+    const composerVisibility = pageParams.get("composer-visibility")
+    const userId = pageParams.get("user-id")
     window.orbConfig = {
         connectionOptions: {
             gridUrl: "https://grid.meya.ai",
             appId: "app-73c6d31d4f544a72941e21fb518b5737",
-            integrationId: "integration.orb",
-            ...(userId ? {
+            integrationId: integrationId ? integrationId : "integration.orb",
+            ...(userId && {
                 userId,
                 threadId: "main",
-            } : {})
-        },
-        theme: { "brandColor": "#4989ea" },
-        launcher: {
-            type: "message",
-            icon: "streamline-regular/21-messages-chat-smileys/02-messages-speech-bubbles/messages-bubble-question.svg",
-            text: "Help",
+            }),
+            connect: connect === "false" ? false : undefined
         },
         container: document.querySelector("#orb-mount"),
         windowApi: true,
+        ...(composerVisibility && {
+            composer: {
+                visibility: composerVisibility
+            },
+        })
     };
     (function () {
         var script = document.createElement("script")

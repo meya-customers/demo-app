@@ -1,0 +1,53 @@
+triggers:
+  - keyword: orb_launcher
+
+steps:
+  - say: Set orb launcher?
+  - buttons:
+      - text: Orb
+        action:
+          jump: orb
+      - text: Text
+        action:
+          jump: text
+      - text: Icon
+        action:
+          jump: icon
+      - text: Hide
+        action:
+          jump: hide
+      - text: Reset
+        action:
+          jump: reset
+
+  - (orb)
+  - orb_launcher:
+      type: orb
+  - jump: done
+
+  - (text)
+  - orb_launcher:
+      type: message
+      text: Hello
+      icon: false
+  - jump: done
+
+  - (icon)
+  - orb_launcher:
+      type: message
+      text: false
+      icon: (@ config.icon.moon )
+  - jump: done
+
+  - (hide)
+  - orb_launcher:
+      type: hide
+  - jump: done
+
+  - (reset)
+  - orb_launcher:
+  - jump: done
+
+  - (done)
+  - say: Done
+  - jump: start

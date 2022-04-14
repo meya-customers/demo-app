@@ -1,0 +1,34 @@
+triggers:
+  - keyword: orb_media_upload
+
+steps:
+  - say: Set media upload?
+  - buttons:
+      - text: Disable
+        action:
+          jump: disable
+      - text: Custom
+        action:
+          jump: custom
+      - text: Reset
+        action:
+          jump: reset
+
+  - (disable)
+  - orb_media_upload:
+      all: false
+  - jump: done
+
+  - (custom)
+  - orb_media_upload:
+      file: false
+      image: true
+  - jump: done
+
+  - (reset)
+  - orb_media_upload:
+  - jump: done
+
+  - (done)
+  - say: Done
+  - jump: start

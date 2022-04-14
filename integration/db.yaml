@@ -1,1 +1,5 @@
 type: meya.db.integration
+presence_ledger:
+  persist: (@ vault.db.persist )
+ws_ledger:
+  persist: (@ vault.db.persist )

@@ -54,8 +54,7 @@ steps:
     default: end
 
   - (host)
-  - thread_set:
-      mode: user_connect
+  - mode: user_connect
   - ask: Ready for others to join
     tiles:
       - title: Thread

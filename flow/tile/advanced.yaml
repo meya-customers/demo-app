@@ -1,9 +1,20 @@
 triggers:
   - keyword: tile_advanced
+    action:
+      data:
+        button_style: action
+  - keyword: tile_advanced_radio
+    action:
+      data:
+        button_style: radio
+  - keyword: tile_advanced_text
+    action:
+      data:
+        button_style: text
 
 steps:
-  - ask: Advanced tiles
-    tiles:
+  - say: Advanced tiles
+  - tiles:
       - image:
           url: https://cataas.com/cat/says/Tile%200
         title: Title 0
@@ -25,6 +36,10 @@ steps:
             result: 5
           - text: Button 6
             result: 6
+          - text: Menu
+            menu:
+              - text: Button 7
+                result: 7
         description: Circumnavigated how far away ship of the imagination star stuff
           harvesting star light great turbulent clouds a billion trillion
       - image:
@@ -73,5 +88,6 @@ steps:
             result: 14
         description: Circumnavigated how far away ship of the imagination star stuff
           harvesting star light great turbulent clouds a billion trillion
+    button_style: (@ flow.button_style )
   - say: Flow result (@ flow.result )
 

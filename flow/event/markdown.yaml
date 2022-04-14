@@ -77,6 +77,11 @@ steps:
     markdown: true
   - jump: done
 
+  - (markdown_reset_thread)
+  - markdown:
+  - say: test **text**
+  - jump: done
+
   - (markdown_on)
   - say: test **text**
     markdown: true
@@ -85,6 +90,18 @@ steps:
   - (markdown_off)
   - say: test **text**
     markdown: false
+  - jump: done
+
+  - (markdown_off_flow)
+  - markdown: false
+    scope: flow
+  - say: test **text**
+  - say: '## test2'
+  - jump: done
+
+  - (markdown_off_thread)
+  - markdown: false
+  - say: test **text**
   - jump: done
 
   - (markdown_linkify)

@@ -20,6 +20,8 @@ steps:
       - Black Rhino
       - Buffalo
       - Orynx
+      - text: Dragon
+        disabled: true
     composer:
       focus: blur
       placeholder: Ideally your favourite one

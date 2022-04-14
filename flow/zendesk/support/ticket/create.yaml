@@ -47,8 +47,7 @@ steps:
   - (name)
 
   # Start "prechat" mode to collect sensitive details, all user responses will be encrypted
-  - thread_set:
-      mode: prechat
+  - mode: prechat
 
   - say: Name?
   - type: text_input
@@ -97,8 +96,7 @@ steps:
   - flow_set: comment
 
   # Done "prechat" mode
-  - thread_set:
-      mode:
+  - mode:
 
   - (create)
   - note: This is a note before ticket creation

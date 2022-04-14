@@ -10,6 +10,7 @@ steps:
           - text: Result
             result: result_x
           - text: Data
+            icon: (@ config.icon.sun )
             data:
               data_a: 1
               data_b: 2
@@ -22,6 +23,16 @@ steps:
             url: https://www.example.org?q=x
     submit:
       text: Next
+    extra_buttons:
+      - text: Result
+        icon: (@ config.icon.help )
+        result: result_z
+      - text: Action
+        icon: (@ config.icon.moon )
+        action:
+          jump: action
+          data:
+            action_x: z
     composer:
       visibility: show
     quick_replies:
@@ -34,7 +45,11 @@ steps:
         url: https://www.example.org?q=y
 
   - say: Next executed (@ flow )
+    quick_replies:
+      - page_buttons_mixed
   - end
 
   - (action)
   - say: Action executed (@ flow )
+    quick_replies:
+      - page_buttons_mixed

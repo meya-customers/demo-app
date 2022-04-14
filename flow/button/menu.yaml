@@ -1,0 +1,61 @@
+triggers:
+  - keyword: button_menu
+
+steps:
+  - say: Open a menu
+  - buttons:
+      - text: Button menu
+        menu:
+          - text: Result
+            result: 10
+          - text: Action
+            action:
+              say: Action
+          - text: Disabled
+            disabled: true
+          - text: Link
+            url: https://example.org/?n=5
+          - '---'
+          - text: Nested
+            menu:
+              - text: Result nested
+                result: nested
+              - text: Action
+                action:
+                  say: Action nested
+              - text: Nested nested
+                menu:
+                  - text: Result nested nested
+                    result: nested nested
+    quick_replies:
+      - text: Quick reply menu
+        menu:
+          - A
+          - B
+          - C
+          - D
+          - E
+          - F
+          - G
+          - H
+          - I
+          - J
+          - K
+          - L
+          - M
+          - N
+          - O
+          - P
+          - Q
+          - R
+          - S
+          - T
+          - U
+          - V
+          - W
+          - X
+          - Y
+          - Z
+  - say: You chose (@ flow.result )
+    quick_replies:
+      - button_menu

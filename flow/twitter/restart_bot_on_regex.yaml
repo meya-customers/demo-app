@@ -3,5 +3,4 @@ triggers:
     when: (@ event_user.type.system and event.data.integration_id == 'integration.twitter')
 
 steps:
-  - thread_set:
-      mode: bot
+  - mode: bot

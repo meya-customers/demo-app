@@ -6,8 +6,7 @@ steps:
   # Start "prechat" mode to collect sensitive details, all user responses will be encrypted
   - flow_set: branch
   - say: Prechat starting
-  - thread_set:
-      mode: prechat
+  - mode: prechat
   - jump: (@ flow.branch )
 
   - (prechat)
@@ -91,8 +90,7 @@ steps:
   - user_set: result
   - thread_set: result
   - say: Prechat done
-  - thread_set:
-      mode:
+  - mode:
 
   - say: Event (@ flow.event )
   - say: Flow scope (@ flow.result ) / ENCRYPTED (@ encrypted_flow.result )

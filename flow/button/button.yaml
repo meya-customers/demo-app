@@ -30,6 +30,16 @@ steps:
         button_id: _static_button
         context:
           product: marmalade
+      - text: Menu 7
+        menu:
+          - text: Result 10
+            result: 10
+          - text: Result 11
+            result: 11
+          - text: Result 20
+            result: 20
+      - text: Disabled
+        disabled: true
     composer:
       visibility: hide
 

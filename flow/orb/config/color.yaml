@@ -1,0 +1,22 @@
+triggers:
+  - keyword: orb_color
+
+steps:
+  - say: Please pick a new color
+  - regex_input: ^\#[0-9a-f]{6}$
+    required: true
+    quick_replies:
+      - text: Reset
+        result:
+      - text: Red
+        result: '#ff0000'
+      - text: Green
+        result: '#00ff00'
+      - text: Blue
+        result: '#0000ff'
+      - text: Cancel
+        action: end
+  - orb_theme:
+      brand_color: (@ flow.result )
+  - say: Done
+  - jump: start

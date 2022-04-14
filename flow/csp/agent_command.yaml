@@ -3,8 +3,8 @@ triggers:
 
 steps:
   # Publish as the agent
-  - flow_set:
-      event_user_id: (@ flow.event.data.user_id )
+  - event_user_id: (@ flow.event.data.user_id )
+    scope: flow
   - ask: Which order do you need help with?
     buttons:
       - text: Order 12345

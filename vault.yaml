@@ -1,3 +1,4 @@
+db.persist: false
 sunshine_conversations.app_id: xxx
 sunshine_conversations.api_key_id: xxx
 sunshine_conversations.api_secret: xxx

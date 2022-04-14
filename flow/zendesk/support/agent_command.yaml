@@ -10,8 +10,8 @@ triggers:
 steps:
   - (verify_phone)
   # Publish as the agent
-  - flow_set:
-      event_user_id: (@ flow.event.data.user_id )
+  - event_user_id: (@ flow.event.data.user_id )
+    scope: flow
   - ask: OK, to verify, what is your phone number?
   - flow_set: phone
   - type: meya.zendesk.support.component.user.show

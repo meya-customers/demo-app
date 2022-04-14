@@ -82,7 +82,7 @@ jobs:
         run: meya push --force --build-image
 
       - name: Set up Google Cloud SDK
-        uses: google-github-actions/setup-gcloud@master
+        uses: google-github-actions/setup-gcloud@main
         if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/develop'
         with:
           version: 321.0.0

@@ -1,6 +1,5 @@
 steps:
-  - thread_set:
-      mode: bot
+  - mode: bot
   - ask: Did we solve your problem?
     quick_replies:
       - Yes
@@ -16,8 +15,7 @@ steps:
   - end
 
   - (reopen)
-  - thread_set:
-      mode: agent
+  - mode: agent
   - type: meya.zendesk.support.component.ticket.update
     integration: integration.zendesk.support
     status: open

@@ -3,5 +3,4 @@ triggers:
     when: (@ event_user.type.system and event.data.integration_id == 'integration.facebook.messenger')
 
 steps:
-  - thread_set:
-      mode: agent
+  - mode: agent

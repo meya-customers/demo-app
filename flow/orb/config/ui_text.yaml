@@ -1,0 +1,38 @@
+triggers:
+  - keyword: orb_ui_text
+
+steps:
+  - say: Set UI text?
+  - buttons:
+      - text: Custom
+        action:
+          jump: custom
+      - text: Reset
+        action:
+          jump: reset
+
+  - (custom)
+  - orb_composer:
+      placeholder_text: Custom placeholder
+      collapse_placeholder_text: Custom collapsed placeholder
+      file_button_text: Custom file
+      file_send_text: Custom send
+      image_button_text: Custom image
+      camera_button_text: Custom camera
+      gallery_button_text: Custom gallery
+  - orb_menu:
+      close_text: Custom close
+      back_text: Custom back
+  - orb_drop:
+      drag_and_drop_text: Custom drop here
+  - jump: done
+
+  - (reset)
+  - orb_composer:
+  - orb_menu:
+  - orb_drop:
+  - jump: done
+
+  - (done)
+  - say: Done
+  - jump: start

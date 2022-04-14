@@ -6,6 +6,5 @@ steps:
   - flow_set:
       mode: (@ flow.groups[0] )
   - say: Setting mode to (@ flow.mode )...
-  - thread_set:
-      mode: (@ flow.mode )
+  - mode: (@ flow.mode )
   - say: Done. To reset type "mode_bot"

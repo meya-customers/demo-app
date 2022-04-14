@@ -1,0 +1,6 @@
+type: meya.orb.integration
+theme:
+  brand_color: '#2ac95b'
+composer:
+  visibility: hide
+identity_verification: (@ vault.orb.identity_verification )

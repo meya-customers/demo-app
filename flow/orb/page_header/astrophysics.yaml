@@ -8,13 +8,13 @@ steps:
     quick_replies:
       - text: Astronomy
         action:
-          flow: flow.orb.header.astronomy
+          flow: flow.orb.page_header.astronomy
       - text: Cosmology
         action:
-          flow: flow.orb.header.cosmology
+          flow: flow.orb.page_header.cosmology
       - text: Astrophysics
         action:
-          flow: flow.orb.header.astrophysics
+          flow: flow.orb.page_header.astrophysics
       - text: Astrobiology
         action:
-          flow: flow.orb.header.astrobiology
+          flow: flow.orb.page_header.astrobiology

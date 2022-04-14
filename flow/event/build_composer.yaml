@@ -1,6 +1,6 @@
 triggers:
-  - keyword: composer
-  - keyword: default composer
+  - keyword: build_composer
+  - keyword: build_default_composer
     action:
       jump: build
 
@@ -57,7 +57,7 @@ steps:
           visibility: show
 
   - (build)
-  - component.orb.build_composer
+  - component.event.build_composer
   - flow_set: composer
   - ask: Configured (@ flow.composer )
     buttons:

@@ -16,16 +16,14 @@ steps:
       event_user_id: (@ flow.event.data.user_id )
     async: true
     thread_id: (@ flow.thread_id )
-  - thread_set:
-      mode:
+  - mode:
   - end
 
   - (send)
-  - thread_set:
-      mode: user
+  - mode: user
   - say: (@ flow.message )
-  - flow_set:
-      event_user_id:
+  - event_user_id:
+    scope: flow
   - ask: Would you like to reply?
     buttons:
       - text: Yes
@@ -35,5 +33,4 @@ steps:
             thread_id: (@ flow.sender_thread_id )
       - text: No
         action: next
-  - thread_set:
-      mode:
+  - mode:

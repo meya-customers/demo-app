@@ -3,8 +3,8 @@ triggers:
 
 steps:
   # Publish as the agent
-  - flow_set:
-      event_user_id: (@ flow.event.data.user_id )
+  - event_user_id: (@ flow.event.data.user_id )
+    scope: flow
   - say: Executing the `/slash` command.
   - ask: Which pill?
     buttons:
@@ -17,12 +17,10 @@ steps:
 
   - (blue_pill)
   - say: Welcome to the real world!
-  - thread_set:
-      mode: blue
+  - mode: blue
   - end
 
   - (red_pill)
   - say: Welcome back to the Matrix.
-  - thread_set:
-      mode: red
+  - mode: red
   - end

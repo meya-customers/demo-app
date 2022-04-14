@@ -2,8 +2,7 @@ triggers:
   - keyword: page_sensitive
 
 steps:
-  - thread_set:
-      mode: prechat
+  - mode: prechat
   - page:
       - info: |
           # Sensitive data
@@ -29,5 +28,4 @@ steps:
       pet_type: (@ flow.result[0] | encrypt_sensitive )
       pet_stripes: (@ flow.result[1] | encrypt_sensitive )
       pet_name: (@ flow.result[2] | encrypt_sensitive )
-  - thread_set:
-      mode:
+  - mode:

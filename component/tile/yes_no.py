@@ -1,12 +1,13 @@
 from dataclasses import dataclass
 from dataclasses import field
 from meya.button.spec import ButtonElementSpec
+from meya.button.spec import ButtonEventSpec
 from meya.component.element.interactive import InteractiveComponent
 from meya.core.meta_level import MetaLevel
 from meya.element.field import element_field
 from meya.entry import Entry
-from meya.orb import composer_spec
-from meya.orb.composer_spec import ComposerFocus
+from meya.event import composer_spec
+from meya.event.composer_spec import ComposerFocus
 from meya.tile.event.ask import TileAskEvent
 from meya.tile.spec import TileButtonStyle
 from meya.tile.spec import TileEventSpec
@@ -34,10 +35,11 @@ class YesNoTileComponent(InteractiveComponent):
             ButtonElementSpec(text="No", result=False),
         ]
 
-        buttons = self.get_buttons_and_triggers(buttons_specs)
-        triggers = buttons.triggers
+        buttons, triggers = ButtonEventSpec.from_element_spec_union_list(
+            buttons_specs
+        )
 
-        tiles = [TileEventSpec(buttons=buttons.buttons, title=self.text)]
+        tiles = [TileEventSpec(buttons=buttons, title=self.text)]
 
         ask_tiles_event = TileAskEvent(
             button_style=TileButtonStyle.ACTION,

@@ -1,0 +1,33 @@
+triggers:
+  - keyword: tile_menu
+    action:
+      data:
+        button_style: action
+  - keyword: tile_menu_radio
+    action:
+      data:
+        button_style: radio
+  - keyword: tile_menu_text
+    action:
+      data:
+        button_style: text
+
+steps:
+  - say: Menu tiles
+  - tiles:
+      - title: Title 0
+        menu:
+          - text: Button 0
+            result: 0
+      - buttons:
+          - text: Button 1
+            result: 1
+          - text: Button 2
+            result: 2
+          - text: Menu
+            menu:
+              - text: Button 3
+                result: 3
+    button_style: (@ flow.button_style )
+  - say: Flow result (@ flow.result )
+

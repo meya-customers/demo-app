@@ -4,6 +4,5 @@ triggers:
 
 steps:
   - say: Resetting thread mode...
-  - thread_set:
-      mode:
+  - mode:
   - say: Done.

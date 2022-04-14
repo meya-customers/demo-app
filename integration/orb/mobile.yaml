@@ -11,3 +11,5 @@ ios:
   auth_key_id: (@ vault.orb.mobile.auth_key_id )
   team_id: (@ vault.orb.mobile.team_id )
   topic: ai.meya.OrbDemo
+theme:
+  brand_color: '#691ac9'

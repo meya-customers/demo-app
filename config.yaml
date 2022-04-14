@@ -1,4 +1,7 @@
 icon:
+  menu: streamline-regular/01-interface-essential/03-menu/navigation-menu.svg
+  left: streamline-regular/52-arrows-diagrams/01-arrows/arrow-left-1.svg
+  right: streamline-regular/52-arrows-diagrams/01-arrows/arrow-right-1.svg
   bird: streamline-regular/33-pets-animals/12-wild birds/wild-bird.svg
   cat: streamline-regular/33-pets-animals/04-cats/cat-sitting.svg
   dog: streamline-regular/33-pets-animals/03-dogs/dog.svg
