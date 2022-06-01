@@ -104,11 +104,18 @@ steps:
   - say: test **text**
   - jump: done
 
+  - (markdown_links)
+  - say: >
+      [web](https://example.org)
+      [email](mailto:support@meya.ai)
+      [phone](tel:+18889077680)
+    markdown: true
+  - jump: done
+
   - (markdown_linkify)
   - say: >
-      [link text](http://dev.nodeca.com)
-      Autoconverted link https://github.com/nodeca/pica
-      Autoconverted email support@meya.ai
+      https://example.org
+      support@meya.ai
     markdown:
       - linkify
   - jump: done

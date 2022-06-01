@@ -1,0 +1,12 @@
+triggers:
+  - keyword: button_links
+
+steps:
+  - say: Here are some button links
+  - buttons:
+      - text: Web
+        url: https://example.org
+      - text: Email
+        url: mailto:support@meya.ai
+      - text: Phone
+        url: tel:+18889077680
