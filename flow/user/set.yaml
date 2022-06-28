@@ -44,8 +44,8 @@ steps:
   - user_set:
       user_data_1: []
       user_data_2: {}
-      user_data_3: {key: !!null ''}
-      user_data_4: {key1: x, key2: !!null ''}
+      user_data_3: {key: null}
+      user_data_4: {key1: x, key2: null}
       user_data_5:
         - {}
         - key1: x

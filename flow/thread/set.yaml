@@ -44,8 +44,8 @@ steps:
   - thread_set:
       thread_data_1: []
       thread_data_2: {}
-      thread_data_3: {key: !!null ''}
-      thread_data_4: {key1: x, key2: !!null ''}
+      thread_data_3: {key: null}
+      thread_data_4: {key1: x, key2: null}
       thread_data_5:
         - {}
         - key1: x
