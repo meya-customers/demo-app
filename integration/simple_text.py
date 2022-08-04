@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from http import HTTPStatus
 from meya.db.view.thread import ThreadView
 from meya.entry import Entry
 from meya.voice.integration.integration import VoiceIntegration
@@ -17,7 +18,7 @@ class SimpleTextIntegration(VoiceIntegration):
         if not integration_user_id or not text:
             return self.respond(
                 data=dict(ok=False, error="`user_id` and `text` required."),
-                status=400,
+                status=HTTPStatus.BAD_REQUEST,
             )
 
         await self.event_user.identify(integration_user_id)
@@ -55,7 +56,7 @@ class SimpleTextIntegration(VoiceIntegration):
 
         response = self.create_response(
             request_id=session.simple_request_id,
-            status=200,
+            status=HTTPStatus.OK,
             data=dict(ok=True, text=text),
             url=self.gateway_webhook_url,
         )
