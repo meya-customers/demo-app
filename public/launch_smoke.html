@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Launch Smoke - 2026-05-21</title>
+    <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+    <meta
+        name="viewport"
+        content="width=device-width,initial-scale=1,shrink-to-fit=no"
+    />
+    <link rel="stylesheet" href="https://cdn.meya.ai/font/inter.css"/>
+    <meta charset="utf-8"/>
+    <style>
+        body {
+            font-family: Inter, "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+            margin: 0;
+            padding: 24px;
+            background: #f7f8fa;
+            color: #232323;
+        }
+
+        h1 {
+            font-size: 20px;
+            margin: 0 0 4px;
+            color: #1b3e73;
+        }
+
+        .meta {
+            font-size: 13px;
+            color: #5b6470;
+            margin-bottom: 20px;
+        }
+
+        .meta code {
+            background: #e8edf3;
+            padding: 1px 6px;
+            border-radius: 4px;
+        }
+
+        .mode-bar {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .mode-bar a {
+            padding: 8px 14px;
+            border-radius: 6px;
+            background: #fff;
+            color: #4989ea;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            border: 1px solid #d8dde6;
+        }
+
+        .mode-bar a.active {
+            background: #4989ea;
+            color: #fff;
+            border-color: #4989ea;
+        }
+
+        h2 {
+            font-size: 15px;
+            color: #1b3e73;
+            margin: 24px 0 8px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 8px;
+        }
+
+        button.trigger {
+            padding: 12px 14px;
+            border-radius: 6px;
+            background: #fff;
+            color: #232323;
+            border: 1px solid #d8dde6;
+            font-family: inherit;
+            font-size: 14px;
+            cursor: pointer;
+            text-align: left;
+        }
+
+        button.trigger:hover {
+            background: #f0f4fa;
+            border-color: #4989ea;
+        }
+
+        button.trigger code {
+            display: block;
+            font-size: 12px;
+            color: #5b6470;
+            margin-top: 3px;
+        }
+
+        .diag {
+            margin-top: 24px;
+            padding: 12px 14px;
+            background: #fff;
+            border: 1px solid #d8dde6;
+            border-radius: 6px;
+            font-size: 13px;
+            color: #4a4a4a;
+        }
+
+        .diag code {
+            background: #e8edf3;
+            padding: 1px 4px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+<h1>Launch smoke - 2026-05-21</h1>
+<div class="meta">
+    Loads <code id="bundle-label">cdn.meya.ai/v2/orb.js</code>
+    against demo-app
+    (<code>integration.orb</code>).
+    Toggle mode and bundle via URL params:
+    <code>?mode=auto|fullscreen|floating</code>,
+    <code>?bundle=orb|fs</code>.
+</div>
+
+<div class="mode-bar" id="mode-bar">
+    <a href="?">mode: default (no key)</a>
+    <a href="?mode=auto">mode: auto</a>
+    <a href="?mode=fullscreen">mode: fullscreen</a>
+    <a href="?mode=floating">mode: floating</a>
+    <a href="?bundle=fs">bundle: orb-fs.js</a>
+</div>
+
+<h2>Date picker (#1082)</h2>
+<div class="grid">
+    <button class="trigger" data-trigger="date_input">
+        Basic <code>date_input</code>
+    </button>
+    <button class="trigger" data-trigger="date_input_required">
+        Required <code>date_input_required</code>
+    </button>
+    <button class="trigger" data-trigger="date_input_range">
+        Min/max range <code>date_input_range</code>
+    </button>
+    <button class="trigger" data-trigger="date_input_page">
+        Page form <code>date_input_page</code>
+    </button>
+</div>
+
+<h2>Multi-rating (#1083)</h2>
+<div class="grid">
+    <button class="trigger" data-trigger="multi_rating">
+        Three groups <code>multi_rating</code>
+    </button>
+    <button class="trigger" data-trigger="multi_rating_required">
+        Required <code>multi_rating_required</code>
+    </button>
+    <button class="trigger" data-trigger="multi_rating_custom">
+        Custom options <code>multi_rating_custom</code>
+    </button>
+    <button class="trigger" data-trigger="multi_rating_page">
+        Page form <code>multi_rating_page</code>
+    </button>
+</div>
+
+<h2>Zendesk HTML body (#1091)</h2>
+<div class="grid">
+    <button class="trigger" data-trigger="zendesk_support_ticket_create_html_body">
+        Create with HTML body <code>zendesk_support_ticket_create_html_body</code>
+    </button>
+    <button class="trigger" data-trigger="zendesk_support_ticket_create_simple">
+        Baseline (plain comment) <code>zendesk_support_ticket_create_simple</code>
+    </button>
+</div>
+
+<div class="diag" id="diag">
+    Loading orb...
+</div>
+
+<script type="text/javascript">
+    const pageParams = new URL(location.href).searchParams
+    const mode = pageParams.get("mode")
+    const bundle = pageParams.get("bundle") === "fs" ? "orb-fs.js" : "orb.js"
+
+    // Highlight the active mode-bar link.
+    document.querySelectorAll("#mode-bar a").forEach((a) => {
+        const url = new URL(a.href, location.href)
+        const aMode = url.searchParams.get("mode")
+        const aBundle = url.searchParams.get("bundle")
+        if (aMode === mode && aBundle === pageParams.get("bundle")) {
+            a.classList.add("active")
+        }
+    })
+
+    document.getElementById("bundle-label").textContent =
+        "cdn.meya.ai/v2/" + bundle
+
+    window.orbConfig = {
+        connectionOptions: {
+            gridUrl: "https://grid.meya.ai",
+            appId: "app-73c6d31d4f544a72941e21fb518b5737",
+            integrationId: "integration.orb",
+        },
+        windowApi: true,
+        ...(mode && { mode: mode }),
+    }
+
+    document.querySelectorAll("button.trigger").forEach((btn) => {
+        btn.addEventListener("click", () => {
+            const trigger = btn.dataset.trigger
+            if (window.orb && typeof window.orb.say === "function") {
+                window.orb.openChat()
+                window.orb.say(trigger)
+            } else {
+                alert("Orb hasn't loaded yet.")
+            }
+        })
+    })
+
+    function updateDiag() {
+        const diag = document.getElementById("diag")
+        const htmlMode = document.documentElement.getAttribute("data-orb-mode")
+        const hasOrb = typeof window.orb === "object"
+        const hasMount = !!document.querySelector(".orb-chat-mount")
+        diag.innerHTML =
+            "<code>window.orb</code>: " + (hasOrb ? "ready" : "not yet") +
+            " &nbsp;|&nbsp; <code>.orb-chat-mount</code>: " + (hasMount ? "present" : "absent") +
+            " &nbsp;|&nbsp; <code>&lt;html data-orb-mode&gt;</code>: " +
+            (htmlMode === null ? "(not set)" : htmlMode) +
+            " &nbsp;|&nbsp; bundle: " + bundle +
+            " &nbsp;|&nbsp; config.mode: " + (mode || "(unset, default auto)")
+    }
+    setInterval(updateDiag, 500)
+    updateDiag()
+
+    ;(function () {
+        var script = document.createElement("script")
+        script.type = "text/javascript"
+        script.async = true
+        script.src = "https://cdn.meya.ai/v2/" + bundle
+        document.body.appendChild(script)
+    })()
+</script>
+</body>
+</html>

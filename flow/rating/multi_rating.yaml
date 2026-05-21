@@ -1,0 +1,75 @@
+triggers:
+  - keyword: multi_rating
+  - keyword: multi_rating_required
+    action:
+      jump: required
+  - keyword: multi_rating_custom
+    action:
+      jump: custom
+  - keyword: multi_rating_page
+    action:
+      jump: page
+
+steps:
+  - say: Rate your experience.
+  - type: meya.tile.component.multi_rating
+    label: How did we do?
+    groups:
+      - title: Speed of response
+        rating: stars
+      - title: Helpfulness
+        rating: faces
+      - title: Would you recommend us?
+        rating: thumbs
+  - say: Scores in group order, (@ flow.result )
+  - end
+
+  - (required)
+  - say: All three groups required.
+  - type: meya.tile.component.multi_rating
+    label: Required ratings
+    required: true
+    error_message: Please rate all three.
+    groups:
+      - title: Quality
+        rating: stars
+      - title: Value
+        rating: stars
+      - title: Service
+        rating: thumbs
+  - say: (@ flow.result )
+  - end
+
+  - (custom)
+  - say: Pick a shape and a temperature.
+  - type: meya.tile.component.multi_rating
+    label: Custom options
+    groups:
+      - title: Shape
+        rating: custom
+        options:
+          - icon: streamline-regular/12-design/06-shapes/shape-triangle.svg
+            score: 1
+          - icon: streamline-regular/12-design/06-shapes/shape-cube.svg
+            score: 2
+          - icon: streamline-regular/12-design/06-shapes/shape-cylinder.svg
+            score: 3
+      - title: Temperature
+        rating: faces
+  - say: (@ flow.result )
+  - end
+
+  - (page)
+  - page:
+      - info: |
+          # Survey
+          Tell us how your visit went.
+      - type: meya.tile.component.multi_rating
+        label: Ratings
+        required: true
+        groups:
+          - title: Site speed
+            rating: stars
+          - title: Checkout flow
+            rating: thumbs
+  - say: (@ flow.result )

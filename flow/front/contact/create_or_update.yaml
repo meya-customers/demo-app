@@ -3,7 +3,8 @@ triggers:
     action:
       data:
         name: Test
-        avatar_url: https://images.prismic.io/meya-website/c63a142a-a049-4da2-8c83-842325e31449_scifi-robot.png
+        avatar_url: 
+          https://images.prismic.io/meya-website/c63a142a-a049-4da2-8c83-842325e31449_scifi-robot.png
 
 steps:
   - ask: Contact name?

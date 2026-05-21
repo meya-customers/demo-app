@@ -1,0 +1,94 @@
+# .github/workflows/meya_monitor.yaml
+name: Meya Build & Monitor
+
+on:
+  push:
+    branches:
+      - '**'
+  schedule:
+    - cron: 0 * * * *    # Runs every hour
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📑Source
+        run: echo "CURRENT_STEP=Checkout source" >> $GITHUB_ENV
+
+      - name: 📥 Checkout source
+        uses: actions/checkout@v4
+
+      - name: 🐧 Install system dependencies
+        run: |
+          echo "CURRENT_STEP=Install system dependencies" >> $GITHUB_ENV
+          echo "🐧 Installing system dependencies..."
+          sudo apt-get update
+          sudo apt-get install -y libgit2-dev
+
+      - name: 📑Python
+        run: echo "CURRENT_STEP=Set up Python 3.10" >> $GITHUB_ENV
+
+      - name: 🐍 Set up Python 3.10
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: 📦 Preinstall build tools (setuptools + wheel)
+        run: |
+          echo "CURRENT_STEP=Preinstall build tools" >> $GITHUB_ENV
+          python -m pip install --upgrade pip setuptools wheel
+
+      - name: 📦 Install Python deps
+        run: |
+          echo "CURRENT_STEP=Install Python deps" >> $GITHUB_ENV
+          pip install --upgrade \
+            --extra-index-url https://meya:${{ secrets.auth_token }}@grid.meya.ai/registry/pypi \
+            pygit2 \
+            "meya-sdk>=2.0.0" \
+            "meya-cli>=2.0.0"
+
+      - name: 🔑 Authenticate with Meya
+        run: |
+          echo "CURRENT_STEP=Authenticate with Meya" >> $GITHUB_ENV
+          echo "🔑 Authenticating with Meya..."
+          timeout 10 meya auth add \
+            --grid-url https://grid.meya.ai \
+            --auth-token ${{ secrets.auth_token }}
+
+      - name: 🔗 Connect to Meya app
+        run: |
+          echo "CURRENT_STEP=Connect to Meya app" >> $GITHUB_ENV
+          echo "🔗 Connecting to Meya app..."
+          timeout 10 meya connect \
+            --grid-url https://grid.meya.ai \
+            --app-id ${{ secrets.app_id }}
+
+      - name: 🛠️ Check code syntax
+        run: |
+          echo "CURRENT_STEP=Check code syntax" >> $GITHUB_ENV
+          echo "🛠️ Running meya check..."
+          timeout 30 meya check
+
+      - name: 🧪 Run tests
+        run: |
+          echo "CURRENT_STEP=Run tests" >> $GITHUB_ENV
+          echo "🧪 Running meya test..."
+          timeout 30 meya test
+
+      - name: 🚀 Deploy
+        run: |
+          echo "CURRENT_STEP=Deploy" >> $GITHUB_ENV
+          echo "🚀 Deploying to Meya with timeout..."
+          timeout 90 meya push --force --build-image
+
+      - name: 🚨 Slack failure alert
+        if: failure()
+        run: |
+          echo "Sending Slack notification..."
+          SLACK_MESSAGE=":rotating_light: *Meya Demo App Build Failed!*\n• *Failed Step:* \`${CURRENT_STEP}\`\n• *Repo:* ${GITHUB_REPOSITORY}\n• *Branch:* ${GITHUB_REF}\n• *Commit:* ${GITHUB_SHA}\n\n:fire: Please investigate! https://github.com/meya-ai/demo-app/actions/workflows/meya.monitor.yaml"
+
+          curl -X POST -H "Content-type: application/json" \
+            --data "{\"text\": \"${SLACK_MESSAGE}\"}" \
+            "${SLACK_WEBHOOK_URL}"
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}

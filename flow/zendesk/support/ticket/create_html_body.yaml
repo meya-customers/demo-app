@@ -1,0 +1,26 @@
+triggers:
+  - keyword: zendesk_support_ticket_create_html_body
+
+steps:
+  - say: Creating ticket with an HTML body...
+  - type: meya.zendesk.support.component.user.create_or_update
+    integration: integration.zendesk.support
+    name: Demo HTML body
+    email: demo-html-body@example.com
+  - flow_set:
+      requester_id: (@ flow.result.id )
+  - type: meya.zendesk.support.component.ticket.create
+    integration: integration.zendesk.support
+    requester_id: (@ flow.requester_id )
+    subject: Test ticket with HTML body
+    comment_html_body: |
+      <p>Hi team,</p>
+      <p>This is a <strong>rich-text</strong> ticket body with an inline image:</p>
+      <p><img src="https://placehold.co/600x400/png" alt="screenshot"/></p>
+      <p>Repro steps:</p>
+      <ol>
+        <li>Open <code>/checkout</code></li>
+        <li>Apply coupon <code>SAVE10</code></li>
+        <li>Click submit</li>
+      </ol>
+  - say: Ticket (@ flow.result.id ) created with HTML body.

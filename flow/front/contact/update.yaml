@@ -31,7 +31,8 @@ steps:
     contact_id: (@ flow.get('contact_id') )
     handle: (@ flow.get('contact_handle') )
     is_spammer: (@ flow.spammer )
-    avatar_url: https://images.prismic.io/meya-website/c63a142a-a049-4da2-8c83-842325e31449_scifi-robot.png
+    avatar_url: 
+      https://images.prismic.io/meya-website/c63a142a-a049-4da2-8c83-842325e31449_scifi-robot.png
     integration: integration.front
 
   - say: 'Successfully updated contact - id: (@ flow.result.id )'

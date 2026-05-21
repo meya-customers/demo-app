@@ -1,10 +1,8 @@
 # demo-app
 
-![Meya build](https://github.com/meya-customers/demo-app/workflows/Meya%20build/badge.svg)
+[![Meya Build & Monitor](https://github.com/meya-ai/demo-app/actions/workflows/meya.monitor.yaml/badge.svg)](https://github.com/meya-ai/demo-app/actions/workflows/meya.monitor.yaml)
 
 Sample BFML and Python code for Meya Grid and Orb.
-
-Try it live: https://codepen.io/ekalvi/pen/MWzovYB
 
 ## Setup
 
@@ -43,4 +41,4 @@ meya push --force --build-image
 ```
 
 ## GitHub Actions
-See `.github/workflows/meya.check-test.yaml`
+See `.github/workflows/meya.monitor.yaml`

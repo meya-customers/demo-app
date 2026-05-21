@@ -8,7 +8,8 @@ steps:
       - title: Tacos
         description: Description
         image:
-          url: https://www.cookingclassy.com/wp-content/uploads/2017/06/salsa-chicken-tacos-2.jpg
+          url: 
+            https://www.cookingclassy.com/wp-content/uploads/2017/06/salsa-chicken-tacos-2.jpg
         buttons:
           - text: Select
             icon:

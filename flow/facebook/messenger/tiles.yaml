@@ -10,7 +10,8 @@ steps:
         description: Description
         url: https://www.cookingclassy.com/instant-pot-slow-cooker-salsa-chicken-tacos/
         image:
-          url: https://www.cookingclassy.com/wp-content/uploads/2017/06/salsa-chicken-tacos-2.jpg
+          url: 
+            https://www.cookingclassy.com/wp-content/uploads/2017/06/salsa-chicken-tacos-2.jpg
         buttons:
           - text: Order your meal
             button_id: tacos

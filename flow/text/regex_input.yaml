@@ -9,6 +9,7 @@ steps:
       [ -]?
       (?P<second_part>\d[A-Za-z]\d)
       $
+    capture_groups: true
     error_message: Invalid postal code, please try again.
   - say: 'Flow data: (@ flow )'
   - flow_set: postal_code

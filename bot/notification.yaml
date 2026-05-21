@@ -2,4 +2,5 @@ type: meya.bot.element
 default: false
 name: Notification Bot
 avatar:
-  image: https://images.prismic.io/meya-website/c5f3ba9f-60af-42d5-92bf-6f03f79ab1a7_alarm-bell-ring.png
+  image: 
+    https://images.prismic.io/meya-website/c5f3ba9f-60af-42d5-92bf-6f03f79ab1a7_alarm-bell-ring.png

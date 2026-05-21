@@ -1,0 +1,51 @@
+triggers:
+  - keyword: date_input
+  - keyword: date_input_required
+    action:
+      jump: required
+  - keyword: date_input_range
+    action:
+      jump: range
+  - keyword: date_input_page
+    action:
+      jump: page
+
+steps:
+  - say: When is your birthday?
+  - type: meya.date.component.input
+    label: Date of birth
+  - say: You picked (@ flow.result )
+  - end
+
+  - (required)
+  - say: Pick a date (required).
+  - type: meya.date.component.input
+    label: Date
+    required: true
+    error_message: A date is required to continue.
+  - say: (@ flow.result )
+  - end
+
+  - (range)
+  - say: Pick a date in 2026 only.
+  - type: meya.date.component.input
+    label: Date in 2026
+    required: true
+    min: '2026-01-01'
+    max: '2026-12-31'
+    error_message: Please pick a date in 2026.
+  - say: (@ flow.result )
+  - end
+
+  - (page)
+  - page:
+      - info: |
+          # Trip dates
+          Enter when you'll be traveling.
+      - type: meya.date.component.input
+        label: Start date
+        required: true
+      - type: meya.date.component.input
+        label: End date
+        required: true
+  - say: From (@ flow.result.start_date ) to (@ flow.result.end_date )
