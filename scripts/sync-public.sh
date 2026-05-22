@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Sync a snapshot of this repo (meya-ai/demo-app) to the public mirror
-# (meya-customers/demo-app) on the `master` branch.
+# (meya-customers/demo-app) on the `main` branch.
 #
 # Matches the historical "Snapshot" commit pattern. Copies only files tracked
 # by git in the source, so .gitignore'd content (e.g. vault.secret.yaml) cannot
@@ -13,13 +13,13 @@
 #
 # Env overrides (used by CI):
 #   PUBLIC_REPO    target repo URL (may embed an auth token)
-#   PUBLIC_BRANCH  target branch (default: master)
+#   PUBLIC_BRANCH  target branch (default: main)
 #   COMMIT_MSG     commit message (default: Snapshot)
 
 set -euo pipefail
 
 PUBLIC_REPO="${PUBLIC_REPO:-https://github.com/meya-customers/demo-app.git}"
-PUBLIC_BRANCH="${PUBLIC_BRANCH:-master}"
+PUBLIC_BRANCH="${PUBLIC_BRANCH:-main}"
 COMMIT_MSG="${COMMIT_MSG:-Snapshot}"
 
 # Tracked paths kept OUT of the public mirror (prefix match). Internal CI

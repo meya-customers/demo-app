@@ -48,4 +48,4 @@ steps:
       - type: meya.date.component.input
         label: End date
         required: true
-  - say: From (@ flow.result.start_date ) to (@ flow.result.end_date )
+  - say: From (@ flow.result[0] ) to (@ flow.result[1] )
