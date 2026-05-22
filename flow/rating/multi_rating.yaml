@@ -37,7 +37,7 @@ steps:
         rating: stars
       - title: Service
         rating: thumbs
-  - say: (@ flow.result )
+  - say: 'Required ratings result: (@ flow.result )'
   - end
 
   - (custom)
@@ -56,7 +56,7 @@ steps:
             score: 3
       - title: Temperature
         rating: faces
-  - say: (@ flow.result )
+  - say: 'Custom options result: (@ flow.result )'
   - end
 
   - (page)
@@ -72,4 +72,4 @@ steps:
             rating: stars
           - title: Checkout flow
             rating: thumbs
-  - say: (@ flow.result )
+  - say: 'Page form result: (@ flow.result )'

@@ -23,7 +23,7 @@ steps:
     label: Date
     required: true
     error_message: A date is required to continue.
-  - say: (@ flow.result )
+  - say: 'Required date result: (@ flow.result )'
   - end
 
   - (range)
@@ -34,7 +34,7 @@ steps:
     min: '2026-01-01'
     max: '2026-12-31'
     error_message: Please pick a date in 2026.
-  - say: (@ flow.result )
+  - say: 'Range date result: (@ flow.result )'
   - end
 
   - (page)
