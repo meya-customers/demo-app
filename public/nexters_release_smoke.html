@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Nexters release smoke test</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <link rel="stylesheet" href="https://cdn.meya.ai/font/inter.css"/>
+    <style>
+        body { font-family: Inter, sans-serif; margin: 0; padding: 24px; background: #f7f8fa; color: #20242a; }
+        main { max-width: 900px; margin: auto; }
+        h1, h2 { color: #1b3e73; }
+        h1 { font-size: 24px; margin-bottom: 4px; }
+        h2 { font-size: 17px; margin-top: 28px; }
+        .meta, .note { color: #5b6470; font-size: 14px; line-height: 1.5; }
+        .card { background: white; border: 1px solid #d8dde6; border-radius: 8px; padding: 16px; margin: 12px 0; }
+        .controls { display: flex; gap: 8px; flex-wrap: wrap; }
+        button, a.control { border: 1px solid #b8c1cf; border-radius: 6px; padding: 10px 14px; background: white; color: #1b3e73; cursor: pointer; text-decoration: none; font: inherit; }
+        button:hover, a.control:hover, a.active { border-color: #4989ea; background: #eef5ff; }
+        code { background: #e8edf3; padding: 1px 5px; border-radius: 4px; }
+        pre { overflow-x: auto; padding: 14px; border-radius: 6px; background: #172033; color: #f4f7fb; line-height: 1.45; }
+        pre code { padding: 0; background: transparent; color: inherit; }
+        ol { line-height: 1.6; }
+        #diag { font-family: monospace; white-space: pre-wrap; }
+        .warning { border-left: 4px solid #d97706; }
+    </style>
+</head>
+<body>
+<main>
+    <h1>Nexters release smoke test</h1>
+    <div class="meta">Production verification for Grid/SDK 2.9.2. This page uses the demo app and production Orb bundle.</div>
+
+    <div class="card warning">
+        Run these probes only after the v2 release and demo testbench are deployed. The Zendesk probe creates one real test ticket; the timeout probes create no customer data.
+    </div>
+
+    <h2>Customer-facing configuration</h2>
+    <div class="card">
+        <p>Append <code>meya_timeout=6</code> to the Zendesk webhook Endpoint URL. No BFML change is required:</p>
+        <pre><code>https://grid.meya.ai/gateway/v2/zendesk_support/APP_ID/INTEGRATION_ID?meya_timeout=6</code></pre>
+        <p>Use <code>&amp;meya_timeout=6</code> if the URL already has query parameters. This extends Gateway's incoming wait from five to six seconds; it does not reduce processing time or platform load.</p>
+    </div>
+    <div class="card">
+        <p>Set <code>comment_author_id</code> on a Zendesk ticket create or update component to attribute that comment to a Zendesk user:</p>
+        <pre><code>- type: meya.zendesk.support.component.ticket.create
+  integration: integration.zendesk.support
+  requester_id: (@ flow.author_id )
+  subject: Customer support request
+  comment: Initial comment
+  comment_author_id: (@ flow.author_id )
+
+- type: meya.zendesk.support.component.ticket.update
+  integration: integration.zendesk.support
+  ticket_id: (@ flow.ticket_id )
+  comment: Follow-up comment
+  comment_author_id: (@ flow.author_id )</code></pre>
+    </div>
+
+    <h2>1. URL timeout enforcement</h2>
+    <div class="card">
+        <ol>
+            <li>Open the 5.5-second probe. It should return JSON with HTTP 200 after approximately 5.5 seconds.</li>
+            <li>Open the 6.5-second probe. It should stop at approximately six seconds with HTTP 503.</li>
+            <li>Both URLs explicitly use <code>meya_timeout=6</code>.</li>
+        </ol>
+        <div class="controls">
+            <a class="control" target="_blank" rel="noopener" href="https://grid.meya.ai/gateway/v2/release_timeout/app-73c6d31d4f544a72941e21fb518b5737/integration.release_timeout?delay=5.5&amp;meya_timeout=6">5.5s → expect 200</a>
+            <a class="control" target="_blank" rel="noopener" href="https://grid.meya.ai/gateway/v2/release_timeout/app-73c6d31d4f544a72941e21fb518b5737/integration.release_timeout?delay=6.5&amp;meya_timeout=6">6.5s → expect 503</a>
+        </div>
+    </div>
+
+    <h2>2. Zendesk comment author</h2>
+    <div class="card">
+        <ol>
+            <li>Run the Zendesk probe once.</li>
+            <li>Open the reported ticket and verify both comments are attributed to “Meya release smoke author”.</li>
+        </ol>
+        <button data-trigger="release_zendesk_comment_author">Create attributed Zendesk ticket</button>
+    </div>
+
+    <h2>Diagnostics</h2>
+    <div class="card" id="diag">Loading Orb…</div>
+</main>
+<script>
+    const integrationId = "integration.orb"
+
+    window.orbConfig = {
+        connectionOptions: {
+            gridUrl: "https://grid.meya.ai",
+            appId: "app-73c6d31d4f544a72941e21fb518b5737",
+            integrationId,
+        },
+        windowApi: true,
+    }
+
+    document.querySelectorAll("button[data-trigger]").forEach((button) => {
+        button.addEventListener("click", () => {
+            if (!window.orb || typeof window.orb.say !== "function") {
+                alert("Orb has not loaded yet.")
+                return
+            }
+            window.orb.openChat()
+            window.orb.say(button.dataset.trigger)
+        })
+    })
+
+    function updateDiagnostics() {
+        const ready = !!(window.orb && typeof window.orb.say === "function")
+        const mount = !!document.querySelector(".orb-chat-mount")
+        document.getElementById("diag").textContent =
+            `Orb API: ${ready ? "ready" : "loading"}\n` +
+            `Orb mount: ${mount ? "present" : "absent"}\n` +
+            `Integration: ${integrationId}\n` +
+            `Bundle: https://cdn.meya.ai/v2/orb.js`
+    }
+    setInterval(updateDiagnostics, 500)
+    updateDiagnostics()
+
+    const script = document.createElement("script")
+    script.async = true
+    script.src = "https://cdn.meya.ai/v2/orb.js"
+    document.body.appendChild(script)
+</script>
+</body>
+</html>

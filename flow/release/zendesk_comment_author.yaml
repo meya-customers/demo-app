@@ -1,0 +1,35 @@
+triggers:
+  - keyword: release_zendesk_comment_author
+
+steps:
+  - say: Creating a Zendesk end user for the attributed comments...
+  - type: meya.zendesk.support.component.user.create_or_update
+    integration: integration.zendesk.support
+    link: false
+    name: Meya release smoke author
+    email: meya-release-smoke-author@example.com
+  - flow_set:
+      author_id: (@ flow.result.id )
+
+  - say: Creating a ticket whose first comment uses author (@ flow.author_id )...
+  - type: meya.zendesk.support.component.ticket.create
+    integration: integration.zendesk.support
+    link: false
+    followup: false
+    requester_id: (@ flow.author_id )
+    subject: Meya release smoke — comment author
+    comment: Created by the September 2026 release smoke test.
+    comment_author_id: (@ flow.author_id )
+  - flow_set:
+      ticket_id: (@ flow.result.id )
+
+  - say: Adding a second comment with the same author...
+  - type: meya.zendesk.support.component.ticket.update
+    integration: integration.zendesk.support
+    ticket_id: (@ flow.ticket_id )
+    comment: Updated by the September 2026 release smoke test.
+    comment_author_id: (@ flow.author_id )
+
+  - say: Ticket (@ flow.ticket_id ) is ready. Verify both comments are attributed
+      to “Meya release smoke author”.
+  - end
